@@ -1,10 +1,8 @@
 <header class="topbar">
-  <input class="topbar__search" type="text" placeholder="Search" />
+  <app-search-bar></app-search-bar>
 
   <div class="topbar__actions">
-    <button class="topbar__button" type="button">Nueva receta</button>
-    <button class="topbar__logout" type="button" (click)="logout()">
-      Salir
-    </button>
+    <ui-button routerLink="/recipes/new">Nueva receta</ui-button>
+    <span class="material-symbols-outlined" (click)="logout()">logout</span>
   </div>
 </header>
