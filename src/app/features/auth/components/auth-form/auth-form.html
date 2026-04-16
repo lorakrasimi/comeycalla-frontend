@@ -1,0 +1,19 @@
+<div class="auth-page">
+  <div class="auth-page__overlay">
+    <section class="auth-card">
+      @if (showLogo) {
+        <img class="auth-card__logo" src="/img/logo.png" alt="Comeycalla" />
+      }
+
+      @if (title) {
+        <h1 class="auth-card__title">{{ title }}</h1>
+      }
+
+      @if (subtitle) {
+        <p class="auth-card__subtitle">{{ subtitle }}</p>
+      }
+
+      <ng-content />
+    </section>
+  </div>
+</div>

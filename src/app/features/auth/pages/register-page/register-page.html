@@ -1,0 +1,73 @@
+<app-auth-form
+  subtitle="Regístrate y guarda tus recetas"
+>
+  <form [formGroup]="registerForm" (ngSubmit)="submit()" novalidate>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+      @if (email.touched && email.invalid) {
+        <small class="error-message">
+          @if (email.errors?.['required']) {
+            El email es obligatorio.
+          }
+          @if (email.errors?.['email']) {
+            Introduce un email válido.
+          }
+        </small>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="password">Contraseña</label>
+      <input id="password" type="password" formControlName="password" />
+      @if (password.touched && password.invalid) {
+        <small class="error-message">
+          @if (password.errors?.['required']) {
+            La contraseña es obligatoria.
+          }
+          @if (password.errors?.['minlength']) {
+            Debe tener al menos 6 caracteres.
+          }
+        </small>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="confirmPassword">Confirma contraseña</label>
+      <input
+        id="confirmPassword"
+        type="password"
+        formControlName="confirmPassword"
+      />
+      @if (confirmPassword.touched && confirmPassword.invalid) {
+        <small class="error-message">
+          @if (confirmPassword.errors?.['required']) {
+            Debes confirmar la contraseña.
+          }
+        </small>
+      }
+
+      @if (
+        registerForm.touched &&
+        registerForm.errors?.['passwordsMismatch'] &&
+        !confirmPassword.errors?.['required']
+        ) {
+        <small class="error-message">
+          Las contraseñas no coinciden.
+        </small>
+      }
+    </div>
+
+    @if (serverError) {
+      <div class="error-message">{{ serverError }}</div>
+    }
+
+    <button class="auth-button" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Creando cuenta...' : 'Crear cuenta' }}
+    </button>
+
+    <a class="signing-link" routerLink="/login">
+      Iniciar sesión
+    </a>
+  </form>
+</app-auth-form>

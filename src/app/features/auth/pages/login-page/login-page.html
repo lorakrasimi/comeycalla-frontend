@@ -1,0 +1,63 @@
+<app-auth-form
+  subtitle="Guarda tus recetas y crea tu menú semanal"
+>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Introduce tu email"
+      />
+      @if (email.touched && email.invalid) {
+        <small class="error-message">
+          @if (email.errors?.['required']) {
+            El email es obligatorio.
+          }
+          @if (email.errors?.['email']) {
+            Introduce un email válido.
+          }
+        </small>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="password">Contraseña</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Introduce tu contraseña"
+      />
+      @if (password.touched && password.invalid) {
+        <small class="error-message">
+          @if (password.errors?.['required']) {
+            La contraseña es obligatoria.
+          }
+          @if (password.errors?.['minlength']) {
+            Debe tener al menos 6 caracteres.
+          }
+        </small>
+      }
+    </div>
+
+    @if (serverError) {
+      <div class="error-message">
+        {{ serverError }}
+      </div>
+    }
+
+    <a class="recover-link" routerLink="/recover-password">
+      ¿Olvidaste tu contraseña?
+    </a>
+
+    <button class="auth-button" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Entrando...' : 'Iniciar sesión' }}
+    </button>
+
+    <a class="signing-link" routerLink="/register">
+      Crear cuenta
+    </a>
+  </form>
+</app-auth-form>
