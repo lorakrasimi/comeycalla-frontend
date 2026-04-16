@@ -1,0 +1,42 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e9d9df;
+  background: #fff;
+}
+
+.topbar__search {
+  width: 100%;
+  max-width: 420px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #d7c4cb;
+  border-radius: 12px;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar__button,
+.topbar__logout {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.topbar__button {
+  background: #d9415d;
+  color: #fff;
+}
+
+.topbar__logout {
+  background: #f3f3f3;
+}

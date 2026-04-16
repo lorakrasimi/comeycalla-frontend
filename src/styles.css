@@ -1,1 +1,238 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Typography */
+  --font-family-base: 'Nunito', sans-serif;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --line-height-tight: 1.1;
+  --line-height-base: 1.4;
+  --line-height-relaxed: 1.6;
+
+  /* Brand colors */
+  --color-primary: #D12F41;
+  --color-primary-hover: #c43f5c;
+  --color-secondary: #FF6900;
+
+  /* Backgrounds */
+  --color-background: #F9E1EE;
+  --color-background-soft: #f3c8d1;
+
+  /* Text */
+  --color-text: #1a1a1a;
+  --color-text-strong: #111111;
+  --color-text-muted: #5f5f5f;
+  --color-text-soft: #8a8a8a;
+
+  /* Borders */
+  --color-border: #D12F41;
+  --color-border-soft: #f1dbe0;
+  --color-border-focus: #d94b68;
+
+  /* States */
+  --color-success: #2e7d32;
+  --color-warning: #ff9800;
+  --color-error: #c62828;
+  --color-info: #1976d2;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+
+  /* Radius */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 10px rgba(0, 0, 0, 0.15);
+  --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+  /* Layout */
+  --container-max-width: 1200px;
+  --sidebar-width: 240px;
+  --topbar-height: 72px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-base), serif;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+/* Base form styles */
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-soft);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(217, 75, 104, 0.12);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+label {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled,
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.logo {
+  width: 259px;
+  height: 91px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 75, 104, 0.35);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(243, 200, 209, 0.35);
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(217, 75, 104, 0.2);
+  color: var(--color-text-strong);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-xl: 22px;
+    --font-size-2xl: 28px;
+  }
+}
