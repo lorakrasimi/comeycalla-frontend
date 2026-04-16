@@ -10,9 +10,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Sidebar {
   readonly navItems = [
-    { label: 'Dashboard', path: '/dashboard' },
-    { label: 'Mis recetas', path: '/recipes' },
-    { label: 'Añadir receta', path: '/recipes/new' },
-    { label: 'Menú semanal', path: '/meal-plan' },
+    { label: 'Dashboard', path: '/dashboard', icon: 'dashboard' },
+    { label: 'Mis recetas', path: '/recipes', icon: 'menu_book' },
+    { label: 'Añadir receta', path: '/recipes/new', icon: 'add_circle' },
+    { label: 'Menú semanal', path: '/meal-plan', icon: 'calendar_month' },
   ];
 }

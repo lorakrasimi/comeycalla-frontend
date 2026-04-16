@@ -204,9 +204,14 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Logo */
 .logo {
   width: 259px;
   height: 91px;
+}
+
+.logo-sidebar {
+  width: 140px;
 }
 
 /* Scrollbar */

@@ -1,13 +1,18 @@
 <aside class="sidebar">
-  <div class="sidebar__brand">COMEYCALLA</div>
+  <div class="sidebar__brand">
+    <img class="logo-sidebar" src="/img/logo.png" alt="Comeycalla">
+  </div>
 
   <nav class="sidebar__nav">
     @for (item of navItems; track item.path) {
+
       <a
         class="sidebar__link"
         [routerLink]="item.path"
         routerLinkActive="sidebar__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
+        <span class="material-symbols-outlined">{{item.icon}}</span>
         {{ item.label }}
       </a>
     }
