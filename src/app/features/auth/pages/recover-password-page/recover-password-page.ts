@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { AuthForm } from '../../components/auth-form/auth-form';
+import {RouterLink} from '@angular/router';
+import {AuthForm} from '../../components/auth-form/auth-form';
+import {AuthFacade} from '../../services/auth-facade';
 
 @Component({
   selector: 'app-recover-password-page',
@@ -27,7 +28,10 @@ export class RecoverPasswordPage {
     return this.recoverForm.controls.email;
   }
 
-  submit(): void {
+  constructor(private authFacade: AuthFacade) {
+  }
+
+  async submit(): Promise<void> {
     if (this.recoverForm.invalid) {
       this.recoverForm.markAllAsTouched();
       return;
@@ -36,9 +40,14 @@ export class RecoverPasswordPage {
     this.isSubmitting = true;
     this.successMessage = '';
 
-    setTimeout(() => {
-      this.isSubmitting = false;
-      this.successMessage = 'Te hemos enviado un enlace para restablecer tu contraseña.';
-    }, 500);
+    const {email} = this.recoverForm.getRawValue();
+    const success = await this.authFacade.recoverPassword(email);
+
+    if (success) {
+      this.successMessage =
+        'Te hemos enviado un enlace para restablecer tu contraseña.';
+    }
+
+    this.isSubmitting = false;
   }
 }

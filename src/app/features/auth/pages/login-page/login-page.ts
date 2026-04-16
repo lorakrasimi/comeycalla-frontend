@@ -7,6 +7,7 @@ import {
 import {AuthService} from '../../../../core/services/auth.service';
 import {Router, RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
+import {AuthFacade} from '../../services/auth-facade';
 
 @Component({
   selector: 'app-login-page',
@@ -20,8 +21,6 @@ import {AuthForm} from '../../components/auth-form/auth-form';
 })
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
 
   isSubmitting = false;
   serverError = '';
@@ -40,7 +39,10 @@ export class LoginPage {
     return this.loginForm.controls.password;
   }
 
-  submit(): void {
+  constructor(private authFacade: AuthFacade) {
+  }
+
+  async submit(): Promise<void> {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -53,8 +55,7 @@ export class LoginPage {
 
     // Temporary login until backend is connected
     if (email === 'test@test.com' && password === '123456') {
-      this.authService.setToken('fake-token');
-      this.router.navigate(['/dashboard']);
+      await this.authFacade.login(email, password);
       return;
     }
 

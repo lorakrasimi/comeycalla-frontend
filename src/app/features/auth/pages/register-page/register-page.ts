@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
+import {AuthFacade} from '../../services/auth-facade';
 
 
 function passwordsMatchValidator(
@@ -14,7 +15,7 @@ function passwordsMatchValidator(
     return null;
   }
 
-  return password === confirmPassword ? null : { passwordsMismatch: true };
+  return password === confirmPassword ? null : {passwordsMismatch: true};
 }
 
 @Component({
@@ -40,7 +41,7 @@ export class RegisterPage {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
     },
-    { validators: passwordsMatchValidator }
+    {validators: passwordsMatchValidator}
   );
 
   get email() {
@@ -55,7 +56,10 @@ export class RegisterPage {
     return this.registerForm.controls.confirmPassword;
   }
 
-  submit(): void {
+  constructor(private authFacade: AuthFacade) {
+  }
+
+  async submit(): Promise<void> {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
@@ -64,9 +68,15 @@ export class RegisterPage {
     this.isSubmitting = true;
     this.serverError = '';
 
-    setTimeout(() => {
-      this.isSubmitting = false;
-      this.router.navigate(['/login']);
-    }, 500);
+    const { email, password } = this.registerForm.getRawValue();
+
+    const success = await this.authFacade.register(email, password);
+
+    if (!success) {
+      this.serverError = 'No se pudo crear la cuenta.';
+    }
+
+    this.isSubmitting = false;
   }
 }
+
