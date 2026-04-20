@@ -17,7 +17,12 @@ export class RecipeCard {
   @Input() img?: string;
   @Input() category: string = '';
   @Input() time: string = '';
-  @Input() description?: string = '';
-  @Input() servings?: number;
-  @Input() tags?: string[];
+
+  @Input() description: string = '';
+  @Input() servings: number = 0;
+  @Input() tags: string[] = [];
+  @Input()  showTags = true;
+
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+
 }

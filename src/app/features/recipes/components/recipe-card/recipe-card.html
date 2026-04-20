@@ -1,4 +1,4 @@
-<div class="recipe-card">
+<div class="recipe-card recipe-card-{{size}}">
   <div class="recipe-card__media">
     <img
       class="recipe-card__image"
@@ -17,14 +17,13 @@
         {{ description }}
       </h5>
     }
-    @if (tags) {
+    @if (showTags) {
       <div class="recipe-card__tags">
         @for (tag of tags; track tag) {
           <ui-chip variant="secondary">{{ tag }}</ui-chip>
         }
       </div>
     }
-
     <div class="recipe-card__meta">
       <div class="recipe-card__meta-left">
     <span class="recipe-card__time">

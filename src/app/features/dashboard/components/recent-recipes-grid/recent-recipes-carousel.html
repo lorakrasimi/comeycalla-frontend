@@ -11,9 +11,6 @@
       <span class="material-symbols-outlined ">arrow_back_ios</span>
     </button>
 
-
-
-
     <div class="recent-recipes-carousel__viewport" #viewport>
       @for (recipe of recipes(); track recipe.id) {
         <div class="recent-recipes-carousel__slide">
@@ -22,6 +19,8 @@
             [img]="recipe?.img"
             [category]="recipe.category"
             [time]="recipe.cookingTime"
+            [size]="'sm'"
+            [showTags] = false
           />
         </div>
       }
