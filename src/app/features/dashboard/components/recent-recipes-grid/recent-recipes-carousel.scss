@@ -1,0 +1,110 @@
+.recent-recipes-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.recent-recipes-carousel__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-strong);
+}
+
+.recent-recipes-carousel__content {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.recent-recipes-carousel__nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-primary);
+}
+
+.recent-recipes-carousel__nav-button--left {
+  left: -22px;
+}
+
+.recent-recipes-carousel__nav-button--right {
+  right: -22px;
+}
+
+
+.recent-recipes-carousel__nav-button:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(217, 75, 104, 0.16);
+}
+
+.recent-recipes-carousel__viewport {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 0 32px 8px;
+  width: 100%;
+}
+
+.recent-recipes-carousel__viewport::-webkit-scrollbar {
+  height: 10px;
+}
+
+.recent-recipes-carousel__slide {
+  flex: 0 0 240px;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 900px) {
+  .recent-recipes-carousel__slide {
+    flex: 0 0 220px;
+  }
+
+  .recent-recipes-carousel__nav-button--left {
+    left: -12px;
+  }
+
+  .recent-recipes-carousel__nav-button--right {
+    right: -12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .recent-recipes-carousel {
+    gap: 20px;
+  }
+
+  .recent-recipes-carousel__title {
+    font-size: var(--font-size-xl);
+  }
+
+  .recent-recipes-carousel__slide {
+    flex: 0 0 190px;
+  }
+
+  .recent-recipes-carousel__nav-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .recent-recipes-carousel__nav-button--left {
+    left: -8px;
+  }
+
+  .recent-recipes-carousel__nav-button--right {
+    right: -8px;
+  }
+
+  .recent-recipes-carousel__viewport {
+    padding: 0 24px 8px;
+  }
+}

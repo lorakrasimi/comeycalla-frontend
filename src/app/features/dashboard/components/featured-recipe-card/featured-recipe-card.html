@@ -1,1 +1,30 @@
-<p>featured-recipe-card works!</p>
+<article class="featured-recipe-card">
+  <div class="featured-recipe-card__content">
+    <ui-chip>Receta del día</ui-chip>
+
+    <h2 class="featured-recipe-card__title">
+      {{ recipe.title }}
+    </h2>
+
+    <div class="featured-recipe-card__meta">
+      <span class="featured-recipe-card__time">
+        <span class="material-symbols-outlined">timer</span>
+        {{ recipe.cookingTime }}min
+      </span>
+    </div>
+
+    <ui-button routerLink="{{recipe.id}}"
+               [icon]="'arrow_forward'"
+               [iconPosition]="'right'">
+      Nueva receta
+    </ui-button>
+  </div>
+
+  <div class="featured-recipe-card__media">
+    <img
+      class="featured-recipe-card__image"
+      [src]="recipe.img"
+      [alt]="recipe.title"
+    />
+  </div>
+</article>

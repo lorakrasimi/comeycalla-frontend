@@ -13,6 +13,8 @@ export class UiButton {
   @Input() variant: ButtonVariant = 'primary';
   @Input() type: ButtonType = 'button';
   @Input() disabled = false;
+  @Input() icon?: string;
+  @Input() iconPosition: 'left' | 'right' = 'left';
 
   get buttonClass(): string {
     switch (this.variant) {

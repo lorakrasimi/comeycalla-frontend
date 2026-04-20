@@ -1,1 +1,23 @@
-<p>recipe-card works!</p>
+<div class="recipe-card">
+  <div class="recipe-card__media">
+    <img
+      class="recipe-card__image"
+      [src]="img"
+      [alt]="title"
+    />
+      <ui-chip class="recipe-card__chip">{{ category }}</ui-chip>
+  </div>
+
+  <div class="recipe-card__content">
+    <h3 class="recipe-card__title">
+      {{ title }}
+    </h3>
+
+    <div class="recipe-card__meta">
+      <span class="recipe-card__time">
+        <span class="material-symbols-outlined">timer</span>
+        {{ time }} mins
+      </span>
+    </div>
+  </div>
+</div>

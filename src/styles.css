@@ -230,12 +230,32 @@ button:disabled {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(217, 75, 104, 0.35);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-3xl);
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(243, 200, 209, 0.35);
 }
+
+.recent-recipes-carousel__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.recent-recipes-carousel__viewport::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none;
+}
+
+.recent-recipes-carousel__viewport::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+
+.recent-recipes-carousel__viewport::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
 
 /* Selection */
 ::selection {
