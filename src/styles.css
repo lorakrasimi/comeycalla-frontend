@@ -59,7 +59,7 @@
   --radius-xl: 20px;
   --radius-2xl: 24px;
   --radius-3xl: 32px;
-  --radius-pill: 999px;
+  --radius-full: 50%;
 
   /* Shadows */
   --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -74,7 +74,15 @@
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-base: 0.3s ease;
+
+  /* Avatar-cell */
+  --size-avatar-sm: 32px;
+
+  --color-avatar-surface-muted: #e5e7eb;
+  --color-avatar-text-placeholder: #374151;
 }
+
+
 
 /* Reset */
 *,
@@ -222,7 +230,7 @@ button:disabled {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(217, 75, 104, 0.35);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-track {

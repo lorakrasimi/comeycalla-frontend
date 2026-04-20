@@ -1,0 +1,16 @@
+<div class="avatar-cell">
+  <a routerLink="/profile" class="avatar-cell__link">
+  @if (img) {
+    <img
+      class="avatar-cell__image"
+      [src]="img"
+      [alt]="name"
+      routerLink="/profile"
+    />
+  } @else {
+    <div class="avatar-cell__placeholder">
+      {{ name?.charAt(0)?.toUpperCase() }}
+    </div>
+  }
+  </a>
+</div>

@@ -1,0 +1,33 @@
+.avatar-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.avatar-cell__image {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.avatar-cell__placeholder {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-placeholder);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  flex-shrink: 0;
+}
+
+.avatar-cell__name {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-strong);
+  white-space: nowrap;
+}

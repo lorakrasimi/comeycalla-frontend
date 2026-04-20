@@ -5,12 +5,6 @@ import { guestGuard } from './core/guards/guest-guard';
 export const appRoutes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'login',
-  },
-
-  {
-    path: '',
     canActivate: [guestGuard],
     loadComponent: () =>
       import('./layout/auth-layout/auth-layout').then(
