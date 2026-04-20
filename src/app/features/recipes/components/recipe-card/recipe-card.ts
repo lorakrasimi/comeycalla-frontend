@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {UiChip} from '../../../../shared/ui/ui-chip/ui-chip';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 
 @Component({
   selector: 'app-recipe-card',
@@ -7,7 +8,8 @@ import {UiChip} from '../../../../shared/ui/ui-chip/ui-chip';
   templateUrl: './recipe-card.html',
   styleUrl: './recipe-card.scss',
   imports: [
-    UiChip
+    UiChip,
+    UiButton
   ]
 })
 export class RecipeCard {
@@ -15,4 +17,7 @@ export class RecipeCard {
   @Input() img?: string;
   @Input() category: string = '';
   @Input() time: string = '';
+  @Input() description?: string = '';
+  @Input() servings?: number;
+  @Input() tags?: string[];
 }

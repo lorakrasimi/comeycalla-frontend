@@ -5,19 +5,39 @@
       [src]="img"
       [alt]="title"
     />
-      <ui-chip class="recipe-card__chip">{{ category }}</ui-chip>
+    <ui-chip class="recipe-card__chip">{{ category }}</ui-chip>
   </div>
 
   <div class="recipe-card__content">
     <h3 class="recipe-card__title">
       {{ title }}
     </h3>
+    @if (description) {
+      <h5 class="recipe-card__description">
+        {{ description }}
+      </h5>
+    }
+    @if (tags) {
+      <div class="recipe-card__tags">
+        @for (tag of tags; track tag) {
+          <ui-chip variant="secondary">{{ tag }}</ui-chip>
+        }
+      </div>
+    }
 
     <div class="recipe-card__meta">
-      <span class="recipe-card__time">
-        <span class="material-symbols-outlined">timer</span>
-        {{ time }} mins
-      </span>
+      <div class="recipe-card__meta-left">
+    <span class="recipe-card__time">
+      <span class="material-symbols-outlined">timer</span>
+      {{ time }}
+    </span>
+        <span class="recipe-card__servings">
+      <span class="material-symbols-outlined">person</span>
+          {{ servings }}
+    </span>
+      </div>
+
+      <ui-button size="sm" [icon]="'visibility'">Ver</ui-button>
     </div>
   </div>
 </div>

@@ -1,1 +1,23 @@
-<p>recipes-list-page works!</p>
+<section class="recipes-list-page">
+  <header class="recipes-list-page__header">
+    <h1 class="recipes-list-page__title">Mis recetas</h1>
+  </header>
+
+  <section class="recipes-list-page__filters">
+    <app-recipe-filters />
+  </section>
+
+  <section class="recipes-list-page__grid">
+    @for (recipe of recipes(); track recipe.id) {
+      <app-recipe-card
+        [title]="recipe.title"
+        [img]="recipe.img"
+        [category]="recipe.category"
+        [time]="recipe.cookingTime"
+        [description]="recipe.description"
+        [servings] = "recipe.servings"
+        [tags] = "recipe.tags"
+      />
+    }
+  </section>
+</section>

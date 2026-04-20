@@ -13,6 +13,7 @@ export class Recipe {
   servings: number;
   difficulty: Difficulty;
   category: string;
+  tags?: string[];
 
   createdAt: Date;
   updatedAt?: Date;
@@ -29,6 +30,7 @@ export class Recipe {
     createdAt: Date,
     description?: string,
     img?: string,
+    tags?: string[],
     updatedAt?: Date
   ) {
     this.id = id;
@@ -42,6 +44,7 @@ export class Recipe {
     this.createdAt = createdAt;
     this.description = description;
     this.img = img;
+    this.tags = tags;
     this.updatedAt = updatedAt;
   }
 }

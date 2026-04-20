@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-filters',
-  imports: [],
+  standalone: true,
   templateUrl: './recipe-filters.html',
   styleUrl: './recipe-filters.scss',
 })

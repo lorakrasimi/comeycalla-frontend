@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline';
 type ButtonType = 'button' | 'submit' | 'reset';
+type ButtonSize = 'md' | 'sm';
 
 @Component({
   selector: 'ui-button',
@@ -15,16 +16,25 @@ export class UiButton {
   @Input() disabled = false;
   @Input() icon?: string;
   @Input() iconPosition: 'left' | 'right' = 'left';
-
+  @Input() size: ButtonSize = 'md';
   get buttonClass(): string {
+    let base = 'ui-button';
+
     switch (this.variant) {
       case 'secondary':
-        return 'ui-button ui-button--secondary';
+        base += ' ui-button--secondary';
+        break;
       case 'outline':
-        return 'ui-button ui-button--outline';
-      case 'primary':
+        base += ' ui-button--outline';
+        break;
       default:
-        return 'ui-button ui-button--primary';
+        base += ' ui-button--primary';
     }
+
+    if (this.size === 'sm') {
+      base += ' ui-button--sm';
+    }
+
+    return base;
   }
 }
