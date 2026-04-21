@@ -1,29 +1,15 @@
 <form class="recipe-filters" role="search">
-  <div class="recipe-filters__search">
-    <span class="recipe-filters__search-icon">⌕</span>
-    <input
-      type="text"
-      placeholder="Buscar por nombre o ingrediente..."
-      aria-label="Buscar recetas"
-    />
-  </div>
+  <app-search-bar [variant]="'secondary'"
+                  [placeholder]="'Buscar por nombre o ingrediente...'"
+  ></app-search-bar>
 
-  <div class="recipe-filters__field">
-    <select aria-label="Filtrar por tipo">
-      <option>Todos los tipos</option>
-      <option>Italiana</option>
-      <option>Asiática</option>
-      <option>Saludable</option>
-      <option>Americana</option>
-    </select>
-  </div>
+  <ui-select
+    [variant]="'secondary'"
+    [options]="CATEGORY_OPTIONS_MOCK"
+  ></ui-select>
 
-  <div class="recipe-filters__field">
-    <select aria-label="Filtrar por tiempo">
-      <option>Cualquier tiempo</option>
-      <option>Menos de 15 min</option>
-      <option>Menos de 30 min</option>
-      <option>Menos de 1 hora</option>
-    </select>
-  </div>
+  <ui-select
+    [variant]="'secondary'"
+    [options]="TIME_OPTIONS_MOCK"
+  ></ui-select>
 </form>
