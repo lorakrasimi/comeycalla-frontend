@@ -1,1 +1,52 @@
-<p>import-processing-page works!</p>
+<section class="import-processing-page">
+  <div class="import-processing-page__card">
+    <header class="import-processing-page__header">
+      <h2 class="import-processing-page__title">Añadir desde imagen</h2>
+      <p class="import-processing-page__description">
+        Sube una captura o foto de una receta y la procesaremos automáticamente
+      </p>
+    </header>
+
+    @if (importStore.status() !== 'error') {
+      <div class="import-processing-page__content">
+        <h3 class="import-processing-page__processing-title">
+          Estamos procesando tu receta
+        </h3>
+
+        <p class="import-processing-page__processing-text">
+          Esto tomará solo unos segundos...
+        </p>
+
+        <app-processing-steps></app-processing-steps>
+      </div>
+    } @else {
+      <div class="import-processing-page__content">
+        <h3 class="import-processing-page__processing-title">
+          No se pudo procesar la imagen
+        </h3>
+
+        <p class="import-processing-page__processing-text">
+          {{ importStore.error() }}
+        </p>
+
+        <div class="import-processing-page__actions">
+          <button
+            type="button"
+            class="import-processing-page__secondary-button"
+            (click)="onBack()"
+          >
+            Volver
+          </button>
+
+          <button
+            type="button"
+            class="import-processing-page__primary-button"
+            (click)="onRetry()"
+          >
+            Probar otra imagen
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

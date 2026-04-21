@@ -1,1 +1,175 @@
-<p>import-review-page works!</p>
+<section class="import-review-page">
+  <div class="import-review-page__card">
+    <header class="import-review-page__header">
+      <div class="import-review-page__review-header">
+        <h3 class="import-review-page__review-title">Revisa tu receta</h3>
+      </div>
+      <ui-button
+        [variant]="'outline'"
+        [icon]="'restart_alt'"
+        [size]="'sm'"
+        (click)="onProcessAgain()"
+      >
+        Procesar otra vez
+      </ui-button>
+    </header>
+
+    <form class="import-review-page__form" [formGroup]="form" (ngSubmit)="onSave()">
+      <div class="import-review-page__top">
+        <div class="import-review-page__image-column">
+          <label class="import-review-page__label">Imagen de la receta</label>
+
+          @if (importStore.previewUrl()) {
+            <img
+              class="import-review-page__image"
+              [src]="importStore.previewUrl()!"
+              alt="Imagen de la receta"
+            />
+          }
+        </div>
+
+        <div class="import-review-page__main-fields">
+          <div class="import-review-page__field">
+            <label class="import-review-page__label">Nombre de la receta</label>
+            <input class="import-review-page__input" type="text" formControlName="title"/>
+          </div>
+
+          <div class="import-review-page__field">
+            <label class="import-review-page__label">Descripción</label>
+            <textarea
+              class="import-review-page__textarea"
+              rows="3"
+              formControlName="description"
+            ></textarea>
+          </div>
+
+          <div class="import-review-page__field">
+            <label class="import-review-page__label">Categoría</label>
+            <input
+              class="import-review-page__input"
+              type="text"
+              formControlName="category"
+              placeholder="Ej: Italiana"
+            />
+          </div>
+
+          <div class="import-review-page__field">
+            <label class="import-review-page__label">Tags</label>
+            <ui-tags-input
+              [tags]="form.controls.tags.value"
+              (tagsChange)="form.controls.tags.setValue($event)"
+            ></ui-tags-input>
+          </div>
+
+          <div class="import-review-page__meta-grid">
+            <div class="import-review-page__field">
+              <label class="import-review-page__label">Tiempo (minutos)</label>
+              <input
+                class="import-review-page__input"
+                type="number"
+                formControlName="cookingTime"
+              />
+            </div>
+
+            <div class="import-review-page__field">
+              <label class="import-review-page__label">Raciones</label>
+              <input
+                class="import-review-page__input"
+                type="number"
+                formControlName="servings"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="import-review-page__section">
+        <div class="import-review-page__section-header">
+          <h4 class="import-review-page__section-title">Ingredientes</h4>
+
+          <ui-button
+            [variant]="'outline'"
+            [icon]="'add'"
+            [size]="'sm'"
+            (click)="addIngredient()"
+          >
+            Añadir
+          </ui-button>
+        </div>
+
+        <div formArrayName="ingredients" class="import-review-page__list">
+          @for (ingredient of ingredients.controls; track $index) {
+            <div class="import-review-page__list-row" [formGroupName]="$index">
+              <input
+                class="import-review-page__input"
+                type="text"
+                formControlName="name"
+              />
+
+              <button
+                type="button"
+                class="import-review-page__remove-button"
+                (click)="removeIngredient($index)"
+              >
+                ×
+              </button>
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="import-review-page__section">
+        <div class="import-review-page__section-header">
+          <h4 class="import-review-page__section-title">Pasos de preparación</h4>
+
+          <ui-button
+            [variant]="'outline'"
+            [icon]="'add'"
+            [size]="'sm'"
+            (click)="addStep()"
+          >
+            Añadir
+          </ui-button>
+        </div>
+
+        <div formArrayName="steps" class="import-review-page__list">
+          @for (step of steps.controls; track $index) {
+            <div class="import-review-page__step-row" [formGroupName]="$index">
+              <div class="import-review-page__step-badge">
+                {{ $index + 1 }}
+              </div>
+
+              <textarea
+                class="import-review-page__textarea import-review-page__textarea--step"
+                rows="2"
+                formControlName="description"
+              ></textarea>
+
+              <button
+                type="button"
+                class="import-review-page__remove-button"
+                (click)="removeStep($index)"
+              >
+                ×
+              </button>
+            </div>
+          }
+        </div>
+      </section>
+
+      <div class="import-review-page__actions">
+        <ui-button
+          [variant]="'outline'"
+          [icon]="'arrow_back'"
+          (click)="onBack()"
+        >
+          Volver
+        </ui-button>
+
+        <ui-button [icon]="'save'" type="submit">
+          Guardar receta
+        </ui-button>
+      </div>
+    </form>
+  </div>
+</section>

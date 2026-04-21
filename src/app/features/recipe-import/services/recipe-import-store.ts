@@ -1,11 +1,18 @@
 import { Injectable, signal } from '@angular/core';
+import {ExtractedRecipe} from '../../../core/models/recipe-import.model';
 
-export type RecipeImportStatus = 'idle' | 'ready' | 'processing' | 'success' | 'error';
+export type RecipeImportStatus =
+  | 'idle'
+  | 'ready'
+  | 'processing'
+  | 'success'
+  | 'error';
 
 export interface RecipeImportState {
   file: File | null;
   previewUrl: string | null;
   status: RecipeImportStatus;
+  extractedRecipe: ExtractedRecipe | null;
   error: string | null;
 }
 
@@ -13,8 +20,10 @@ const initialState: RecipeImportState = {
   file: null,
   previewUrl: null,
   status: 'idle',
+  extractedRecipe: null,
   error: null,
 };
+
 
 @Injectable({ providedIn: 'root' })
 export class RecipeImportStore {
@@ -23,6 +32,7 @@ export class RecipeImportStore {
   readonly file = () => this.state().file;
   readonly previewUrl = () => this.state().previewUrl;
   readonly status = () => this.state().status;
+  readonly extractedRecipe = () => this.state().extractedRecipe;
   readonly error = () => this.state().error;
 
   setFile(file: File): void {
@@ -34,13 +44,9 @@ export class RecipeImportStore {
       file,
       previewUrl,
       status: 'ready',
+      extractedRecipe: null,
       error: null,
     });
-  }
-
-  clearFile(): void {
-    this.clearPreviewUrl();
-    this.state.set(initialState);
   }
 
   setProcessing(): void {
@@ -51,12 +57,26 @@ export class RecipeImportStore {
     }));
   }
 
+  setExtractedRecipe(recipe: ExtractedRecipe): void {
+    this.state.update((state) => ({
+      ...state,
+      status: 'success',
+      extractedRecipe: recipe,
+      error: null,
+    }));
+  }
+
   setError(error: string): void {
     this.state.update((state) => ({
       ...state,
       status: 'error',
       error,
     }));
+  }
+
+  clearFile(): void {
+    this.clearPreviewUrl();
+    this.state.set(initialState);
   }
 
   reset(): void {

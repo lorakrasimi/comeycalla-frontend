@@ -1,1 +1,25 @@
-<p>processing-steps works!</p>
+<div class="processing-steps">
+  <div class="processing-steps__item">
+    <div
+      class="processing-steps__indicator"
+      [class.processing-steps__indicator--active]="isCompleted(1)"
+    ></div>
+    <span class="processing-steps__label">Extrayendo texto de la imagen</span>
+  </div>
+
+  <div class="processing-steps__item">
+    <div
+      class="processing-steps__indicator"
+      [class.processing-steps__indicator--active]="isCompleted(2)"
+    ></div>
+    <span class="processing-steps__label">Identificando ingredientes</span>
+  </div>
+
+  <div class="processing-steps__item">
+    <div
+      class="processing-steps__indicator"
+      [class.processing-steps__indicator--active]="isCompleted(3)"
+    ></div>
+    <span class="processing-steps__label">Generando estructura de receta</span>
+  </div>
+</div>
