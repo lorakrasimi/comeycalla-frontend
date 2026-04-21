@@ -61,13 +61,55 @@ export const appRoutes: Routes = [
                 './features/recipes/pages/recipes-list-page/recipes-list-page'
                 ).then((m) => m.RecipesListPage),
           },
+
           {
-            path: 'new',
+            path: 'create',
             loadComponent: () =>
               import(
-                './features/recipes/pages/recipe-create-manual-page/recipe-create-manual-page'
-                ).then((m) => m.RecipeCreateManualPage),
+                './features/recipe-create/pages/add-recipe-page'
+                ).then((m) => m.AddRecipePage),
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'image',
+              },
+              {
+                path: 'manual',
+                loadComponent: () =>
+                  import(
+                    './features/recipes/pages/recipe-create-manual-page/recipe-create-manual-page'
+                    ).then((m) => m.RecipeCreateManualPage),
+              },
+              {
+                path: 'image',
+                children: [
+                  {
+                    path: '',
+                    loadComponent: () =>
+                      import(
+                        './features/recipe-import/pages/import-from-image-page/import-from-image-page'
+                        ).then((m) => m.ImportFromImagePage),
+                  },
+                  {
+                    path: 'processing',
+                    loadComponent: () =>
+                      import(
+                        './features/recipe-import/pages/import-processing-page/import-processing-page'
+                        ).then((m) => m.ImportProcessingPage),
+                  },
+                  {
+                    path: 'review',
+                    loadComponent: () =>
+                      import(
+                        './features/recipe-import/pages/import-review-page/import-review-page'
+                        ).then((m) => m.ImportReviewPage),
+                  },
+                ],
+              },
+            ],
           },
+
           {
             path: ':id',
             loadComponent: () =>
@@ -81,33 +123,6 @@ export const appRoutes: Routes = [
               import(
                 './features/recipes/pages/recipe-edit-page/recipe-edit-page'
                 ).then((m) => m.RecipeEditPage),
-          },
-        ],
-      },
-
-      {
-        path: 'import',
-        children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import(
-                './features/recipe-import/pages/import-from-image-page/import-from-image-page'
-                ).then((m) => m.ImportFromImagePage),
-          },
-          {
-            path: 'processing',
-            loadComponent: () =>
-              import(
-                './features/recipe-import/pages/import-processing-page/import-processing-page'
-                ).then((m) => m.ImportProcessingPage),
-          },
-          {
-            path: 'review',
-            loadComponent: () =>
-              import(
-                './features/recipe-import/pages/import-review-page/import-review-page'
-                ).then((m) => m.ImportReviewPage),
           },
         ],
       },

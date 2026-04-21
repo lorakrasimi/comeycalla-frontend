@@ -1,1 +1,28 @@
-<p>import-from-image-page works!</p>
+<section>
+  <div class="import-from-image-page__card">
+    <div class="import-from-image-page__header">
+      <h2 class="import-from-image-page__title">Añadir desde imagen</h2>
+      <p class="import-from-image-page__description">
+        Sube una captura o foto de una receta y la procesaremos automáticamente
+      </p>
+    </div>
+    @if (!importStore.previewUrl()) {
+      <app-image-dropzone (fileSelected)="onFileSelected($event)"/>
+    } @else {
+      <app-image-preview-card
+        (changeImage)="onChangeImage()"
+        [previewUrl]="importStore.previewUrl() ?? ''">
+
+      </app-image-preview-card>
+
+      <div class="import-from-image-page__actions">
+        <ui-button [icon]="'auto_awesome'" (click)="onProcessRecipe()">
+          Procesar receta
+        </ui-button>
+        <p class="import-from-image-page__helper">
+          Analizaremos la imagen y extraeremos automáticamente los ingredientes, pasos y detalles de la receta
+        </p>
+      </div>
+    }
+  </div>
+</section>

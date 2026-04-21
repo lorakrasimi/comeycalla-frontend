@@ -1,0 +1,25 @@
+<section class="add-recipe-page">
+  <header class="add-recipe-page__header">
+    <h1 class="add-recipe-page__title">Añadir receta</h1>
+
+    <nav class="add-recipe-page__tabs">
+      <a
+        routerLink="/recipes/create/image"
+        routerLinkActive="add-recipe-page__tab--active"
+        class="add-recipe-page__tab"
+      >
+        Desde imagen
+      </a>
+
+      <a
+        routerLink="/recipes/create/manual"
+        routerLinkActive="add-recipe-page__tab--active"
+        class="add-recipe-page__tab"
+      >
+        Manual
+      </a>
+    </nav>
+  </header>
+
+  <router-outlet />
+</section>
