@@ -25,6 +25,8 @@
   --color-primary: #D12F41;
   --color-primary-hover: #c43f5c;
   --color-secondary: #FF6900;
+  --color-secondary-hover: #FF6900;
+  --color-tertiary: #BEDBFF;
 
   /* Backgrounds */
   --color-background: #F9E1EE;

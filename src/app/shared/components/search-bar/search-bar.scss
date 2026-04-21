@@ -17,3 +17,11 @@
   padding: 0 14px 0 40px;
   height: 48px;
 }
+
+.search-bar-primary {
+  border: 0.5px solid var(--color-primary);
+}
+
+.search-bar-secondary {
+  border: 2px solid var(--color-tertiary);
+}

@@ -1,1 +1,11 @@
-<p>ui-select works!</p>
+<div class="ui-select ui-select-{{ variant }}">
+  <select [value]="value" (change)="onChange($event)">
+    <option value="" disabled>{{ placeholder }}</option>
+
+    @for (option of options; track option.value) {
+      <option [value]="option.value">
+        {{ option.label }}
+      </option>
+    }
+  </select>
+</div>

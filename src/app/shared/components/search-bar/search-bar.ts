@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchBar {
   @Input() placeholder: string = "Buscar..."
+  @Input() variant = "primary"
   value = '';
 
   @Output() valueChange = new EventEmitter<string>();
