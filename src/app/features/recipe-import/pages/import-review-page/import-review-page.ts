@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {Component, OnInit, inject, signal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -23,12 +23,15 @@ import { RecipeForm } from '../../../recipes/components/recipe-form/recipe-form'
 })
 export class ImportReviewPage implements OnInit {
   private readonly fb = inject(FormBuilder);
+  readonly imagePreviewUrl = signal<string | null>(null);
 
   constructor(
     private router: Router,
     protected importStore: RecipeImportStore,
     private recipesApi: RecipesApi
-  ) {}
+  ) {
+    this.imagePreviewUrl.set(importStore.previewUrl())
+  }
 
   readonly form = this.fb.group({
     title: this.fb.control<string>('', {
@@ -133,4 +136,23 @@ export class ImportReviewPage implements OnInit {
       description: [value, [Validators.required]],
     });
   }
+
+  onImageSelected(file: File): void {
+    const currentUrl = this.imagePreviewUrl();
+    if (currentUrl) {
+      URL.revokeObjectURL(currentUrl);
+    }
+    this.imagePreviewUrl.set(URL.createObjectURL(file));
+  }
+
+  onImageRemoved(): void {
+    const currentUrl = this.imagePreviewUrl();
+    console.log("imgRemoved")
+    if (currentUrl) {
+      URL.revokeObjectURL(currentUrl);
+    }
+
+    this.imagePreviewUrl.set(null);
+  }
+
 }

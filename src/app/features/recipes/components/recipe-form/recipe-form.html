@@ -21,8 +21,8 @@
     <div class="recipe-form__image-column">
       <app-recipe-image-field
         [imageUrl]="imageUrl"
-        [allowUpload]="allowImageUpload"
         (imageSelected)="onImageSelected($event)"
+        (imageRemoved)="onImageRemoved()"
       />
     </div>
 

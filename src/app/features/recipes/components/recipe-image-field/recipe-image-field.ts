@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-image-field',
@@ -8,20 +8,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class RecipeImageField {
   @Input() imageUrl: string | null = null;
-  @Input() allowUpload = false;
   @Input() label = 'Imagen de la receta';
 
   @Output() imageSelected = new EventEmitter<File>();
+  @Output() imageRemoved = new EventEmitter<void>();
+
+  @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
+
   isPreviewOpen = false;
-
-  openPreview(): void {
-    if (!this.imageUrl) return;
-    this.isPreviewOpen = true;
-  }
-
-  closePreview(): void {
-    this.isPreviewOpen = false;
-  }
 
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -31,8 +25,28 @@ export class RecipeImageField {
       return;
     }
 
-    console.log('onFileChange', file);
     this.imageSelected.emit(file);
     input.value = '';
+  }
+
+  openPreview(): void {
+    if (!this.imageUrl) {
+      return;
+    }
+
+    this.isPreviewOpen = true;
+  }
+
+  closePreview(): void {
+    this.isPreviewOpen = false;
+  }
+
+  triggerFilePicker(): void {
+    this.fileInput?.nativeElement.click();
+  }
+
+  removeImage(): void {
+    this.imageRemoved.emit();
+    this.closePreview();
   }
 }

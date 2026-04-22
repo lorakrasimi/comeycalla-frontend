@@ -12,35 +12,47 @@
   color: var(--color-text-strong);
 }
 
-.recipe-image-field__preview,
-.recipe-image-field__upload-card {
+.recipe-image-field__preview-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.recipe-image-field__preview {
   width: 100%;
   height: 180px;
   min-height: 180px;
   max-height: 180px;
-  border-radius: 14px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
 
-.recipe-image-field__preview {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 14px;
   background: #f7f4f6;
   border: 1px solid #ead6db;
+  overflow: hidden;
+  cursor: zoom-in;
 }
 
 .recipe-image-field__image {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: contain;
+  display: block;
 }
 
 .recipe-image-field__upload-card {
+  width: 100%;
+  height: 180px;
+  min-height: 180px;
+  max-height: 180px;
+
   padding: 18px 14px;
   border: 1px dashed #d8bcc4;
+  border-radius: 14px;
   background: #f9f6f7;
 
   display: flex;
@@ -87,30 +99,70 @@
   color: var(--color-text-muted);
 }
 
-.recipe-image-field__input {
-  display: none;
+.recipe-image-field__actions {
+  display: flex;
+  gap: 8px;
 }
 
-.recipe-image-field__preview {
+.recipe-image-field__action-button {
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #ead6db;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--color-text-strong);
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
+}
+
+.recipe-image-field__action-button--danger {
+  border-color: #e7b4bd;
+  color: #c25e70;
+}
+
+.recipe-image-field__input {
+  display: none;
 }
 
 .recipe-image-field__modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.72);
 
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
+}
 
-  z-index: 999;
+.recipe-image-field__modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 
 .recipe-image-field__modal-image {
+  display: block;
   max-width: 90vw;
   max-height: 90vh;
-  border-radius: 12px;
   object-fit: contain;
+  border-radius: 14px;
   background: white;
+}
+
+.recipe-image-field__modal-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #333;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
 }

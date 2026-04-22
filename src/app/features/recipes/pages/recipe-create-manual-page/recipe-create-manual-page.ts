@@ -22,9 +22,12 @@ import { RecipesApi } from '../../services/recipes-api';
 })
 export class RecipeCreateManualPage {
   private readonly fb = inject(FormBuilder);
-  private readonly router = inject(Router);
-  private readonly recipesApi = inject(RecipesApi);
   readonly imagePreviewUrl = signal<string | null>(null);
+
+  constructor(
+    private router: Router,
+    private recipesApi: RecipesApi
+  ) {}
 
   readonly form = this.fb.group({
     title: this.fb.control<string>('', {
@@ -108,11 +111,16 @@ export class RecipeCreateManualPage {
     if (currentUrl) {
       URL.revokeObjectURL(currentUrl);
     }
-
-    //BOrrar los dos
-    const previewUrl = URL.createObjectURL(file);
-    console.log("recipe-create-manual-page", previewUrl);
     this.imagePreviewUrl.set(URL.createObjectURL(file));
   }
 
+  onImageRemoved(): void {
+    const currentUrl = this.imagePreviewUrl();
+
+    if (currentUrl) {
+      URL.revokeObjectURL(currentUrl);
+    }
+
+    this.imagePreviewUrl.set(null);
+  }
 }

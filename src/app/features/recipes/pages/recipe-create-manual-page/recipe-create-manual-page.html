@@ -14,8 +14,8 @@
       <app-recipe-form
         [form]="form"
         [imageUrl]="imagePreviewUrl()"
-        [allowImageUpload]="true"
         (imageSelected)="onImageSelected($event)"
+        (imageRemoved)="onImageRemoved()"
       />
 
       <div class="recipe-create-manual-page__actions">

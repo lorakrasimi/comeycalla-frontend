@@ -18,8 +18,12 @@ export class RecipeForm {
 
   @Input({ required: true }) form!: FormGroup;
   @Input() imageUrl: string | null = null;
-  @Input() allowImageUpload = false;
   @Output() imageSelected = new EventEmitter<File>();
+  @Output() imageRemoved = new EventEmitter<void>();
+
+  onImageRemoved(): void {
+    this.imageRemoved.emit();
+  }
 
   get ingredients(): FormArray<FormGroup> {
     return this.form.get('ingredients') as FormArray<FormGroup>;
@@ -30,7 +34,6 @@ export class RecipeForm {
   }
 
   addIngredient(): void {
-    console.log(this.allowImageUpload)
     this.ingredients.push(this.createIngredientGroup(''));
   }
 
@@ -67,7 +70,6 @@ export class RecipeForm {
   }
 
   onImageSelected(file: File): void {
-    console.log('onImageSelected', file);
     this.imageSelected.emit(file);
   }
 }
