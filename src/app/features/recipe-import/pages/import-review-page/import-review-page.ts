@@ -1,5 +1,5 @@
-import {Component, OnInit, inject} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   FormArray,
   FormBuilder,
@@ -7,27 +7,28 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
-import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
-import {RecipeImportStore} from '../../services/recipe-import-store';
-import {RecipesApi} from '../../../recipes/services/recipes-api';
-import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
+import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
+import { RecipeImportStore } from '../../services/recipe-import-store';
+import { RecipesApi } from '../../../recipes/services/recipes-api';
+import { RecipeForm } from '../../../recipes/components/recipe-form/recipe-form';
 
 @Component({
   selector: 'app-import-review-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UiButton, UiTagsInput],
+  imports: [CommonModule, ReactiveFormsModule, UiButton, RecipeForm],
   templateUrl: './import-review-page.html',
   styleUrl: './import-review-page.scss',
 })
 export class ImportReviewPage implements OnInit {
   private readonly fb = inject(FormBuilder);
 
-  constructor(private router: Router,
-              protected importStore: RecipeImportStore,
-              private recipesApi: RecipesApi) {
-  }
+  constructor(
+    private router: Router,
+    protected importStore: RecipeImportStore,
+    private recipesApi: RecipesApi
+  ) {}
 
   readonly form = this.fb.group({
     title: this.fb.control<string>('', {
@@ -37,10 +38,8 @@ export class ImportReviewPage implements OnInit {
     description: this.fb.control<string | null>(null),
     cookingTime: this.fb.control<string | null>(null),
     servings: this.fb.control<number | null>(null),
-
-    category: this.fb.control<string>("", { nonNullable: true }),
+    category: this.fb.control<string>('', { nonNullable: true }),
     tags: this.fb.control<string[]>([], { nonNullable: true }),
-
     ingredients: this.fb.array<FormGroup>([]),
     steps: this.fb.array<FormGroup>([]),
   });
@@ -58,7 +57,7 @@ export class ImportReviewPage implements OnInit {
       description: extractedRecipe.description ?? null,
       cookingTime: extractedRecipe.cookingTime ?? null,
       servings: extractedRecipe.servings ?? null,
-      category: extractedRecipe.category ?? null,
+      category: extractedRecipe.category ?? '',
       tags: extractedRecipe.tags ?? [],
     });
 
@@ -77,30 +76,6 @@ export class ImportReviewPage implements OnInit {
 
   get steps(): FormArray<FormGroup> {
     return this.form.get('steps') as FormArray<FormGroup>;
-  }
-
-  addIngredient(): void {
-    this.ingredients.push(this.createIngredientGroup(''));
-  }
-
-  removeIngredient(index: number): void {
-    if (this.ingredients.length === 1) {
-      return;
-    }
-
-    this.ingredients.removeAt(index);
-  }
-
-  addStep(): void {
-    this.steps.push(this.createStepGroup(''));
-  }
-
-  removeStep(index: number): void {
-    if (this.steps.length === 1) {
-      return;
-    }
-
-    this.steps.removeAt(index);
   }
 
   onProcessAgain(): void {
@@ -125,15 +100,14 @@ export class ImportReviewPage implements OnInit {
       cookingTime: value.cookingTime ?? '0',
       servings: value.servings ?? 0,
       imageUrl: this.importStore.previewUrl(),
-      category: value.category ?? [],
+      category: value.category ?? '',
       tags: value.tags ?? [],
-
       ingredients: (value.ingredients ?? []).map((item) => ({
-        name: item["name"] ?? '',
+        name: item['name'] ?? '',
       })),
       steps: (value.steps ?? []).map((item, index) => ({
         order: index + 1,
-        description: item["description"] ?? '',
+        description: item['description'] ?? '',
       })),
     };
 

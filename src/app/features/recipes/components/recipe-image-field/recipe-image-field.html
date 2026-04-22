@@ -1,0 +1,41 @@
+<div class="recipe-image-field">
+  <label class="recipe-image-field__label">{{ label }}</label>
+
+  @if (imageUrl) {
+    <div
+      class="recipe-image-field__preview"
+      (click)="openPreview()"
+    >
+      <img
+        class="recipe-image-field__image"
+        [src]="imageUrl"
+        alt="Imagen de la receta"
+      />
+    </div>
+  } @else if (allowUpload) {
+    <label class="recipe-image-field__upload-card">
+      <div class="recipe-image-field__upload-icon">
+        <span class="material-symbols-outlined">add_photo_alternate</span>
+      </div>
+      <span class="recipe-image-field__upload-title">Añadir foto</span>
+      <span class="recipe-image-field__upload-hint">JPG, PNG, o GIF</span>
+
+      <input
+        class="recipe-image-field__input"
+        type="file"
+        accept="image/png,image/jpeg,image/gif,image/webp"
+        (change)="onFileChange($event)"
+      />
+    </label>
+  }
+</div>
+@if (isPreviewOpen) {
+  <div class="recipe-image-field__modal" (click)="closePreview()">
+    <img
+      class="recipe-image-field__modal-image"
+      [src]="imageUrl"
+      alt="Preview"
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+}
