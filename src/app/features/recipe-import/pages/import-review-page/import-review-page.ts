@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
 import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
 import { RecipeImportStore } from '../../services/recipe-import-store';
 import { RecipesApi } from '../../../recipes/services/recipes-api';
-import { RecipeForm } from '../../../recipes/components/recipe-form/recipe-form';
+import { RecipeFormComponent } from '../../../recipes/components/recipe-form/recipe-form';
 
 @Component({
   selector: 'app-import-review-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UiButton, RecipeForm],
+  imports: [CommonModule, ReactiveFormsModule, UiButton, RecipeFormComponent],
   templateUrl: './import-review-page.html',
   styleUrl: './import-review-page.scss',
 })

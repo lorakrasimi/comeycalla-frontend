@@ -10,6 +10,7 @@
   <section class="recipes-list-page__grid">
     @for (recipe of recipes(); track recipe.id) {
       <app-recipe-card
+        [id]="recipe.id"
         [title]="recipe.title"
         [img]="recipe.img"
         [category]="recipe.category"

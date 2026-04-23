@@ -1,75 +1,72 @@
-import {Component, Input, inject, Output, EventEmitter} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
-import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
-import { UiTagsInput } from '../../../../shared/ui/ui-tags-input/ui-tags-input';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {RecipeImageField} from '../recipe-image-field/recipe-image-field';
+import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
 
 @Component({
   selector: 'app-recipe-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UiButton, UiTagsInput, RecipeImageField],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    UiButton,
+    RecipeImageField,
+    UiTagsInput,
+    // Add here your shared/ui components
+  ],
   templateUrl: './recipe-form.html',
-  styleUrl: './recipe-form.scss',
+  styleUrl: './recipe-form.scss'
 })
-export class RecipeForm {
-  private readonly fb = inject(FormBuilder);
-
+export class RecipeFormComponent {
   @Input({ required: true }) form!: FormGroup;
   @Input() imageUrl: string | null = null;
+  @Input() submitLabel = 'Guardar receta';
+  @Input() submitting = false;
+
+  @Output() submit = new EventEmitter<void>();
+  @Output() cancel = new EventEmitter<void>();
   @Output() imageSelected = new EventEmitter<File>();
   @Output() imageRemoved = new EventEmitter<void>();
 
-  onImageRemoved(): void {
-    this.imageRemoved.emit();
+  get ingredients(): FormArray {
+    return this.form.get('ingredients') as FormArray;
   }
 
-  get ingredients(): FormArray<FormGroup> {
-    return this.form.get('ingredients') as FormArray<FormGroup>;
-  }
-
-  get steps(): FormArray<FormGroup> {
-    return this.form.get('steps') as FormArray<FormGroup>;
+  get steps(): FormArray {
+    return this.form.get('steps') as FormArray;
   }
 
   addIngredient(): void {
-    this.ingredients.push(this.createIngredientGroup(''));
+    const ingredients = this.ingredients;
+
+    ingredients.push(
+      new FormGroup({})
+    );
   }
 
   removeIngredient(index: number): void {
-    if (this.ingredients.length === 1) {
-      return;
-    }
-
     this.ingredients.removeAt(index);
   }
 
   addStep(): void {
-    this.steps.push(this.createStepGroup(''));
+    const steps = this.steps;
+
+    steps.push(
+      new FormGroup({})
+    );
   }
 
   removeStep(index: number): void {
-    if (this.steps.length === 1) {
-      return;
-    }
-
     this.steps.removeAt(index);
-  }
-
-  private createIngredientGroup(value: string): FormGroup {
-    return this.fb.group({
-      name: [value, [Validators.required]],
-    });
-  }
-
-  private createStepGroup(value: string): FormGroup {
-    return this.fb.group({
-      description: [value, [Validators.required]],
-    });
   }
 
   onImageSelected(file: File): void {
     this.imageSelected.emit(file);
+  }
+
+  onImageRemoved(): void {
+    this.imageRemoved.emit();
   }
 }

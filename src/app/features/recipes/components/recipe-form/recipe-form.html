@@ -1,10 +1,9 @@
 <div class="recipe-form" [formGroup]="form">
   <div class="recipe-form__header-grid">
-
     <div class="recipe-form__header-fields">
       <div class="recipe-form__field">
         <label class="recipe-form__label">Nombre de la receta</label>
-        <input class="recipe-form__input" type="text" formControlName="title"/>
+        <input class="recipe-form__input" type="text" formControlName="title" />
       </div>
 
       <div class="recipe-form__field">
@@ -17,7 +16,6 @@
       </div>
     </div>
 
-
     <div class="recipe-form__image-column">
       <app-recipe-image-field
         [imageUrl]="imageUrl"
@@ -25,13 +23,9 @@
         (imageRemoved)="onImageRemoved()"
       />
     </div>
-
-
   </div>
 
-  <!-- RESTO DEL FORM -->
   <div class="recipe-form__main-fields">
-
     <div class="recipe-form__field">
       <label class="recipe-form__label">Categoría</label>
       <input
@@ -69,7 +63,6 @@
         />
       </div>
     </div>
-
   </div>
 
   <section class="recipe-form__section">
@@ -83,7 +76,7 @@
         [size]="'sm'"
         (click)="addIngredient()"
       >
-        Añadir
+        Añadir ingrediente
       </ui-button>
     </div>
 
@@ -94,6 +87,7 @@
             class="recipe-form__input"
             type="text"
             formControlName="name"
+            placeholder="Ej: 200g de pasta"
           />
 
           <button
@@ -119,7 +113,7 @@
         [size]="'sm'"
         (click)="addStep()"
       >
-        Añadir
+        Añadir paso
       </ui-button>
     </div>
 
@@ -134,6 +128,7 @@
             class="recipe-form__textarea recipe-form__textarea--step"
             rows="2"
             formControlName="description"
+            placeholder="Describe el paso..."
           ></textarea>
 
           <button
@@ -147,4 +142,21 @@
       }
     </div>
   </section>
+
+  <div class="recipe-form__actions">
+    <ui-button
+      type="button"
+      (click)="cancel.emit()"
+    >
+      Cancelar
+    </ui-button>
+
+    <ui-button
+      type="button"
+      [disabled]="form.invalid || submitting"
+      (click)="submit.emit()"
+    >
+      {{ submitLabel }}
+    </ui-button>
+  </div>
 </div>

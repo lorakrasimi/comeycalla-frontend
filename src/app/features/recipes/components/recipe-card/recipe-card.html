@@ -36,7 +36,12 @@
     </span>
       </div>
 
-      <ui-button size="sm" [icon]="'visibility'">Ver</ui-button>
-    </div>
+      <ui-button
+        size="sm"
+        [icon]="'visibility'"
+        [routerLink]="['/recipes', id]"
+      >
+        Ver
+      </ui-button>    </div>
   </div>
 </div>

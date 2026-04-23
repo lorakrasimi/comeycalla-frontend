@@ -10,13 +10,13 @@ import {
 import { Router } from '@angular/router';
 
 import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
-import { RecipeForm } from '../../components/recipe-form/recipe-form';
+import { RecipeFormComponent } from '../../components/recipe-form/recipe-form';
 import { RecipesApi } from '../../services/recipes-api';
 
 @Component({
   selector: 'app-recipe-create-manual-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UiButton, RecipeForm],
+  imports: [CommonModule, ReactiveFormsModule, UiButton, RecipeFormComponent],
   templateUrl: './recipe-create-manual-page.html',
   styleUrl: './recipe-create-manual-page.scss',
 })

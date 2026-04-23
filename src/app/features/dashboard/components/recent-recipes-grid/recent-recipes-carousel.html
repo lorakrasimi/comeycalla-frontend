@@ -15,6 +15,7 @@
       @for (recipe of recipes(); track recipe.id) {
         <div class="recent-recipes-carousel__slide">
           <app-recipe-card
+            [id]="recipe.id"
             [title]="recipe.title"
             [img]="recipe?.img"
             [category]="recipe.category"
