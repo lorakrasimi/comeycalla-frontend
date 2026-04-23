@@ -4,11 +4,13 @@ import {Router} from '@angular/router';
 import {MealPlanConfig} from '../../../../core/models/meal-plan.model';
 import {finalize} from 'rxjs';
 import {MealPlanConfigForm} from '../../components/meal-plan-config-form/meal-plan-config-form';
+import {UiPageHeader} from '../../../../shared/ui/ui-page-header/ui-page-header';
 
 @Component({
   selector: 'app-create-meal-plan-page',
   imports: [
-    MealPlanConfigForm
+    MealPlanConfigForm,
+    UiPageHeader
   ],
   templateUrl: './create-meal-plan-page.html',
   styleUrl: './create-meal-plan-page.scss',

@@ -1,0 +1,31 @@
+:host {
+  display: block;
+}
+
+.meal-day-column {
+  overflow: hidden;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-xl);
+  background: white;
+  box-shadow: var(--shadow-elevated);
+}
+
+.meal-day-column__header {
+  padding: 1.35rem 1.5rem;
+  background: var(--color-secondary);
+  color: white;
+}
+
+.meal-day-column__title {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+}
+
+.meal-day-column__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem;
+}

@@ -1,0 +1,11 @@
+.ui-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ui-page__title {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-strong);
+}

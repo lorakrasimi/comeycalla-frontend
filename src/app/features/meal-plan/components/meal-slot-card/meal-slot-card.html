@@ -1,1 +1,35 @@
-<p>meal-slot-card works!</p>
+@if (slot.recipe; as recipe) {
+  <article class="meal-slot-card">
+    <img
+      class="meal-slot-card__image"
+      [src]="recipe.img"
+      [alt]="recipe.title"
+    />
+
+    <div class="meal-slot-card__content">
+      <p class="meal-slot-card__type">{{ mealLabel }}</p>
+      <h4 class="meal-slot-card__title">{{ recipe.title }}</h4>
+
+      <div class="meal-slot-card__actions">
+        <ui-button
+          type="button"
+          size="sm"
+          [variant]="'outline'"
+          [icon]="'autorenew'"
+          (click)="onReplace()"
+        >
+          Cambiar
+        </ui-button>
+
+        <ui-button
+          size="sm"
+          [variant]="'outline'"
+          [icon]="'visibility'"
+          [routerLink]="['/recipes', recipe.id]"
+        >
+          Ver
+        </ui-button>
+      </div>
+    </div>
+  </article>
+}

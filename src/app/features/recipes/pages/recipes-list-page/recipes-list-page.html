@@ -1,10 +1,7 @@
 <section class="recipes-list-page">
-  <header class="recipes-list-page__header">
-    <h1 class="recipes-list-page__title">Mis recetas</h1>
-  </header>
-
+  <app-ui-page-header [title]="'Mis recetas'"></app-ui-page-header>
   <section class="recipes-list-page__filters">
-    <app-recipe-filters />
+    <app-recipe-filters/>
   </section>
 
   <section class="recipes-list-page__grid">
@@ -16,8 +13,8 @@
         [category]="recipe.category"
         [time]="recipe.cookingTime"
         [description]="recipe.description"
-        [servings] = "recipe.servings"
-        [tags] = "recipe.tags"
+        [servings]="recipe.servings"
+        [tags]="recipe.tags"
       />
     }
   </section>

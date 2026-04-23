@@ -2,11 +2,12 @@ import { Component, signal } from '@angular/core';
 import { RecipeCard } from '../../components/recipe-card/recipe-card';
 import { RecipeFilters } from '../../components/recipe-filters/recipe-filters';
 import {Recipe} from '../../../../core/models/recipe.model';
+import {UiPageHeader} from '../../../../shared/ui/ui-page-header/ui-page-header';
 
 @Component({
   selector: 'app-recipes-list-page',
   standalone: true,
-  imports: [RecipeCard, RecipeFilters],
+  imports: [RecipeCard, RecipeFilters, UiPageHeader],
   templateUrl: './recipes-list-page.html',
   styleUrl: './recipes-list-page.scss',
 })

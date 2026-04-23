@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-ui-page-header',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './ui-page-header.html',
   styleUrl: './ui-page-header.scss',
 })
-export class UiPageHeader {}
+export class UiPageHeader {
+  @Input() title: string = '';
+}
