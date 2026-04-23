@@ -1,0 +1,138 @@
+:host {
+  display: block;
+}
+
+.meal-plan-config-form {
+  width: 100%;
+}
+
+.meal-plan-config-form__content {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  overflow: hidden;
+  border: 1px solid #efbcc2;
+  border-radius: 20px;
+  background: #feeef8;
+}
+
+.meal-plan-config-form__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2.5rem 2.75rem;
+}
+
+.meal-plan-config-form__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meal-plan-config-form__section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.meal-plan-config-form__section-icon {
+  color: var(--color-secondary);
+}
+
+.meal-plan-config-form__section-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.meal-plan-config-form__day-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.meal-plan-config-form__day-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-background);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.meal-plan-config-form__day-button--active {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.meal-plan-config-form__checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meal-plan-config-form__checkbox {
+  display: none;
+}
+
+.meal-plan-config-form__checkbox + span {
+  position: relative;
+  padding-left: 28px;
+}
+
+.meal-plan-config-form__checkbox + span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #999;
+  border-radius: 4px;
+  background: white;
+}
+
+.meal-plan-config-form__checkbox:checked + span::before {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.meal-plan-config-form__checkbox:checked + span::after {
+  content: "✔";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  font-size: var(--font-size-sm);
+  color: white;
+}
+
+.meal-plan-config-form__error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+.meal-plan-config-form__checkbox-group label:last-child {
+  margin-top: 20px;
+}
+
+.meal-plan-config-form__image-panel {
+  min-height: 520px;
+  background-image: url('/img/fondo.png');
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 920px) {
+  .meal-plan-config-form__content {
+    grid-template-columns: 1fr;
+  }
+
+  .meal-plan-config-form__image-panel {
+    min-height: 220px;
+  }
+
+  .meal-plan-config-form__panel {
+    padding: 1.5rem;
+  }
+}

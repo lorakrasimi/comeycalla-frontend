@@ -1,1 +1,75 @@
-<p>meal-plan-config-form works!</p>
+<form class="meal-plan-config-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="meal-plan-config-form__content">
+    <div class="meal-plan-config-form__panel">
+      <section class="meal-plan-config-form__section">
+        <div class="meal-plan-config-form__section-header">
+          <span class="material-symbols-outlined meal-plan-config-form__section-icon">calendar_month</span>
+          <h3 class="meal-plan-config-form__section-title">Número de días</h3>
+        </div>
+
+        <div class="meal-plan-config-form__day-grid">
+          @for (day of dayOptions; track day) {
+            <button
+              type="button"
+              class="meal-plan-config-form__day-button"
+              [class.meal-plan-config-form__day-button--active]="form.controls['days'].value === day"
+              (click)="selectDays(day)"
+            >
+              {{ day }}
+            </button>
+          }
+        </div>
+      </section>
+
+      <section class="meal-plan-config-form__section">
+        <div class="meal-plan-config-form__section-header">
+          <span class="material-symbols-outlined meal-plan-config-form__section-icon">chef_hat</span>
+          <h3 class="meal-plan-config-form__section-title">Comidas por día</h3>
+        </div>
+
+        <div class="meal-plan-config-form__checkbox-group">
+          <label>
+            <input type="checkbox"  class = "meal-plan-config-form__checkbox" formControlName="breakfast" />
+            <span>Desayuno</span>
+          </label>
+
+          <label>
+            <input type="checkbox" class = "meal-plan-config-form__checkbox" formControlName="lunch" />
+            <span>Comida</span>
+          </label>
+
+          <label>
+            <input type="checkbox" class = "meal-plan-config-form__checkbox" formControlName="dinner" />
+            <span>Cena</span>
+          </label>
+
+          <label>
+            <input type="checkbox" class = "meal-plan-config-form__checkbox " formControlName="excludeRepeatedRecipes" />
+            <span>Excluir recetas repetidas</span>
+          </label>
+        </div>
+
+        @if (
+          !form.controls['breakfast'].value &&
+          !form.controls['lunch'].value &&
+          !form.controls['dinner'].value
+          ) {
+          <p class="meal-plan-config-form__error">
+            Selecciona al menos una comida.
+          </p>
+        }
+      </section>
+
+      <ui-button
+        type="submit"
+        [variant]="'primary'"
+        [icon]="'check'"
+        [disabled]="submitting"
+      >
+        Generar menú
+      </ui-button>
+    </div>
+
+    <div class="meal-plan-config-form__image-panel" aria-hidden="true"></div>
+  </div>
+</form>

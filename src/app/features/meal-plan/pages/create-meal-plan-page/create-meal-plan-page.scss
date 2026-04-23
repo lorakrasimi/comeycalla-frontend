@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.create-meal-plan-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.create-meal-plan-page__title {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text);
+}
