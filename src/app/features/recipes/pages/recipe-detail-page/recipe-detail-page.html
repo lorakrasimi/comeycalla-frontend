@@ -1,18 +1,18 @@
 <section class="recipe-detail-page">
   @if (loading()) {
-    <app-ui-loader></app-ui-loader>
+    <ui-loader></ui-loader>
   } @else if (recipe(); as recipeData) {
     <div class="recipe-detail-page__top-actions">
       <ui-button
-        type="button"
+        [variant]="'ghost'"
         [routerLink]="['/recipes']"
+        [icon]="'arrow_back'"
       >
         Volver
       </ui-button>
 
       <div class="recipe-detail-page__top-actions-right">
         <ui-button
-          type="button"
           [variant]="'outline'"
           [routerLink]="['/recipes', recipeData.id, 'edit']"
         >
@@ -20,7 +20,7 @@
         </ui-button>
 
         <ui-button
-          type="button"
+          [variant]="'danger'"
           (click)="onDelete()"
         >
           Eliminar
@@ -59,7 +59,7 @@
             }
 
             @if (recipeData.category) {
-              <span>{{ recipeData.category }}</span>
+              <ui-chip>{{ recipeData.category }}</ui-chip>
             }
 
             @if (recipeData.difficulty) {

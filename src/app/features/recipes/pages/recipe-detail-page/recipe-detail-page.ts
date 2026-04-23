@@ -7,6 +7,7 @@ import { RecipesApi } from '../../services/recipes-api';
 
 import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
 import { UiLoader } from '../../../../shared/ui/ui-loader/ui-loader';
+import {UiChip} from '../../../../shared/ui/ui-chip/ui-chip';
 
 interface RecipeDetailViewModel {
   id: number;
@@ -29,7 +30,8 @@ interface RecipeDetailViewModel {
     CommonModule,
     RouterLink,
     UiButton,
-    UiLoader
+    UiLoader,
+    UiChip
   ],
   templateUrl: './recipe-detail-page.html',
   styleUrl: './recipe-detail-page.scss'

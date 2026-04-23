@@ -2,11 +2,12 @@
   <app-search-bar></app-search-bar>
 
   <div class="topbar__actions">
-    <ui-button routerLink="/recipes/new">Nueva receta</ui-button>
+    <ui-button routerLink="/recipes/create">Nueva receta</ui-button>
     <app-avatar-cell
       [name]="(user$ | async)?.username ?? 'Guest'"
       [img]="(user$ | async)?.avatar ?? '/img/avatar.jpg'"
     />
+
     <span class="material-symbols-outlined" (click)="logout()">logout</span>
   </div>
 </header>

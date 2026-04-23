@@ -1,1 +1,16 @@
-<p>ui-loader works!</p>
+<div
+  class="ui-loader"
+  [class.ui-loader--full-page]="fullPage"
+  role="status"
+  aria-live="polite"
+  aria-busy="true"
+>
+  <div class="ui-loader__card">
+    <div class="ui-loader__spinner" aria-hidden="true">
+      <span class="ui-loader__ring ui-loader__ring--outer"></span>
+      <span class="ui-loader__ring ui-loader__ring--inner"></span>
+    </div>
+
+    <p class="ui-loader__label">{{ label }}</p>
+  </div>
+</div>

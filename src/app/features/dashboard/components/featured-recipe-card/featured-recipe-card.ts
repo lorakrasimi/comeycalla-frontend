@@ -14,11 +14,6 @@ import {UiChip} from '../../../../shared/ui/ui-chip/ui-chip';
   templateUrl: './featured-recipe-card.html',
   styleUrl: './featured-recipe-card.scss',
 })
-export class FeaturedRecipeCard {
+export class FeaturedRecipeCard  {
   @Input() recipe!: Recipe;
-
-  ngOnInit(): void {
-    console.log(this.recipe);
-    console.log(this.recipe.img);
-  }
 }

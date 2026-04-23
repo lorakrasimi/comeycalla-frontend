@@ -1,6 +1,13 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline';
+type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'outline'
+  | 'ghost'
+  | 'danger'
+  | 'soft';
+
 type ButtonType = 'button' | 'submit' | 'reset';
 type ButtonSize = 'md' | 'sm';
 
@@ -17,6 +24,7 @@ export class UiButton {
   @Input() icon?: string;
   @Input() iconPosition: 'left' | 'right' = 'left';
   @Input() size: ButtonSize = 'md';
+
   get buttonClass(): string {
     let base = 'ui-button';
 
@@ -26,6 +34,15 @@ export class UiButton {
         break;
       case 'outline':
         base += ' ui-button--outline';
+        break;
+      case 'ghost':
+        base += ' ui-button--ghost';
+        break;
+      case 'danger':
+        base += ' ui-button--danger';
+        break;
+      case 'soft':
+        base += ' ui-button--soft';
         break;
       default:
         base += ' ui-button--primary';

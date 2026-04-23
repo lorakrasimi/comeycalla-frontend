@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-ui-input',
+  selector: 'ui-input',
   imports: [],
   templateUrl: './ui-input.html',
   styleUrl: './ui-input.scss',
