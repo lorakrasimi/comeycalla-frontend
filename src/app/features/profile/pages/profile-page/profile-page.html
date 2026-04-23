@@ -1,0 +1,60 @@
+<section class="profile-page">
+  @if (loading()) {
+    <app-ui-loader></app-ui-loader>
+  } @else if (profile(); as user) {
+    <button
+      type="button"
+      class="profile-page__back-link"
+      (click)="goBack()"
+    ><span class="material-symbols-outlined">arrow_back</span>
+      Volver
+    </button>
+
+    <article class="profile-page__card">
+      <div class="profile-page__hero">
+        <app-avatar-cell
+          [name]="user.username"
+          [img]="user.avatar || ''"
+          [variant]="'profile'"
+          [clickable]="false"
+        />
+
+        <div class="profile-page__hero-content">
+          <h1 class="profile-page__name">{{ user.username }}</h1>
+          <p class="profile-page__email">{{ user.email }}</p>
+
+          <ui-button
+            [variant]="'secondary'"
+            [routerLink]="['/profile/edit']"
+          >
+            Editar perfil
+          </ui-button>
+        </div>
+      </div>
+
+      <div class="profile-page__divider"></div>
+
+      <section class="profile-page__stats-grid">
+        <article class="profile-page__stat-card">
+          <span class="profile-page__stat-value">{{ user.stats.savedRecipes }}</span>
+          <span class="profile-page__stat-label">Recetas guardadas</span>
+        </article>
+
+        <article class="profile-page__stat-card">
+          <span class="profile-page__stat-value">{{ user.stats.createdMenus }}</span>
+          <span class="profile-page__stat-label">Menús creados</span>
+        </article>
+
+        <article class="profile-page__stat-card">
+          <span class="profile-page__stat-value">{{ user.stats.cookedRecipes }}</span>
+          <span class="profile-page__stat-label">Recetas cocinadas</span>
+        </article>
+      </section>
+
+      <section class="profile-page__section">
+        <h2 class="profile-page__section-title">Categorías favoritas</h2>
+
+      </section>
+    </article>
+  }
+</section>

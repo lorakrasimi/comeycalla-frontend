@@ -44,6 +44,11 @@ export const appRoutes: Routes = [
       ),
     children: [
       {
+        path: 'profile',
+        loadChildren: () =>
+          import('./features/profile/profile.routes').then((m) => m.PROFILE_ROUTES)
+      },
+      {
         path: 'dashboard',
         loadComponent: () =>
           import(
@@ -155,7 +160,6 @@ export const appRoutes: Routes = [
       },
     ],
   },
-
   {
     path: '**',
     redirectTo: 'login',

@@ -1,16 +1,33 @@
-<div class="avatar-cell">
-  <a routerLink="/profile" class="avatar-cell__link">
-  @if (img) {
-    <img
-      class="avatar-cell__image"
-      [src]="img"
-      [alt]="name"
-      routerLink="/profile"
-    />
+<div
+  class="avatar-cell"
+  [class.avatar-cell--topbar]="variant === 'topbar'"
+  [class.avatar-cell--profile]="variant === 'profile'"
+>
+  @if (clickable) {
+    <a routerLink="/profile" class="avatar-cell__link">
+      @if (img) {
+        <img
+          class="avatar-cell__image"
+          [src]="img"
+          [alt]="name"
+        />
+      } @else {
+        <div class="avatar-cell__placeholder">
+          {{ initial }}
+        </div>
+      }
+    </a>
   } @else {
-    <div class="avatar-cell__placeholder">
-      {{ name.charAt(0).toUpperCase() }}
-    </div>
+    @if (img) {
+      <img
+        class="avatar-cell__image"
+        [src]="img"
+        [alt]="name"
+      />
+    } @else {
+      <div class="avatar-cell__placeholder">
+        {{ initial }}
+      </div>
+    }
   }
-  </a>
 </div>

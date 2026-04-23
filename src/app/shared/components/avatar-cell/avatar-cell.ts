@@ -12,5 +12,10 @@ import {RouterLink} from '@angular/router';
 export class AvatarCell {
   @Input() name: string = '';
   @Input() img: string = '';
+  @Input() variant: 'topbar' | 'profile' = 'topbar';
+  @Input() clickable: boolean = true;
 
+  protected get initial(): string {
+    return this.name?.trim()?.charAt(0)?.toUpperCase() || 'U';
+  }
 }
