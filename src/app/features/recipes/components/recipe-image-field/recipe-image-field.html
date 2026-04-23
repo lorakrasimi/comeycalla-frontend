@@ -15,21 +15,9 @@
       </div>
 
       <div class="recipe-image-field__actions">
-        <button
-          type="button"
-          class="recipe-image-field__action-button"
-          (click)="triggerFilePicker()"
-        >
-          Cambiar
-        </button>
+        <ui-button (click)="triggerFilePicker()" [variant]="'outline'" [size]="'sm'" >Cambiar</ui-button>
+        <ui-button (click)="removeImage()" [variant]="'danger'" [size]="'sm'" >Eliminar</ui-button>
 
-        <button
-          type="button"
-          class="recipe-image-field__action-button recipe-image-field__action-button--danger"
-          (click)="removeImage()"
-        >
-          Eliminar
-        </button>
       </div>
 
       <input

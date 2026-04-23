@@ -54,8 +54,6 @@
   background: transparent;
   border-color: transparent;
   color: var(--color-primary);
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .ui-button--ghost:hover:not(:disabled) {
@@ -63,9 +61,8 @@
 }
 
 .ui-button--danger {
-  background: transparent;
-  border-color: #f0b8c0;
-  color: var(--color-primary);
+  background: var(--color-error);
+  color: white;
 }
 
 .ui-button--danger:hover:not(:disabled) {

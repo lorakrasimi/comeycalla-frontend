@@ -25,9 +25,8 @@
         <span class="material-symbols-outlined image-dropzone__icon">upload</span>
 
         <p class="image-dropzone__drop-text">Arrastra una imagen aquí o haz clic para seleccionar</p>
-        <p class="image-dropzone__helper-text">Sube una captura o foto de una receta</p>
 
-        <ui-button [icon]="'image'"  (click)="$event.stopPropagation(); openFilePicker(fileInput)">Seleccionar imagen</ui-button>
+        <ui-button [icon]="'image'" (click)="$event.stopPropagation(); openFilePicker(fileInput)">Seleccionar imagen</ui-button>
 
       </div>
     } @else {

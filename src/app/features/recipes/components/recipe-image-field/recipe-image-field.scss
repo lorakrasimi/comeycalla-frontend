@@ -104,23 +104,6 @@
   gap: 8px;
 }
 
-.recipe-image-field__action-button {
-  height: 34px;
-  padding: 0 12px;
-  border: 1px solid #ead6db;
-  border-radius: 10px;
-  background: #fff;
-  color: var(--color-text-strong);
-  font-size: 0.85rem;
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-}
-
-.recipe-image-field__action-button--danger {
-  border-color: #e7b4bd;
-  color: #c25e70;
-}
-
 .recipe-image-field__input {
   display: none;
 }

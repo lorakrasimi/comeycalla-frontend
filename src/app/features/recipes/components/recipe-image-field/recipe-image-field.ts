@@ -1,10 +1,14 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 
 @Component({
   selector: 'app-recipe-image-field',
   standalone: true,
   templateUrl: './recipe-image-field.html',
   styleUrl: './recipe-image-field.scss',
+  imports: [
+    UiButton
+  ]
 })
 export class RecipeImageField {
   @Input() imageUrl: string | null = null;

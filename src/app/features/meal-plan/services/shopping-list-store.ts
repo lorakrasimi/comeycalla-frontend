@@ -65,7 +65,7 @@ export class ShoppingListStore {
           collapsed: false,
           items: [
             { id: 1, name: 'Cebolla', quantity: '2 unidades', checked: false },
-            { id: 2, name: 'Tomate', quantity: '4 unidades', checked: true },
+            { id: 2, name: 'Tomate', quantity: '4 unidades', checked: false },
             { id: 3, name: 'Pimiento rojo', quantity: '1 unidad', checked: false },
             { id: 4, name: 'Lechuga', quantity: '2 unidades', checked: false },
             { id: 5, name: 'Zanahoria', quantity: '2 unidades', checked: false }

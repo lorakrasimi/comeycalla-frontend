@@ -37,7 +37,7 @@
     </div>
 
     <div class="recipe-form__field">
-      <label class="recipe-form__label">Tags</label>
+      <h4 class="recipe-form__section-title">Ingredientes</h4>
       <ui-tags-input
         [tags]="form.controls['tags'].value"
         (tagsChange)="form.controls['tags'].setValue($event)"
@@ -146,6 +146,7 @@
   <div class="recipe-form__actions">
     <ui-button
       type="button"
+      [variant]="'ghost'"
       (click)="cancel.emit()"
     >
       Cancelar
