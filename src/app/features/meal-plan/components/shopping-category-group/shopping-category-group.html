@@ -1,1 +1,27 @@
-<p>shopping-category-group works!</p>
+<section class="shopping-category-group">
+  <button
+    type="button"
+    class="shopping-category-group__header"
+    (click)="onToggleCollapse()"
+  >
+    <h3 class="shopping-category-group__title">{{ category.title }}</h3>
+
+    <span
+      class="shopping-category-group__icon"
+      [class.shopping-category-group__icon--collapsed]="category.collapsed"
+    >
+      ▾
+    </span>
+  </button>
+
+  @if (!category.collapsed) {
+    <div class="shopping-category-group__body">
+      @for (item of category.items; track item.id) {
+        <app-shopping-item-row
+          [item]="item"
+          (toggle)="onToggleItem($event)"
+        />
+      }
+    </div>
+  }
+</section>

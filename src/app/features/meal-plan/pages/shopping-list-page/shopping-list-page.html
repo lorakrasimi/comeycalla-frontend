@@ -1,1 +1,85 @@
-<p>shopping-list-page works!</p>
+@if (list(); as shoppingList) {
+  <section class="shopping-list-page">
+    <button
+      type="button"
+      class="shopping-list-page__back-link"
+      (click)="goBackToMenu()"
+    >
+      <span class="material-symbols-outlined">arrow_back</span>Volver al menú
+    </button>
+
+    <header class="shopping-list-page__header">
+      <h1 class="shopping-list-page__title">Lista de la compra</h1>
+    </header>
+
+    <section class="shopping-list-page__progress-card">
+      <div class="shopping-list-page__progress-header">
+        <span>Progreso de compra</span>
+        <span>
+          {{ shoppingListStore.checkedItems() }} de {{ shoppingListStore.totalItems() }} productos
+        </span>
+      </div>
+
+      <div class="shopping-list-page__progress-bar">
+        <div
+          class="shopping-list-page__progress-fill"
+          [style.width.%]="shoppingListStore.progressPercentage()"
+        ></div>
+      </div>
+    </section>
+
+    <div class="shopping-list-page__actions">
+      <ui-button
+        type="button"
+        [variant]="'outline'"
+        [icon]="'done_all'"
+        (click)="markAll()"
+      >
+        Marcar todo
+      </ui-button>
+
+      <ui-button
+        type="button"
+        [variant]="'outline'"
+        [icon]="'check_box_outline_blank'"
+        (click)="unmarkAll()"
+      >
+        Desmarcar todo
+      </ui-button>
+
+      <ui-button
+        type="button"
+        [variant]="'outline'"
+        [icon]="'print'"
+        (click)="print()"
+      >
+        Imprimir
+      </ui-button>
+    </div>
+
+    <div class="shopping-list-page__groups">
+      @for (category of shoppingList.categories; track category.id) {
+        <app-shopping-category-group
+          [category]="category"
+          (toggleCollapse)="toggleCategory($event)"
+          (toggleItem)="toggleItem($event)"
+        />
+      }
+    </div>
+  </section>
+} @else {
+  <section class="shopping-list-page shopping-list-page--empty">
+    <app-ui-empty-state
+      title="No hay lista de la compra"
+      description="Genera primero un menú semanal para construir la lista."
+    ></app-ui-empty-state>
+
+    <ui-button
+      type="button"
+      [variant]="'primary'"
+      [routerLink]="['/meal-plan']"
+    >
+      Crear menú
+    </ui-button>
+  </section>
+}
