@@ -11,8 +11,13 @@ export class ShoppingItemRow {
 
   @Input({ required: true }) item!: ShoppingListItem;
   @Output() toggle = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
 
   protected onToggle(): void {
     this.toggle.emit(this.item.id);
+  }
+
+  protected deleteItem(){
+    this.delete.emit(this.item.id);
   }
 }

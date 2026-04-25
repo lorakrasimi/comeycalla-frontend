@@ -37,3 +37,13 @@
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
 }
+
+.shopping-item__remove-button {
+  border: 0;
+  background: transparent;
+  color: #d66c7a;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px;
+}

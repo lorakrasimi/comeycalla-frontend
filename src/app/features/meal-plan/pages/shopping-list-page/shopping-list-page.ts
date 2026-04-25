@@ -5,6 +5,7 @@ import {Router, RouterLink} from '@angular/router';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {ShoppingCategoryGroup} from '../../components/shopping-category-group/shopping-category-group';
 import {UiEmptyState} from '../../../../shared/ui/ui-empty-state/ui-empty-state';
+import {UiPageHeader} from '../../../../shared/ui/ui-page-header/ui-page-header';
 
 @Component({
   selector: 'app-shopping-list-page',
@@ -12,7 +13,8 @@ import {UiEmptyState} from '../../../../shared/ui/ui-empty-state/ui-empty-state'
     UiButton,
     ShoppingCategoryGroup,
     RouterLink,
-    UiEmptyState
+    UiEmptyState,
+    UiPageHeader
   ],
   templateUrl: './shopping-list-page.html',
   styleUrl: './shopping-list-page.scss',
@@ -45,12 +47,16 @@ export class ShoppingListPage {
     window.print();
   }
 
-  protected toggleCategory(categoryId: string): void {
+  protected toggleCategory(categoryId: number): void {
     this.shoppingListStore.toggleCategory(categoryId);
   }
 
   protected toggleItem(itemId: number): void {
     this.shoppingListStore.toggleItem(itemId);
+  }
+
+  protected deleteItem(itemId: number): void {
+    this.shoppingListStore.deleteItem(itemId);
   }
 
 }

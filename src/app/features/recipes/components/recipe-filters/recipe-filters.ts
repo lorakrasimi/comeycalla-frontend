@@ -3,7 +3,6 @@ import {SearchBar} from '../../../../shared/components/search-bar/search-bar';
 import {SelectOption, UiSelect} from '../../../../shared/ui/ui-select/ui-select';
 
 export const CATEGORY_OPTIONS_MOCK: SelectOption[] = [
-  { label: 'Todas', value: 'all' },
   { label: 'Asiática', value: 'asiatica' },
   { label: 'Italiana', value: 'italiana' },
   { label: 'Saludable', value: 'saludable' },
@@ -11,7 +10,6 @@ export const CATEGORY_OPTIONS_MOCK: SelectOption[] = [
   { label: 'Americana', value: 'americana' }
 ];
 export const TIME_OPTIONS_MOCK: SelectOption[] = [
-  { label: 'Cualquier tiempo', value: 'all' },
   { label: 'Menos de 15 minutos', value: '15' },
   { label: 'Menos de 30 minutos', value: '30' },
   { label: 'Menos de una hora', value: '60' }

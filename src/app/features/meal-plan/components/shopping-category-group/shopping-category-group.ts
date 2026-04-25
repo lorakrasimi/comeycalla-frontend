@@ -13,8 +13,9 @@ import {ShoppingItemRow} from '../shopping-item-row/shopping-item-row';
 export class ShoppingCategoryGroup {
   @Input({ required: true }) category!: ShoppingListCategory;
 
-  @Output() toggleCollapse = new EventEmitter<string>();
+  @Output() toggleCollapse = new EventEmitter<number>();
   @Output() toggleItem = new EventEmitter<number>();
+  @Output() deleteItem = new EventEmitter<number>();
 
   protected onToggleCollapse(): void {
     this.toggleCollapse.emit(this.category.id);
@@ -22,5 +23,9 @@ export class ShoppingCategoryGroup {
 
   protected onToggleItem(itemId: number): void {
     this.toggleItem.emit(itemId);
+  }
+
+  protected onDeleteItem(itemId: number) {
+    this.deleteItem.emit(itemId);
   }
 }

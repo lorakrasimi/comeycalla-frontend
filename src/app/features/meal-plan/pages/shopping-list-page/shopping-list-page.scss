@@ -5,17 +5,9 @@
 .shopping-list-page {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
+  gap: 24px;
+  padding: 0 40px 40px;
 
-.shopping-list-page__back-link {
-  align-self: flex-start;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--color-secondary);
-  font-size: var(--font-size-sm);
-  cursor: pointer;
 }
 
 .shopping-list-page__title {
@@ -35,14 +27,6 @@
   border-radius: var(--radius-lg);
   background: white;
   box-shadow: var(--shadow-soft);
-}
-
-.shopping-list-page__progress-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--color-text-soft);
-  font-size: var(--font-size-sm);
 }
 
 .shopping-list-page__progress-bar {
@@ -76,10 +60,6 @@
 }
 
 @media (max-width: 768px) {
-  .shopping-list-page__title {
-    font-size: var(--font-size-xl);
-  }
-
   .shopping-list-page__progress-header {
     flex-direction: column;
   }

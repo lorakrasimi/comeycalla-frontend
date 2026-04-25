@@ -60,7 +60,7 @@ export class ShoppingListStore {
     const list: ShoppingList = {
       categories: [
         {
-          id: 'vegetables',
+          id: 1,
           title: 'Verduras',
           collapsed: false,
           items: [
@@ -72,7 +72,7 @@ export class ShoppingListStore {
           ]
         },
         {
-          id: 'meat',
+          id: 2,
           title: 'Carne',
           collapsed: false,
           items: [
@@ -86,7 +86,7 @@ export class ShoppingListStore {
     this.shoppingList.set(list);
   }
 
-  toggleCategory(categoryId: string): void {
+  toggleCategory(categoryId: number): void {
     const list = this.shoppingList();
     if (!list) {
       return;
@@ -115,6 +115,20 @@ export class ShoppingListStore {
             ? { ...item, checked: !item.checked }
             : item
         )
+      }))
+    });
+  }
+
+  deleteItem(itemId: number): void {
+    const list = this.shoppingList();
+    if (!list) {
+      return;
+    }
+
+    this.shoppingList.set({
+      categories: list.categories.map(category => ({
+        ...category,
+        items: category.items.filter(item => item.id !== itemId)
       }))
     });
   }

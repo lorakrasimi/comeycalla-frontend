@@ -13,8 +13,17 @@
       {{ item.name }}
     </span>
   </div>
-
-  <span class="shopping-item-row__quantity">
+  <div>
+ <span class="shopping-item-row__quantity">
     {{ item.quantity }}
   </span>
+    <button
+      type="button"
+      class="recipe-form__remove-button"
+      (click)="deleteItem()"
+    >
+      ×
+    </button>
+  </div>
+
 </label>

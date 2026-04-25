@@ -6,7 +6,7 @@ export interface ShoppingListItem {
 }
 
 export interface ShoppingListCategory {
-  id: string;
+  id: number;
   title: string;
   collapsed: boolean;
   items: ShoppingListItem[];

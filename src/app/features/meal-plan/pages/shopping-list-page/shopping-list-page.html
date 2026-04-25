@@ -1,16 +1,14 @@
 @if (list(); as shoppingList) {
   <section class="shopping-list-page">
-    <button
-      type="button"
-      class="shopping-list-page__back-link"
+    <ui-button
+      [variant]="'ghost'"
+      [icon]="'arrow_back'"
       (click)="goBackToMenu()"
     >
-      <span class="material-symbols-outlined">arrow_back</span>Volver al menú
-    </button>
+      Volver al menú
+    </ui-button>
+    <app-ui-page-header [title]="'Lista de la compra'"></app-ui-page-header>
 
-    <header class="shopping-list-page__header">
-      <h1 class="shopping-list-page__title">Lista de la compra</h1>
-    </header>
 
     <section class="shopping-list-page__progress-card">
       <div class="shopping-list-page__progress-header">
@@ -63,6 +61,7 @@
           [category]="category"
           (toggleCollapse)="toggleCategory($event)"
           (toggleItem)="toggleItem($event)"
+          (deleteItem)="deleteItem($event)"
         />
       }
     </div>
