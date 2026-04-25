@@ -36,10 +36,6 @@
   align-items: start;
 }
 
-.meal-plan-result-page--empty {
-  align-items: flex-start;
-}
-
 @media (max-width: 768px) {
   .meal-plan-result-page__title {
     font-size: var(--font-size-xl);
