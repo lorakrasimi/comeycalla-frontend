@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {RecipeImageField} from '../recipe-image-field/recipe-image-field';
 import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
@@ -14,7 +14,6 @@ import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
     UiButton,
     RecipeImageField,
     UiTagsInput,
-    // Add here your shared/ui components
   ],
   templateUrl: './recipe-form.html',
   styleUrl: './recipe-form.scss'
@@ -39,23 +38,29 @@ export class RecipeFormComponent {
   }
 
   addIngredient(): void {
-    const ingredients = this.ingredients;
+    this.ingredients.push(
+      new FormGroup({
+        name: new FormControl('', {
+          nonNullable: true,
+          validators: [Validators.required],
+        }),
+      })
+    );
+  }
 
-    ingredients.push(
-      new FormGroup({})
+  addStep(): void {
+    this.steps.push(
+      new FormGroup({
+        description: new FormControl('', {
+          nonNullable: true,
+          validators: [Validators.required],
+        }),
+      })
     );
   }
 
   removeIngredient(index: number): void {
     this.ingredients.removeAt(index);
-  }
-
-  addStep(): void {
-    const steps = this.steps;
-
-    steps.push(
-      new FormGroup({})
-    );
   }
 
   removeStep(index: number): void {
@@ -68,5 +73,9 @@ export class RecipeFormComponent {
 
   onImageRemoved(): void {
     this.imageRemoved.emit();
+  }
+
+  onBack(): void {
+    this.cancel.emit();
   }
 }

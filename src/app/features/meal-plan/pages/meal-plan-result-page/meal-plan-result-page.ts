@@ -1,6 +1,6 @@
 import {Component, computed, inject} from '@angular/core';
 import {MealPlanStore} from '../../services/meal-plan-store';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {MealSlot} from '../../../../core/models/meal-plan.model';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {MealDayColumn} from '../../components/meal-day-column/meal-day-column';
@@ -13,7 +13,6 @@ import {UiPageHeader} from '../../../../shared/ui/ui-page-header/ui-page-header'
     UiButton,
     MealDayColumn,
     UiEmptyState,
-    RouterLink,
     UiPageHeader
   ],
   templateUrl: './meal-plan-result-page.html',

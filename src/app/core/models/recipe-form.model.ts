@@ -3,18 +3,16 @@ export interface RecipeFormIngredient {
 }
 
 export interface RecipeFormStep {
-  order: number;
   description: string;
 }
 
 export interface RecipeFormValue {
   title: string;
-  description: string;
+  description: string | null;
   cookingTime: string | null;
   servings: number | null;
   category: string;
   tags: string[];
-  imageUrl: string | null;
   ingredients: RecipeFormIngredient[];
   steps: RecipeFormStep[];
 }

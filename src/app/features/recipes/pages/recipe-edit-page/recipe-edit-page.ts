@@ -89,7 +89,7 @@ export class RecipeEditPage implements OnInit {
       removeImage: this.removeCurrentImage
     };
 
-    this.recipesApi.updateRecipe(this.recipeId, payload, this.selectedImageFile)
+    this.recipesApi.updateRecipe(this.recipeId, payload)
       .pipe(finalize(() => this.submitting.set(false)))
       .subscribe({
         next: () => {

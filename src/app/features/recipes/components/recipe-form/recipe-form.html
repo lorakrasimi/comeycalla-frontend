@@ -3,7 +3,7 @@
     <div class="recipe-form__header-fields">
       <div class="recipe-form__field">
         <label class="recipe-form__label">Nombre de la receta</label>
-        <input class="recipe-form__input" type="text" formControlName="title" />
+        <input class="recipe-form__input" type="text" formControlName="title"/>
       </div>
 
       <div class="recipe-form__field">
@@ -70,7 +70,6 @@
       <h4 class="recipe-form__section-title">Ingredientes</h4>
 
       <ui-button
-        type="button"
         [variant]="'outline'"
         [icon]="'add'"
         [size]="'sm'"
@@ -91,7 +90,6 @@
           />
 
           <button
-            type="button"
             class="shopping-item__remove-button"
             (click)="removeIngredient($index)"
           >
@@ -107,7 +105,6 @@
       <h4 class="recipe-form__section-title">Pasos de preparación</h4>
 
       <ui-button
-        type="button"
         [variant]="'outline'"
         [icon]="'add'"
         [size]="'sm'"
@@ -132,7 +129,6 @@
           ></textarea>
 
           <button
-            type="button"
             class="recipe-form__remove-button"
             (click)="removeStep($index)"
           >
@@ -145,15 +141,13 @@
 
   <div class="recipe-form__actions">
     <ui-button
-      type="button"
       [variant]="'ghost'"
-      (click)="cancel.emit()"
+      (click)="onBack()"
     >
       Cancelar
     </ui-button>
 
     <ui-button
-      type="button"
       [disabled]="form.invalid || submitting"
       (click)="submit.emit()"
     >

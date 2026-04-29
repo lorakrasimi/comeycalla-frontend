@@ -1,16 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-export interface RecipeFormValue {
-  title: string;
-  description: string;
-  category: string;
-  tags: string[];
-  cookingTime: number | null;
-  servings: number | null;
-  ingredients: { name: string }[];
-  steps: { description: string }[];
-}
+import { RecipeRequest } from '../../../core/models/recipe.model';
+import {RecipeFormValue} from '../../../core/models/recipe-form.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +12,10 @@ export class RecipeFormMapper {
   createEmptyForm(): FormGroup {
     return this.fb.group({
       title: this.fb.nonNullable.control('', Validators.required),
-      description: this.fb.nonNullable.control(''),
-      category: this.fb.nonNullable.control(''),
-      tags: this.fb.nonNullable.control<string[]>([]),
-      cookingTime: this.fb.control<number | null>(null),
+      description: this.fb.control<string | null>(null),
+      category: this.fb.control(''),
+      tags: this.fb.control<string[]>([]),
+      cookingTime: this.fb.control<string | null>(null),
       servings: this.fb.control<number | null>(null),
       ingredients: this.fb.array([this.createIngredientGroup()]),
       steps: this.fb.array([this.createStepGroup()])
@@ -33,13 +24,13 @@ export class RecipeFormMapper {
 
   createIngredientGroup(value = ''): FormGroup {
     return this.fb.group({
-      name: this.fb.nonNullable.control(value, Validators.required)
+      name: this.fb.nonNullable.control(value)
     });
   }
 
   createStepGroup(value = ''): FormGroup {
     return this.fb.group({
-      description: this.fb.nonNullable.control(value, Validators.required)
+      description: this.fb.nonNullable.control(value)
     });
   }
 
@@ -49,7 +40,7 @@ export class RecipeFormMapper {
       description: recipe.description ?? '',
       category: recipe.category ?? recipe.nationality ?? '',
       tags: recipe.tags ?? [],
-      cookingTime: recipe.cookingTime ?? recipe.time ?? null,
+      cookingTime: recipe.cookingTime?.toString() ?? recipe.time?.toString() ?? null,
       servings: recipe.servings ?? null
     });
 
@@ -71,11 +62,26 @@ export class RecipeFormMapper {
     }
   }
 
-  toCreatePayload(formValue: RecipeFormValue, imageFile: File | null): FormData | RecipeFormValue {
-    return formValue;
+  toCreatePayload(formValue: RecipeFormValue): RecipeRequest {
+    return {
+      title: formValue.title,
+      description: formValue.description ?? '',
+      img: null,
+      cookingTime: formValue.cookingTime ? Number(formValue.cookingTime) : null,
+      servings: formValue.servings,
+      difficulty: 'easy',
+      category: formValue.category,
+      ingredients: formValue.ingredients.map((ingredient) => ({
+        name: ingredient.name,
+      })),
+      steps: formValue.steps.map((step) => ({
+        description: step.description,
+      })),
+      tags: formValue.tags ?? [],
+    };
   }
 
-  toUpdatePayload(formValue: RecipeFormValue, imageFile: File | null): FormData | RecipeFormValue {
-    return formValue;
+  toUpdatePayload(formValue: RecipeFormValue): RecipeRequest {
+    return this.toCreatePayload(formValue);
   }
 }

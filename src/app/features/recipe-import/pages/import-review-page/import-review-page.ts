@@ -13,6 +13,7 @@ import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
 import { RecipeImportStore } from '../../services/recipe-import-store';
 import { RecipesApi } from '../../../recipes/services/recipes-api';
 import { RecipeFormComponent } from '../../../recipes/components/recipe-form/recipe-form';
+import {Difficulty} from '../../../../core/models/recipe.model';
 
 @Component({
   selector: 'app-import-review-page',
@@ -100,16 +101,16 @@ export class ImportReviewPage implements OnInit {
     const payload = {
       title: value.title ?? '',
       description: value.description ?? '',
-      cookingTime: value.cookingTime ?? '0',
-      servings: value.servings ?? 0,
-      imageUrl: this.importStore.previewUrl(),
+      cookingTime: value.cookingTime ? Number(value.cookingTime) : null,
+      servings: value.servings ?? null,
+      difficulty: 'easy' as Difficulty,
+      img: this.importStore.previewUrl(),
       category: value.category ?? '',
       tags: value.tags ?? [],
       ingredients: (value.ingredients ?? []).map((item) => ({
         name: item['name'] ?? '',
       })),
-      steps: (value.steps ?? []).map((item, index) => ({
-        order: index + 1,
+      steps: (value.steps ?? []).map((item) => ({
         description: item['description'] ?? '',
       })),
     };

@@ -5,16 +5,13 @@ export class Recipe {
   title: string;
   description?: string;
   img?: string;
-
   ingredients: string[];
   steps: string[];
-
   cookingTime: string;
   servings: number;
   difficulty: Difficulty;
   category: string;
   tags?: string[];
-
   createdAt: Date;
   updatedAt?: Date;
 
@@ -47,4 +44,41 @@ export class Recipe {
     this.tags = tags;
     this.updatedAt = updatedAt;
   }
+}
+
+export interface RecipeRequest {
+  title: string;
+  description: string;
+  img: string | null;
+  cookingTime: number | null;
+  servings: number | null;
+  difficulty: Difficulty;
+  category: string;
+  ingredients: { name: string }[];
+  steps: { description: string }[];
+  tags: string[];
+}
+
+export interface RecipeResponse {
+  id: number;
+  title: string;
+  description: string;
+  img: string | null;
+  cookingTime: number;
+  servings: number;
+  difficulty: Difficulty;
+  category: string;
+  ingredients: {
+    id: number;
+    name: string;
+    position: number;
+  }[];
+  steps: {
+    id: number;
+    stepOrder: number;
+    description: string;
+  }[];
+  tags: string[];
+  createdAt: string;
+  updatedAt?: string;
 }
