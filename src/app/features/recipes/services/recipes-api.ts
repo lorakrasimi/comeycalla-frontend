@@ -34,4 +34,8 @@ export class RecipesApi {
   getLastRecipes(){
     return this.http.get<Recipe[]>(this.baseUrl + '/last-recipes');
   }
+
+  getRandomRecipe(){
+    return this.http.get<Recipe>(this.baseUrl + '/random-recipe');
+  }
 }

@@ -15,5 +15,5 @@ import {UiChip} from '../../../../shared/ui/ui-chip/ui-chip';
   styleUrl: './featured-recipe-card.scss',
 })
 export class FeaturedRecipeCard  {
-  @Input() recipe!: Recipe;
+  @Input() recipe!: Recipe | undefined;
 }

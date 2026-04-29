@@ -15,14 +15,18 @@ import {RecipesApi} from '../../../recipes/services/recipes-api';
 })
 export class DashboardPage implements OnInit {
   recipes = signal<Recipe[]>([]);
+  featuredRecipe?: Recipe;
 
-  constructor(private recipesApi: RecipesApi) {
-  }
+  constructor(private recipesApi: RecipesApi) {}
 
   ngOnInit(): void {
+    this.getLastRecipes();
+    this.getFeaturedRecipe();
+  }
+
+  private getLastRecipes(): void {
     this.recipesApi.getLastRecipes().subscribe({
       next: (recipes) => {
-        console.log(recipes);
         this.recipes.set(recipes);
       },
       error: (error) => {
@@ -32,26 +36,15 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  protected featuredRecipe(): Recipe {
-    return new Recipe(
-      1,
-      'Bowl de frutas con yogurt',
-      ['yogurt', 'frutas rojas', 'platano', 'canela'],
-      [
-        'Echar el yogur',
-        'Echar las frutas cortadas',
-        'Echar la canela',
-        'Mezclar y cocinar'
-      ],
-      "10",
-      1,
-      'easy',
-      'italiana',
-      new Date(),
-      'Receta clásica española',
-      '/img/bowl-frutas.png'
-    );
+  private getFeaturedRecipe(): void {
+    this.recipesApi.getRandomRecipe().subscribe({
+      next: (recipe) => {
+        this.featuredRecipe = recipe;
+      },
+      error: (error) => {
+        console.error(error);
+        this.featuredRecipe = undefined;
+      }
+    });
   }
-
-
 }
