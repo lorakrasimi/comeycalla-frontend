@@ -26,7 +26,6 @@ export class SearchBar {
   }
 
   onEnter(): void {
-    console.log('ENTER PRESSED', this.value);
     if (this.trigger === 'submit') {
       this.search.emit(this.value);
     }

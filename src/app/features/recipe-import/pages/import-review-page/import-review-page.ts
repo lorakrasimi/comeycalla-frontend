@@ -148,7 +148,6 @@ export class ImportReviewPage implements OnInit {
 
   onImageRemoved(): void {
     const currentUrl = this.imagePreviewUrl();
-    console.log("imgRemoved")
     if (currentUrl) {
       URL.revokeObjectURL(currentUrl);
     }

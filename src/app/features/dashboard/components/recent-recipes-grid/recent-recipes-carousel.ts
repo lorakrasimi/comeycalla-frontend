@@ -1,4 +1,4 @@
-import {Component, effect, ElementRef, input, viewChild} from '@angular/core';
+import {Component, ElementRef, input, viewChild} from '@angular/core';
 import {RecipeCard} from '../../../recipes/components/recipe-card/recipe-card';
 import {Recipe} from '../../../../core/models/recipe.model';
 import {UiEmptyState} from '../../../../shared/ui/ui-empty-state/ui-empty-state';
@@ -15,12 +15,6 @@ export class RecentRecipesCarousel {
 
   protected readonly viewport =
     viewChild<ElementRef<HTMLDivElement>>('viewport');
-
-  constructor() {
-    effect(() => {
-      console.log('RECIPES EN HIJO:', this.recipes());
-    });
-  }
 
   protected scrollLeft(): void {
     const element = this.viewport()?.nativeElement;

@@ -32,8 +32,6 @@ export class Topbar {
   }
 
   onTopbarSearch(value: string): void {
-    console.log('TOPBAR SEARCH', value);
-
     if (!value) return;
 
     this.router.navigate(['/recipes'], {
