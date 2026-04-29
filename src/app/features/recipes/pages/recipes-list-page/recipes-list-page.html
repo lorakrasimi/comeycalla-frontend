@@ -1,7 +1,9 @@
 <section class="recipes-list-page">
   <app-ui-page-header [title]="'Mis recetas'"></app-ui-page-header>
   <section class="recipes-list-page__filters">
-    <app-recipe-filters/>
+    <app-recipe-filters
+      (filtersChange)="onFiltersChange($event)"
+    />
   </section>
 
   <section class="recipes-list-page__grid">

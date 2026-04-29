@@ -1,5 +1,8 @@
 <header class="topbar">
-  <app-search-bar></app-search-bar>
+  <app-search-bar
+    [trigger]="'submit'"
+    (search)="onTopbarSearch($event)"
+  ></app-search-bar>
 
   <div class="topbar__actions">
     <ui-button routerLink="/recipes/create">Nueva receta</ui-button>

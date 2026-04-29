@@ -5,6 +5,7 @@
     [placeholder]="placeholder"
     [(ngModel)]="value"
     (input)="onInput()"
+    (keydown.enter)="onEnter(); $event.preventDefault()"
     class="search-bar-{{variant}}"
   />
 </div>

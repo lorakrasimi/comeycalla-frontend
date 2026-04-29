@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import AuthFacade from '../../features/auth/services/auth-facade';
 import {SearchBar} from '../../shared/components/search-bar/search-bar';
 import {UiButton} from '../../shared/ui/ui-button/ui-button';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {Observable} from 'rxjs';
 import {User} from '../../core/models/user.model';
 import {AvatarCell} from '../../shared/components/avatar-cell/avatar-cell';
@@ -23,11 +23,21 @@ import {AsyncPipe} from '@angular/common';
 export class Topbar {
   protected user$: Observable<User | null>;
 
-  constructor(private authFacade: AuthFacade) {
+  constructor(private authFacade: AuthFacade, private router: Router) {
    this.user$ = this.authFacade.getCurrentUser();
   }
 
   async logout(): Promise<void> {
     await this.authFacade.logout();
+  }
+
+  onTopbarSearch(value: string): void {
+    console.log('TOPBAR SEARCH', value);
+
+    if (!value) return;
+
+    this.router.navigate(['/recipes'], {
+      queryParams: { search: value }
+    });
   }
 }
