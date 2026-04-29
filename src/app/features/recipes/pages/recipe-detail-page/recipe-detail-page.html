@@ -32,7 +32,7 @@
       <header class="recipe-detail-page__hero">
         <img
           class="recipe-detail-page__hero-image"
-          [src]="recipeData.imageUrl || 'https://via.placeholder.com/1200x500?text=Recipe'"
+          [src]="recipeData.img || 'img/generic-recipe-img.jpg'"
           [alt]="recipeData.title"
         />
 
@@ -73,7 +73,7 @@
         <section class="recipe-detail-page__section">
           <h2 class="recipe-detail-page__section-title">Descripción</h2>
           <p class="recipe-detail-page__description">
-            {{ recipeData.description || 'Sin descripción disponible.' }}
+            {{ recipeData.description || 'Sin descripción añadida.' }}
           </p>
         </section>
 
@@ -89,7 +89,7 @@
               }
             </ul>
           } @else {
-            <p class="recipe-detail-page__empty-text">No hay ingredientes disponibles.</p>
+            <p class="recipe-detail-page__empty-text">No hay ingredientes añadidos.</p>
           }
         </section>
 
@@ -111,7 +111,7 @@
               }
             </ol>
           } @else {
-            <p class="recipe-detail-page__empty-text">No hay pasos disponibles.</p>
+            <p class="recipe-detail-page__empty-text">No hay pasos añadidos.</p>
           }
         </section>
       </div>

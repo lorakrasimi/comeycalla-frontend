@@ -1,8 +1,8 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import {Injectable, inject} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-import { Recipe, RecipeRequest, RecipeResponse } from '../../../core/models/recipe.model';
+import {Recipe, RecipeRequest, RecipeResponse} from '../../../core/models/recipe.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,8 @@ export class RecipesApi {
     return this.http.get<Recipe[]>(this.baseUrl);
   }
 
-  getRecipeById(id: number): Observable<any> | null {
-    return null;
+  getRecipeById(id: number): Observable<any> {
+    return this.http.get<Recipe>(this.baseUrl + "/" + id);
   }
 
   createRecipe(payload: RecipeRequest): Observable<RecipeResponse> {
@@ -29,5 +29,9 @@ export class RecipesApi {
 
   deleteRecipe(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  getLastRecipes(){
+    return this.http.get<Recipe[]>(this.baseUrl + '/last-recipes');
   }
 }

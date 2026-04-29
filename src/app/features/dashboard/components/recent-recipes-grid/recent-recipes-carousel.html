@@ -1,39 +1,43 @@
 <div class="recent-recipes-carousel">
   <h2 class="recent-recipes-carousel__title">Tus últimas recetas</h2>
+  @if (recipes().length > 0) {
+    <div class="recent-recipes-carousel__content">
+      <button
+        class="recent-recipes-carousel__nav-button recent-recipes-carousel__nav-button--left"
+        type="button"
+        aria-label="Ver recetas anteriores"
+        (click)="scrollLeft()"
+      >
+        <span class="material-symbols-outlined ">arrow_back_ios</span>
+      </button>
 
-  <div class="recent-recipes-carousel__content">
-    <button
-      class="recent-recipes-carousel__nav-button recent-recipes-carousel__nav-button--left"
-      type="button"
-      aria-label="Ver recetas anteriores"
-      (click)="scrollLeft()"
-    >
-      <span class="material-symbols-outlined ">arrow_back_ios</span>
-    </button>
 
-    <div class="recent-recipes-carousel__viewport" #viewport>
-      @for (recipe of recipes(); track recipe.id) {
-        <div class="recent-recipes-carousel__slide">
-          <app-recipe-card
-            [id]="recipe.id"
-            [title]="recipe.title"
-            [img]="recipe?.img"
-            [category]="recipe.category"
-            [time]="recipe.cookingTime"
-            [size]="'sm'"
-            [showTags] = false
-          />
-        </div>
-      }
+      <div class="recent-recipes-carousel__viewport" #viewport>
+        @for (recipe of recipes(); track recipe.id) {
+          <div class="recent-recipes-carousel__slide">
+            <app-recipe-card
+              [id]="recipe.id"
+              [title]="recipe.title"
+              [img]="recipe?.img"
+              [category]="recipe.category"
+              [time]="recipe.cookingTime"
+              [size]="'sm'"
+              [showTags]=false
+            />
+          </div>
+        }
+      </div>
+
+      <button
+        class="recent-recipes-carousel__nav-button recent-recipes-carousel__nav-button--right"
+        type="button"
+        aria-label="Ver siguientes recetas"
+        (click)="scrollRight()"
+      >
+        <span class="material-symbols-outlined ">arrow_forward_ios</span>
+      </button>
     </div>
-
-    <button
-      class="recent-recipes-carousel__nav-button recent-recipes-carousel__nav-button--right"
-      type="button"
-      aria-label="Ver siguientes recetas"
-      (click)="scrollRight()"
-    >
-      <span class="material-symbols-outlined ">arrow_forward_ios</span>
-    </button>
-  </div>
+  } @else {
+    <ui-empty-state></ui-empty-state>
+  }
 </div>

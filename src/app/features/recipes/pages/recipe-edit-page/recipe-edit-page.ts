@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { finalize } from 'rxjs';
-import { RecipeFormComponent } from '../../components/recipe-form/recipe-form';
-import { RecipeFormMapper } from '../../services/recipe-form-mapper';
-import { RecipesApi } from '../../services/recipes-api';
+import {CommonModule} from '@angular/common';
+import {Component, OnInit, inject, signal} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {finalize} from 'rxjs';
+import {RecipeFormComponent} from '../../components/recipe-form/recipe-form';
+import {RecipeFormMapper} from '../../services/recipe-form-mapper';
+import {RecipesApi} from '../../services/recipes-api';
 import {UiLoader} from '../../../../shared/ui/ui-loader/ui-loader';
 
 @Component({

@@ -1,27 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { finalize } from 'rxjs';
+import {CommonModule} from '@angular/common';
+import {Component, OnInit, signal} from '@angular/core';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {finalize} from 'rxjs';
 
-import { RecipesApi } from '../../services/recipes-api';
+import {RecipesApi} from '../../services/recipes-api';
 
-import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
-import { UiLoader } from '../../../../shared/ui/ui-loader/ui-loader';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
+import {UiLoader} from '../../../../shared/ui/ui-loader/ui-loader';
 import {UiChip} from '../../../../shared/ui/ui-chip/ui-chip';
-
-interface RecipeDetailViewModel {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  tags: string[];
-  imageUrl: string | null;
-  cookingTime: number | null;
-  servings: number | null;
-  difficulty: string | null;
-  ingredients: string[];
-  steps: string[];
-}
+import {RecipeDetail} from '../../../../core/models/recipe-detail.model';
 
 @Component({
   selector: 'app-recipe-detail-page',
@@ -37,14 +24,17 @@ interface RecipeDetailViewModel {
   styleUrl: './recipe-detail-page.scss'
 })
 export class RecipeDetailPage implements OnInit {
-  private readonly route = inject(ActivatedRoute);
-  private readonly router = inject(Router);
-  private readonly recipesApi = inject(RecipesApi);
-
   protected readonly loading = signal(true);
-  protected readonly recipe = signal<RecipeDetailViewModel | null>(null);
+  protected readonly recipe = signal<RecipeDetail | null>(null);
 
   private recipeId!: number;
+
+  constructor(
+    private route: ActivatedRoute,
+    private recipesApi: RecipesApi,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -59,6 +49,7 @@ export class RecipeDetailPage implements OnInit {
   }
 
   protected onDelete(): void {
+    //TODO create toast
     const confirmed = window.confirm('¿Seguro que quieres eliminar esta receta?');
 
     if (!confirmed) {
@@ -91,14 +82,14 @@ export class RecipeDetailPage implements OnInit {
       });
   }
 
-  private mapRecipe(recipe: any): RecipeDetailViewModel {
+  private mapRecipe(recipe: any): RecipeDetail {
     return {
       id: recipe.id,
       title: recipe.title ?? recipe.name ?? '',
       description: recipe.description ?? '',
       category: recipe.category ?? recipe.nationality ?? '',
       tags: recipe.tags ?? [],
-      imageUrl: recipe.imageUrl ?? recipe.img ?? null,
+      img: recipe.img ?? null,
       cookingTime: recipe.cookingTime ?? recipe.time ?? null,
       servings: recipe.servings ?? null,
       difficulty: recipe.difficulty ?? null,
