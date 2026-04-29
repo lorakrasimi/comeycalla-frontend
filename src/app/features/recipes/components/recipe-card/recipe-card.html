@@ -20,7 +20,7 @@
     @if (showTags) {
       <div class="recipe-card__tags">
         @for (tag of tags; track tag) {
-          <ui-chip variant="secondary">{{ tag }}</ui-chip>
+          <ui-chip [size]="'sm'" variant="secondary">{{ tag }}</ui-chip>
         }
       </div>
     }
@@ -42,6 +42,7 @@
         [routerLink]="['/recipes', id]"
       >
         Ver
-      </ui-button>    </div>
+      </ui-button>
+    </div>
   </div>
 </div>

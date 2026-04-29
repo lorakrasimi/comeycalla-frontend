@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 type ChipVariant = 'primary' | 'secondary' | 'outline';
+type ChipSize = 'md' | 'sm';
 
 @Component({
   selector: 'ui-chip',
@@ -10,11 +11,13 @@ type ChipVariant = 'primary' | 'secondary' | 'outline';
 })
 export class UiChip {
   @Input() variant: ChipVariant = 'primary';
+  @Input() size: ChipSize = 'md';
   @Input() clickable = false;
 
   get chipClass(): string {
     let base = 'ui-chip';
 
+    // variant
     switch (this.variant) {
       case 'secondary':
         base += ' ui-chip--secondary';
@@ -26,6 +29,12 @@ export class UiChip {
         base += ' ui-chip--primary';
     }
 
+    // size
+    if (this.size === 'sm') {
+      base += ' ui-chip--sm';
+    }
+
+    // clickable
     if (this.clickable) {
       base += ' ui-chip--clickable';
     }

@@ -18,4 +18,25 @@
       />
     }
   </section>
+  <div class="recipes-list-page__pagination">
+    <ui-button
+      [variant]="'ghost'"
+      [icon]="'arrow_back'"
+      (click)="prevPage()"
+    >
+      Anterior
+    </ui-button>
+
+    <span class="recipes-list-page__pagination-info">
+    Página {{ page() + 1 }} / {{ totalPages() }}
+  </span>
+
+    <ui-button
+      [variant]="'ghost'"
+      [icon]="'arrow_forward'"
+      (click)="nextPage()"
+    >
+      Siguiente
+    </ui-button>
+  </div>
 </section>

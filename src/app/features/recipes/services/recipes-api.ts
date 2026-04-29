@@ -11,10 +11,11 @@ export class RecipesApi {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:8080/api/recipes';
 
-  getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(this.baseUrl);
+  getRecipes(page = 0, size = 12) {
+    return this.http.get<any>(
+      `${this.baseUrl}?page=${page}&size=${size}`
+    );
   }
-
   getRecipeById(id: number): Observable<any> {
     return this.http.get<Recipe>(this.baseUrl + "/" + id);
   }

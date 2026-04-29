@@ -35,3 +35,9 @@
 .ui-chip--clickable:hover {
   opacity: 0.85;
 }
+
+.ui-chip--sm {
+  padding: 6px 8px;
+  font-size: var(--font-size-xs);
+  border-radius: var(--radius-lg);
+}
