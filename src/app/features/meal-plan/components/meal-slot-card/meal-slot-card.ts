@@ -16,19 +16,6 @@ export class MealSlotCard {
   @Input({ required: true }) slot!: MealSlot;
   @Output() replace = new EventEmitter<MealSlot>();
 
-  protected get mealLabel(): string {
-    switch (this.slot.type) {
-      case 'breakfast':
-        return 'DESAYUNO';
-      case 'lunch':
-        return 'COMIDA';
-      case 'dinner':
-        return 'CENA';
-      default:
-        return '';
-    }
-  }
-
   protected onReplace(): void {
     this.replace.emit(this.slot);
   }

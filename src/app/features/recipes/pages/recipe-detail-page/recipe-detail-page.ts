@@ -2,6 +2,7 @@ import {CommonModule} from '@angular/common';
 import {Component, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {finalize} from 'rxjs';
+import {Location} from '@angular/common';
 
 import {RecipesApi} from '../../services/recipes-api';
 
@@ -32,7 +33,8 @@ export class RecipeDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipesApi: RecipesApi,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
   }
 
@@ -100,5 +102,9 @@ export class RecipeDetailPage implements OnInit {
         typeof step === 'string' ? step : step.description
       )
     };
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

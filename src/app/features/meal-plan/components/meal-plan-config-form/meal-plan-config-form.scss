@@ -12,7 +12,7 @@
   overflow: hidden;
   border: 1px solid #efbcc2;
   border-radius: 20px;
-  background: #feeef8;
+  background: #f9f9f9;
 }
 
 .meal-plan-config-form__panel {
@@ -119,8 +119,10 @@
 
 .meal-plan-config-form__image-panel {
   min-height: 520px;
-  background-image: url('/img/fondo.png');
+  background-image: url('/img/fondo-menu.jpg');
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 @media (max-width: 920px) {

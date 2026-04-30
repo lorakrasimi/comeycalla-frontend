@@ -5,7 +5,7 @@
     <div class="recipe-detail-page__top-actions">
       <ui-button
         [variant]="'ghost'"
-        [routerLink]="['/recipes']"
+        (click)="goBack()"
         [icon]="'arrow_back'"
       >
         Volver

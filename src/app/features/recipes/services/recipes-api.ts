@@ -9,7 +9,8 @@ import {RecipeFiltersModel} from '../../../core/models/recipe-filters.model';
   providedIn: 'root',
 })
 export class RecipesApi {
-  private readonly http = inject(HttpClient);
+  constructor(private http: HttpClient) {
+  }
   private readonly baseUrl = 'http://localhost:8080/api/recipes';
 
   getRecipes(page = 0, size = 12, filters?: RecipeFiltersModel) {
