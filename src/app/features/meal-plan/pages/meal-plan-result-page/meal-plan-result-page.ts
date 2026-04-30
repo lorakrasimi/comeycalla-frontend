@@ -1,4 +1,4 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed} from '@angular/core';
 import {MealPlanStore} from '../../services/meal-plan-store';
 import {Router} from '@angular/router';
 import {MealPlan, MealSlot} from '../../../../core/models/meal-plan.model';

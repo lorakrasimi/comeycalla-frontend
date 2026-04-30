@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {MealPlan, MealPlanDay, MealPlanRecipe, MealType} from '../../../core/models/meal-plan.model';
+import {MealPlan, MealPlanRecipe, MealType} from '../../../core/models/meal-plan.model';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
