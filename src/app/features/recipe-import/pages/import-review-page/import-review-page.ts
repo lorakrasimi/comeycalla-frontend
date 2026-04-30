@@ -115,7 +115,7 @@ export class ImportReviewPage implements OnInit {
       })),
     };
 
-    this.recipesApi.createRecipe(payload).subscribe({
+    this.recipesApi.createRecipe(new FormData).subscribe({
       next: () => {
         this.importStore.reset();
         this.router.navigate(['/recipes']);

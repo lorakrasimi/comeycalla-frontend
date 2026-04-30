@@ -86,10 +86,26 @@ export class RecipeEditPage implements OnInit {
 
     const payload = {
       ...this.form.getRawValue(),
-      removeImage: this.removeCurrentImage
+      removeImage: this.removeCurrentImage,
     };
 
-    this.recipesApi.updateRecipe(this.recipeId, payload)
+    const formData = new FormData();
+
+    formData.append(
+      'recipe',
+      new Blob([JSON.stringify(payload)], {type: 'application/json'})
+    );
+    //New image
+    if (this.selectedImageFile) {
+      formData.append('image', this.selectedImageFile);
+    }
+
+    // Deleted image
+    if (this.removeCurrentImage) {
+      formData.append('image', new Blob());
+    }
+
+    this.recipesApi.updateRecipe(this.recipeId, formData)
       .pipe(finalize(() => this.submitting.set(false)))
       .subscribe({
         next: () => {
@@ -97,7 +113,7 @@ export class RecipeEditPage implements OnInit {
         },
         error: (error) => {
           console.error(error);
-        }
+        },
       });
   }
 }

@@ -18,6 +18,7 @@ import {RecipeFormComponent} from '../../components/recipe-form/recipe-form';
 export class RecipeCreateManualPage {
   readonly imagePreviewUrl = signal<string | null>(null);
   readonly form: FormGroup;
+  selectedImage: File | null = null;
 
   constructor(
     private router: Router,
@@ -36,7 +37,20 @@ export class RecipeCreateManualPage {
     const value = this.form.getRawValue() as RecipeFormValue;
     const payload = this.recipeFormMapper.toCreatePayload(value);
 
-    this.recipesApi.createRecipe(payload).subscribe({
+    const formData = new FormData();
+
+    formData.append(
+      'recipe',
+      new Blob([JSON.stringify(payload)], {
+        type: 'application/json',
+      })
+    );
+
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+
+    this.recipesApi.createRecipe(formData).subscribe({
       next: (recipe) => {
         this.router.navigate(['/recipe', recipe.id]);
       },
@@ -55,8 +69,8 @@ export class RecipeCreateManualPage {
   }
 
   onImageSelected(file: File): void {
+    this.selectedImage = file;
     const currentUrl = this.imagePreviewUrl();
-
     if (currentUrl) {
       URL.revokeObjectURL(currentUrl);
     }
@@ -65,8 +79,8 @@ export class RecipeCreateManualPage {
   }
 
   onImageRemoved(): void {
+    this.selectedImage = null;
     const currentUrl = this.imagePreviewUrl();
-
     if (currentUrl) {
       URL.revokeObjectURL(currentUrl);
     }

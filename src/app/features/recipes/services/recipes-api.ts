@@ -2,7 +2,7 @@ import {Injectable, inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {Recipe, RecipeRequest, RecipeResponse} from '../../../core/models/recipe.model';
+import {Recipe, RecipeResponse} from '../../../core/models/recipe.model';
 import {RecipeFiltersModel} from '../../../core/models/recipe-filters.model';
 
 @Injectable({
@@ -37,12 +37,12 @@ export class RecipesApi {
     return this.http.get<Recipe>(this.baseUrl + "/" + id);
   }
 
-  createRecipe(payload: RecipeRequest): Observable<RecipeResponse> {
-    return this.http.post<RecipeResponse>(this.baseUrl + "/new", payload);
+  createRecipe(form: FormData): Observable<RecipeResponse> {
+    return this.http.post<RecipeResponse>(this.baseUrl + "/new", form);
   }
 
-  updateRecipe(id: number, payload: RecipeRequest): Observable<RecipeResponse> {
-    return this.http.put<RecipeResponse>(`${this.baseUrl}/${id}`, payload);
+  updateRecipe(id: number, form: FormData): Observable<RecipeResponse> {
+    return this.http.put<RecipeResponse>(`${this.baseUrl}/${id}`, form);
   }
 
   deleteRecipe(id: number): Observable<void> {
