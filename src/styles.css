@@ -275,3 +275,37 @@ button:disabled {
     --font-size-2xl: 28px;
   }
 }
+
+/* Print */
+@page {
+  size: A4 landscape;
+  margin: 8mm;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #print-section,
+  #print-section * {
+    visibility: visible;
+  }
+
+  #print-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    transform: scale(0.55);
+    transform-origin: top left;
+  }
+
+  ui-button,
+  button,
+  .meal-plan-result-page__actions,
+  app-ui-page-header {
+    display: none !important;
+  }
+}

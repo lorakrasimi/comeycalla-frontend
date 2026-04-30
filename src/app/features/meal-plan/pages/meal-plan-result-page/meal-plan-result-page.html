@@ -4,7 +4,6 @@
 
     <div class="meal-plan-result-page__actions">
       <ui-button
-        type="button"
         [variant]="'outline'"
         [icon]="'autorenew'"
         (click)="regenerate()"
@@ -13,16 +12,14 @@
       </ui-button>
 
       <ui-button
-        type="button"
         [variant]="'outline'"
-        [icon]="'inventory_2'"
-        (click)="savePlan()"
+        [icon]="'print'"
+        (click)="printMenu()"
       >
-        Guardar menú
+        Imprimir menú
       </ui-button>
 
       <ui-button
-        type="button"
         [variant]="'primary'"
         [icon]="'shopping_cart'"
         (click)="goToShoppingList()"
@@ -31,7 +28,8 @@
       </ui-button>
     </div>
 
-    <div class="meal-plan-result-page__grid">
+    <div id="print-section"
+         class="meal-plan-result-page__grid">
       @for (day of mealPlan.days; track day.dayNumber) {
         <app-meal-day-column
           [day]="day"

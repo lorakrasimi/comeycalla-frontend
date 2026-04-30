@@ -7,6 +7,7 @@ import {MealDayColumn} from '../../components/meal-day-column/meal-day-column';
 import {UiEmptyState} from '../../../../shared/ui/ui-empty-state/ui-empty-state';
 import {UiPageHeader} from '../../../../shared/ui/ui-page-header/ui-page-header';
 import {MealPlanApi} from '../../services/meal-plan-api';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-meal-plan-result-page',
@@ -34,10 +35,9 @@ export class MealPlanResultPage {
     this.router.navigate(['/meal-plan']);
   }
 
-  protected savePlan(): void {
-    console.log('Save meal plan');
+  protected printMenu(): void {
+    window.print();
   }
-
   protected goToShoppingList(): void {
     this.router.navigate(['/meal-plan/shopping-list']);
   }
