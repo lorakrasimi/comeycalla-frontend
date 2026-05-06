@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgClass } from '@angular/common';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 
 @Component({
@@ -13,11 +13,11 @@ export class ImageDropzone {
   @Input() accept: string = 'image/*';
   @Input() disabled: boolean = false;
 
-  @Output() fileSelected = new EventEmitter<File>();
+  @Output() filesSelected = new EventEmitter<File[]>();
 
   isDragging = false;
-  previewUrl: string | null = null;
-  selectedFile: File | null = null;
+  previewUrls: string[] = [];
+  selectedFiles: File[] = [];
 
   onDragOver(event: DragEvent): void {
     event.preventDefault();
@@ -35,17 +35,20 @@ export class ImageDropzone {
     this.isDragging = false;
     if (this.disabled) return;
 
-    const file = event.dataTransfer?.files?.[0];
-    if (file) {
-      this.handleFile(file);
+    const files = Array.from(event.dataTransfer?.files ?? []);
+
+    if (files.length > 0) {
+      this.handleFiles(files);
     }
   }
 
+
   onFileInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    if (file) {
-      this.handleFile(file);
+    const files = Array.from(input.files ?? []);
+
+    if (files.length > 0) {
+      this.handleFiles(files);
       input.value = '';
     }
   }
@@ -55,21 +58,31 @@ export class ImageDropzone {
     input.click();
   }
 
-  removeFile(): void {
-    this.selectedFile = null;
-    this.previewUrl = null;
+  removeFile(index: number): void {
+    URL.revokeObjectURL(this.previewUrls[index]);
+
+    this.selectedFiles.splice(index, 1);
+    this.previewUrls.splice(index, 1);
+
+    this.filesSelected.emit([...this.selectedFiles]);
   }
 
-  private handleFile(file: File): void {
-    if (!file.type.startsWith('image/')) return;
 
-    this.selectedFile = file;
-    this.fileSelected.emit(file);
+  private handleFiles(files: File[]): void {
+    const imageFiles = files.filter(file => file.type.startsWith('image/'));
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.previewUrl = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+    if (imageFiles.length === 0) return;
+
+    this.clearPreviews();
+
+    this.selectedFiles = imageFiles;
+    this.filesSelected.emit(imageFiles);
+
+    this.previewUrls = imageFiles.map(file => URL.createObjectURL(file));
   }
+  private clearPreviews(): void {
+    this.previewUrls.forEach(url => URL.revokeObjectURL(url));
+    this.previewUrls = [];
+  }
+
 }

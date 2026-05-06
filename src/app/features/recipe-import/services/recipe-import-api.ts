@@ -1,29 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Observable, delay, of } from 'rxjs';
-import {ExtractedRecipe} from '../../../core/models/recipe-import.model';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ExtractedRecipe, RecipeImportImage} from '../../../core/models/recipe-import.model';
+import {HttpClient} from '@angular/common/http';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class RecipeImportApi {
-  extractRecipeFromImage(file: File): Observable<ExtractedRecipe> {
-    console.log('Processing file:', file.name);
+  private readonly apiUrl = 'http://localhost:8080/api/recipes';
 
-    return of({
-      title: 'Pasta carbonara clásica',
-      description: 'La carbonara tal y como la hace la nonna',
-      cookingTime: '30',
-      servings: 4,
-      category: 'Italiana',
-      tags: ['pasta', 'italiana', 'rápida', 'tradicional'],
-      ingredients: [
-        '400g de pasta',
-        '200g de panceta o guanciale',
-        '4 huevos',
-      ],
-      steps: [
-        'Cocinar la pasta en abundante agua con sal según las instrucciones del paquete',
-        'Mientras tanto, cortar la panceta en cubos pequeños y dorar en una sartén sin aceite',
-        'Batir los huevos con el queso parmesano rallado en un bol',
-      ],
-    }).pipe(delay(2500));
+  constructor(private http: HttpClient) {
+  }
+
+  extractRecipeFromImages(images: RecipeImportImage[]): Observable<ExtractedRecipe> {
+    const formData = new FormData();
+
+    if (images.length > 1) {
+      images.forEach((image) => {
+        formData.append('images', image.file);
+        formData.append('sections', image.section);
+      });
+    } else {
+      formData.append('images', images[0].file);
+    }
+
+    return this.http.post<ExtractedRecipe>(
+      `${this.apiUrl}/scan`,
+      formData
+    );
   }
 }

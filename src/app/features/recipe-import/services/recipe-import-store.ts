@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import {ExtractedRecipe} from '../../../core/models/recipe-import.model';
+import {ExtractedRecipe, RecipeImageSection, RecipeImportImage} from '../../../core/models/recipe-import.model';
 
 export type RecipeImportStatus =
   | 'idle'
@@ -9,43 +9,82 @@ export type RecipeImportStatus =
   | 'error';
 
 export interface RecipeImportState {
-  file: File | null;
-  previewUrl: string | null;
+  images: RecipeImportImage[];
   status: RecipeImportStatus;
   extractedRecipe: ExtractedRecipe | null;
   error: string | null;
 }
 
 const initialState: RecipeImportState = {
-  file: null,
-  previewUrl: null,
+  images: [],
   status: 'idle',
   extractedRecipe: null,
   error: null,
 };
 
-
 @Injectable({ providedIn: 'root' })
 export class RecipeImportStore {
   private readonly state = signal<RecipeImportState>(initialState);
 
-  readonly file = () => this.state().file;
-  readonly previewUrl = () => this.state().previewUrl;
+  readonly images = () => this.state().images;
+  readonly files = () => this.state().images.map((image) => image.file);
+  readonly previewUrls = () => this.state().images.map((image) => image.previewUrl);
   readonly status = () => this.state().status;
   readonly extractedRecipe = () => this.state().extractedRecipe;
   readonly error = () => this.state().error;
 
-  setFile(file: File): void {
-    this.clearPreviewUrl();
+  setFiles(files: File[]): void {
+    this.clearPreviewUrls();
 
-    const previewUrl = URL.createObjectURL(file);
+    const images: RecipeImportImage[] = files.map((file) => ({
+      file,
+      previewUrl: URL.createObjectURL(file),
+      section: 'main',
+    }));
 
     this.state.set({
-      file,
-      previewUrl,
-      status: 'ready',
+      images,
+      status: images.length > 0 ? 'ready' : 'idle',
       extractedRecipe: null,
       error: null,
+    });
+  }
+
+  updateImageSection(index: number, section: RecipeImageSection): void {
+    this.state.update((state) => {
+      const images = [...state.images];
+
+      if (!images[index]) {
+        return state;
+      }
+
+      images[index] = {
+        ...images[index],
+        section,
+      };
+
+      return {
+        ...state,
+        images,
+      };
+    });
+  }
+
+  removeImage(index: number): void {
+    this.state.update((state) => {
+      const images = [...state.images];
+      const image = images[index];
+
+      if (image) {
+        URL.revokeObjectURL(image.previewUrl);
+        images.splice(index, 1);
+      }
+
+      return {
+        ...state,
+        images,
+        status: images.length > 0 ? 'ready' : 'idle',
+      };
     });
   }
 
@@ -74,19 +113,18 @@ export class RecipeImportStore {
     }));
   }
 
-  clearFile(): void {
-    this.clearPreviewUrl();
+  clearFiles(): void {
+    this.clearPreviewUrls();
     this.state.set(initialState);
   }
 
   reset(): void {
-    this.clearFile();
+    this.clearFiles();
   }
 
-  private clearPreviewUrl(): void {
-    const previewUrl = this.state().previewUrl;
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
-    }
+  private clearPreviewUrls(): void {
+    this.state().images.forEach((image) => {
+      URL.revokeObjectURL(image.previewUrl);
+    });
   }
 }

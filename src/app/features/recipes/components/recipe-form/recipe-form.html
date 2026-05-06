@@ -37,7 +37,7 @@
     </div>
 
     <div class="recipe-form__field">
-      <h4 class="recipe-form__section-title">Ingredientes</h4>
+      <h4 class="recipe-form__section-title">Tags</h4>
       <ui-tags-input
         [tags]="form.controls['tags'].value"
         (tagsChange)="form.controls['tags'].setValue($event)"
@@ -80,7 +80,7 @@
     </div>
 
     <div formArrayName="ingredients" class="recipe-form__list">
-      @for (ingredient of ingredients.controls; track $index) {
+      @for (ingredient of ingredients.controls; track ingredient) {
         <div class="recipe-form__list-row" [formGroupName]="$index">
           <input
             class="recipe-form__input"
@@ -90,7 +90,7 @@
           />
 
           <button
-            class="shopping-item__remove-button"
+            class="recipe-form__remove-button"
             (click)="removeIngredient($index)"
           >
             ×
@@ -115,7 +115,7 @@
     </div>
 
     <div formArrayName="steps" class="recipe-form__list">
-      @for (step of steps.controls; track $index) {
+      @for (step of steps.controls; track step) {
         <div class="recipe-form__step-row" [formGroupName]="$index">
           <div class="recipe-form__step-badge">
             {{ $index + 1 }}

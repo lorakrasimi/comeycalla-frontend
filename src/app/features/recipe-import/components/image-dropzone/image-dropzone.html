@@ -3,6 +3,7 @@
     #fileInput
     class="image-dropzone__input"
     type="file"
+    multiple
     [accept]="accept"
     [disabled]="disabled"
     (change)="onFileInputChange($event)"
@@ -12,7 +13,7 @@
     class="image-dropzone__box"
     [ngClass]="{
       'image-dropzone__box--dragging': isDragging,
-      'image-dropzone__box--has-file': !!selectedFile,
+      'image-dropzone__box--has-file': !!selectedFiles,
       'image-dropzone__box--disabled': disabled
     }"
     (dragover)="onDragOver($event)"
@@ -20,34 +21,48 @@
     (drop)="onDrop($event)"
     (click)="openFilePicker(fileInput)"
   >
-    @if (!previewUrl) {
+    @if (previewUrls.length === 0) {
       <div class="image-dropzone__content">
         <span class="material-symbols-outlined image-dropzone__icon">upload</span>
 
-        <p class="image-dropzone__drop-text">Arrastra una imagen aquí o haz clic para seleccionar</p>
+        <p class="image-dropzone__drop-text">
+          Arrastra una o varias imágenes aquí o haz clic para seleccionar
+        </p>
 
-        <ui-button [icon]="'image'" (click)="$event.stopPropagation(); openFilePicker(fileInput)">Seleccionar imagen</ui-button>
+        <p class="image-dropzone__helper-text">
+         Para un resultado óptimo se recomienda subir una imágen por sección (imagen de la receta, título, ingredientes y pasos)
+        </p>
 
+        <ui-button
+          [icon]="'image'"
+          (click)="$event.stopPropagation(); openFilePicker(fileInput)"
+        >
+          Seleccionar imágenes
+        </ui-button>
       </div>
     } @else {
-      <div class="image-dropzone__preview-wrapper">
-        <img
-          class="image-dropzone__preview"
-          [src]="previewUrl!"
-          [alt]="selectedFile?.name || 'Preview'"
-        />
+      <div class="image-dropzone__preview-list">
+        @for (previewUrl of previewUrls; track previewUrl; let i = $index) {
+          <div class="image-dropzone__preview-wrapper">
+            <img
+              class="image-dropzone__preview"
+              [src]="previewUrl"
+              [alt]="selectedFiles[i].name"
+            />
 
-        <div class="image-dropzone__preview-footer">
-          <span class="image-dropzone__filename">{{ selectedFile?.name }}</span>
+            <div class="image-dropzone__preview-footer">
+              <span class="image-dropzone__filename">{{ selectedFiles[i].name }}</span>
 
-          <button
-            type="button"
-            class="image-dropzone__remove"
-            (click)="$event.stopPropagation(); removeFile()"
-          >
-            Eliminar
-          </button>
-        </div>
+              <button
+                type="button"
+                class="image-dropzone__remove"
+                (click)="$event.stopPropagation(); removeFile(i)"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        }
       </div>
     }
   </div>

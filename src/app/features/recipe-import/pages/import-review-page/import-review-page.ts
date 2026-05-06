@@ -1,4 +1,4 @@
-import {Component, OnInit, inject, signal} from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -13,7 +13,7 @@ import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
 import { RecipeImportStore } from '../../services/recipe-import-store';
 import { RecipesApi } from '../../../recipes/services/recipes-api';
 import { RecipeFormComponent } from '../../../recipes/components/recipe-form/recipe-form';
-import {Difficulty} from '../../../../core/models/recipe.model';
+import { Difficulty } from '../../../../core/models/recipe.model';
 
 @Component({
   selector: 'app-import-review-page',
@@ -24,14 +24,15 @@ import {Difficulty} from '../../../../core/models/recipe.model';
 })
 export class ImportReviewPage implements OnInit {
   private readonly fb = inject(FormBuilder);
-  readonly imagePreviewUrl = signal<string | null>(null);
+
+  readonly imagePreviewUrls = signal<string[]>([]);
 
   constructor(
     private router: Router,
     protected importStore: RecipeImportStore,
     private recipesApi: RecipesApi
   ) {
-    this.imagePreviewUrl.set(importStore.previewUrl())
+    this.imagePreviewUrls.set(this.importStore.previewUrls());
   }
 
   readonly form = this.fb.group({
@@ -40,7 +41,7 @@ export class ImportReviewPage implements OnInit {
       validators: [Validators.required],
     }),
     description: this.fb.control<string | null>(null),
-    cookingTime: this.fb.control<string | null>(null),
+    cookingTime: this.fb.control<number | null>(null),
     servings: this.fb.control<number | null>(null),
     category: this.fb.control<string>('', { nonNullable: true }),
     tags: this.fb.control<string[]>([], { nonNullable: true }),
@@ -65,11 +66,11 @@ export class ImportReviewPage implements OnInit {
       tags: extractedRecipe.tags ?? [],
     });
 
-    extractedRecipe.ingredients.forEach((ingredient) => {
+    extractedRecipe.ingredients?.forEach((ingredient) => {
       this.ingredients.push(this.createIngredientGroup(ingredient));
     });
 
-    extractedRecipe.steps.forEach((step) => {
+    extractedRecipe.steps?.forEach((step) => {
       this.steps.push(this.createStepGroup(step));
     });
   }
@@ -99,12 +100,12 @@ export class ImportReviewPage implements OnInit {
     const value = this.form.getRawValue();
 
     const payload = {
-      title: value.title ?? '',
+      title: value.title,
       description: value.description ?? '',
-      cookingTime: value.cookingTime ? Number(value.cookingTime) : null,
+      cookingTime: value.cookingTime ?? null,
       servings: value.servings ?? null,
       difficulty: 'easy' as Difficulty,
-      img: this.importStore.previewUrl(),
+      img: null,
       category: value.category ?? '',
       tags: value.tags ?? [],
       ingredients: (value.ingredients ?? []).map((item) => ({
@@ -115,7 +116,20 @@ export class ImportReviewPage implements OnInit {
       })),
     };
 
-    this.recipesApi.createRecipe(new FormData).subscribe({
+    const formData = new FormData();
+
+    formData.append(
+      'recipe',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+
+    const firstFile = this.importStore.files()[0];
+
+    if (firstFile) {
+      formData.append('image', firstFile);
+    }
+
+    this.recipesApi.createRecipe(formData).subscribe({
       next: () => {
         this.importStore.reset();
         this.router.navigate(['/recipes']);
@@ -139,20 +153,28 @@ export class ImportReviewPage implements OnInit {
   }
 
   onImageSelected(file: File): void {
-    const currentUrl = this.imagePreviewUrl();
-    if (currentUrl) {
-      URL.revokeObjectURL(currentUrl);
-    }
-    this.imagePreviewUrl.set(URL.createObjectURL(file));
+    this.revokePreviewUrls();
+
+    const previewUrl = URL.createObjectURL(file);
+    this.imagePreviewUrls.set([previewUrl]);
   }
 
-  onImageRemoved(): void {
-    const currentUrl = this.imagePreviewUrl();
-    if (currentUrl) {
-      URL.revokeObjectURL(currentUrl);
+  onImageRemoved(index: number): void {
+    const urls = [...this.imagePreviewUrls()];
+    const removedUrl = urls[index];
+
+    if (removedUrl) {
+      URL.revokeObjectURL(removedUrl);
     }
 
-    this.imagePreviewUrl.set(null);
+    urls.splice(index, 1);
+    this.imagePreviewUrls.set(urls);
   }
 
+
+  private revokePreviewUrls(): void {
+    this.imagePreviewUrls().forEach((url) => {
+      URL.revokeObjectURL(url);
+    });
+  }
 }

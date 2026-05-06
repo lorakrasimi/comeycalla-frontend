@@ -18,9 +18,9 @@
     <form class="import-review-page__form" [formGroup]="form" (ngSubmit)="onSave()">
       <app-recipe-form
         [form]="form"
-        [imageUrl]="imagePreviewUrl()"
+        [imageUrl]="imagePreviewUrls()[0]"
         (imageSelected)="onImageSelected($event)"
-        (imageRemoved)="onImageRemoved()"
+        (imageRemoved)="onImageRemoved(0)"
       />
     </form>
   </div>

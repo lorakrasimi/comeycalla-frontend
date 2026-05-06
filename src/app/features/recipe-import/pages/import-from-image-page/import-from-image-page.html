@@ -1,28 +1,47 @@
-<section>
+<section class="import-from-image-page">
   <div class="import-from-image-page__card">
-    <div class="import-from-image-page__header">
-      <h2 class="import-from-image-page__title">Añadir desde imagen</h2>
-      <p class="import-from-image-page__description">
-        Sube una captura o foto de una receta y la procesaremos automáticamente
-      </p>
-    </div>
-    @if (!importStore.previewUrl()) {
-      <app-image-dropzone (fileSelected)="onFileSelected($event)"/>
+
+    @if (importStore.images().length === 0) {
+      <app-image-dropzone
+        (filesSelected)="onFilesSelected($event)"
+      />
     } @else {
-      <app-image-preview-card
-        (changeImage)="onChangeImage()"
-        [previewUrl]="importStore.previewUrl() ?? ''">
+      <div class="import-from-image-page__images">
+        @for (image of importStore.images(); track image.previewUrl; let i = $index) {
+          <div class="import-from-image-page__image-card">
+            <img
+              class="import-from-image-page__preview"
+              [src]="image.previewUrl"
+              [alt]="image.file.name"
+            />
 
-      </app-image-preview-card>
+            @if(importStore.images().length > 1){
+              <label>
+                ¿Qué contiene esta imagen?
 
-      <div class="import-from-image-page__actions">
-        <ui-button [icon]="'auto_awesome'" (click)="onProcessRecipe()">
-          Procesar receta
-        </ui-button>
-        <p class="import-from-image-page__helper">
-          Analizaremos la imagen y extraeremos automáticamente los ingredientes, pasos y detalles de la receta
-        </p>
+                <select
+                  [value]="image.section"
+                  (change)="onSectionChange(i, $event)"
+                >
+                  @for (option of sectionOptions; track option.value) {
+                    <option [value]="option.value">
+                      {{ option.label }}
+                    </option>
+                  }
+                </select>
+              </label>
+              <button type="button" (click)="onRemoveImage(i)">
+                Eliminar
+              </button>
+            }
+          </div>
+        }
       </div>
+
+      <ui-button (click)="onProcessRecipe()">
+        Procesar receta
+      </ui-button>
     }
+
   </div>
 </section>

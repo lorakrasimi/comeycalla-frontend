@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
 import { ProcessingSteps } from '../../components/processing-steps/processing-steps';
 import { RecipeImportApi } from '../../services/recipe-import-api';
 import { RecipeImportStore } from '../../services/recipe-import-store';
@@ -20,27 +19,24 @@ export class ImportProcessingPage implements OnInit {
   readonly importStore = inject(RecipeImportStore);
 
   ngOnInit(): void {
-    const file = this.importStore.file();
+    const images = this.importStore.images();
 
-    if (!file) {
+    if (images.length === 0) {
       this.router.navigate(['/recipes/create/image']);
       return;
     }
 
     this.importStore.setProcessing();
 
-    this.recipeImportApi
-      .extractRecipeFromImage(file)
-      .pipe(finalize(() => {}))
-      .subscribe({
-        next: (recipe) => {
-          this.importStore.setExtractedRecipe(recipe);
-          this.router.navigate(['/recipes/create/image/review']);
-        },
-        error: () => {
-          this.importStore.setError('No se pudo procesar la imagen.');
-        },
-      });
+    this.recipeImportApi.extractRecipeFromImages(images).subscribe({
+      next: (recipe) => {
+        this.importStore.setExtractedRecipe(recipe);
+        this.router.navigate(['/recipes/create/image/review']);
+      },
+      error: () => {
+        this.importStore.setError('No se pudo procesar la imagen.');
+      },
+    });
   }
 
   onBack(): void {
