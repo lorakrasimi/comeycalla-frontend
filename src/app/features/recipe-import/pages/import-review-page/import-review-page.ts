@@ -14,6 +14,7 @@ import { RecipeImportStore } from '../../services/recipe-import-store';
 import { RecipesApi } from '../../../recipes/services/recipes-api';
 import { RecipeFormComponent } from '../../../recipes/components/recipe-form/recipe-form';
 import { Difficulty } from '../../../../core/models/recipe.model';
+import {RecipeFormMapper} from '../../../recipes/services/recipe-form-mapper';
 
 @Component({
   selector: 'app-import-review-page',
@@ -30,7 +31,8 @@ export class ImportReviewPage implements OnInit {
   constructor(
     private router: Router,
     protected importStore: RecipeImportStore,
-    private recipesApi: RecipesApi
+    private recipesApi: RecipesApi,
+    private recipeFormMapper: RecipeFormMapper
   ) {
     this.imagePreviewUrls.set(this.importStore.previewUrls());
   }
@@ -91,7 +93,7 @@ export class ImportReviewPage implements OnInit {
     this.router.navigate(['/recipes/create/image']);
   }
 
-  onSave(): void {
+  onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -116,18 +118,12 @@ export class ImportReviewPage implements OnInit {
       })),
     };
 
-    const formData = new FormData();
-
-    formData.append(
-      'recipe',
-      new Blob([JSON.stringify(payload)], { type: 'application/json' })
-    );
-
     const firstFile = this.importStore.files()[0];
 
-    if (firstFile) {
-      formData.append('image', firstFile);
-    }
+    const formData = this.recipeFormMapper.toFormData(
+      payload,
+      firstFile
+    );
 
     this.recipesApi.createRecipe(formData).subscribe({
       next: () => {

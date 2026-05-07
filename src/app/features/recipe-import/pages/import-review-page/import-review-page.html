@@ -15,12 +15,13 @@
       </ui-button>
     </header>
 
-    <form class="import-review-page__form" [formGroup]="form" (ngSubmit)="onSave()">
+    <form class="import-review-page__form" [formGroup]="form">
       <app-recipe-form
         [form]="form"
         [imageUrl]="imagePreviewUrls()[0]"
         (imageSelected)="onImageSelected($event)"
         (imageRemoved)="onImageRemoved(0)"
+        (submit)="onSubmit()"
       />
     </form>
   </div>

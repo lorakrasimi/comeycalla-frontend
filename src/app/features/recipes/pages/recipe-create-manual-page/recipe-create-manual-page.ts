@@ -28,7 +28,7 @@ export class RecipeCreateManualPage {
     this.form = this.recipeFormMapper.createEmptyForm();
   }
 
-  onSave(): void {
+  onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -37,25 +37,17 @@ export class RecipeCreateManualPage {
     const value = this.form.getRawValue() as RecipeFormValue;
     const payload = this.recipeFormMapper.toCreatePayload(value);
 
-    const formData = new FormData();
-
-    formData.append(
-      'recipe',
-      new Blob([JSON.stringify(payload)], {
-        type: 'application/json',
-      })
+    const formData = this.recipeFormMapper.toFormData(
+      payload,
+      this.selectedImage
     );
-
-    if (this.selectedImage) {
-      formData.append('image', this.selectedImage);
-    }
 
     this.recipesApi.createRecipe(formData).subscribe({
       next: (recipe) => {
         this.router.navigate(['/recipe', recipe.id]);
       },
       error: (error) => {
-        console.error('Error saving recipe', error);
+        console.error('Error al guardar la receta', error);
       },
     });
   }

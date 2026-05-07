@@ -81,7 +81,34 @@ export class RecipeFormMapper {
     };
   }
 
-  toUpdatePayload(formValue: RecipeFormValue): RecipeRequest {
-    return this.toCreatePayload(formValue);
+  toFormData(payload: unknown, image?: File | Blob | null): FormData {
+    const formData = new FormData();
+
+    formData.append(
+      'recipe',
+      new Blob([JSON.stringify(payload)], {
+        type: 'application/json',
+      })
+    );
+
+    if (image) {
+      formData.append('image', image);
+    }
+
+    return formData;
+  }
+
+  toUpdateFormData(
+    payload: unknown,
+    image?: File | null,
+    removeImage = false
+  ): FormData {
+    const formData = this.toFormData(payload, image);
+
+    if (removeImage && !image) {
+      formData.append('image', new Blob());
+    }
+
+    return formData;
   }
 }

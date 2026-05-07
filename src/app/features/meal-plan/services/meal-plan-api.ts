@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 
 import {MealPlan, MealPlanRecipe, MealType} from '../../../core/models/meal-plan.model';
 import {HttpClient} from '@angular/common/http';
+import {ShoppingListBackendCategory} from '../../../core/models/shopping-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class MealPlanApi {
   }
 
   replaceSlot(
-    mealPlanId: string,
+    mealPlanId: number,
     dayNumber: number,
     mealType: MealType
   ): Observable<MealPlanRecipe> {
@@ -27,6 +28,13 @@ export class MealPlanApi {
       {}
     );
   }
+
+  getShoppingList(mealPlanId: number): Observable<ShoppingListBackendCategory[]> {
+    return this.http.get<ShoppingListBackendCategory[]>(
+      `${this.baseUrl}/${mealPlanId}/shopping-list`
+    );
+  }
+
 }
 
 

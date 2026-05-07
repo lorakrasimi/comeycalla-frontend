@@ -26,7 +26,7 @@ export interface MealPlanDay {
 }
 
 export interface MealPlan {
-  id: string;
+  id: number;
   config: MealPlanConfig;
   days: MealPlanDay[];
 }

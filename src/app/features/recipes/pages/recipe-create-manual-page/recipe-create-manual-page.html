@@ -9,14 +9,14 @@
     <form
       class="recipe-create-manual-page__form"
       [formGroup]="form"
-      (ngSubmit)="onSave()"
+      (ngSubmit)="onSubmit()"
     >
       <app-recipe-form
         [form]="form"
         [imageUrl]="imagePreviewUrl()"
         (imageSelected)="onImageSelected($event)"
         (imageRemoved)="onImageRemoved()"
-        (submit)="onSave()"
+        (submit)="onSubmit()"
       />
     </form>
   </div>

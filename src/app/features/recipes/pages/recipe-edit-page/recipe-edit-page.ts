@@ -76,12 +76,11 @@ export class RecipeEditPage implements OnInit {
     this.router.navigate(['/recipes', this.recipeId]);
   }
 
-  protected onSubmit(): void {
+  public onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-
     this.submitting.set(true);
 
     const payload = {
@@ -89,21 +88,11 @@ export class RecipeEditPage implements OnInit {
       removeImage: this.removeCurrentImage,
     };
 
-    const formData = new FormData();
-
-    formData.append(
-      'recipe',
-      new Blob([JSON.stringify(payload)], {type: 'application/json'})
+    const formData = this.recipeFormMapper.toUpdateFormData(
+      payload,
+      this.selectedImageFile,
+      this.removeCurrentImage
     );
-    //New image
-    if (this.selectedImageFile) {
-      formData.append('image', this.selectedImageFile);
-    }
-
-    // Deleted image
-    if (this.removeCurrentImage) {
-      formData.append('image', new Blob());
-    }
 
     this.recipesApi.updateRecipe(this.recipeId, formData)
       .pipe(finalize(() => this.submitting.set(false)))
@@ -116,4 +105,5 @@ export class RecipeEditPage implements OnInit {
         },
       });
   }
+
 }

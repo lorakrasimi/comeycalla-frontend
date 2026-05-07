@@ -1,3 +1,8 @@
+export interface ShoppingListBackendCategory {
+  category: string;
+  ingredients: string[];
+}
+
 export interface ShoppingListItem {
   id: number;
   name: string;

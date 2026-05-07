@@ -1,6 +1,9 @@
 import {computed, Injectable, signal} from '@angular/core';
-import {ShoppingList} from '../../../core/models/shopping-list.model';
-import {MealPlan} from '../../../core/models/meal-plan.model';
+import {
+  ShoppingList,
+  ShoppingListBackendCategory,
+  ShoppingListCategory
+} from '../../../core/models/shopping-list.model';
 
 @Injectable({
   providedIn: 'root',
@@ -50,40 +53,45 @@ export class ShoppingListStore {
     return Math.round((this.checkedItems() / total) * 100);
   });
 
-  buildFromMealPlan(plan: MealPlan | null): void {
-    if (!plan) {
+  buildFromBackendResponse(response: ShoppingListBackendCategory[] | null): void {
+    if (!response) {
       this.shoppingList.set(null);
       return;
     }
 
-    // Mock temporal para maquetar la pantalla
-    const list: ShoppingList = {
-      categories: [
-        {
-          id: 1,
-          title: 'Verduras',
-          collapsed: false,
-          items: [
-            { id: 1, name: 'Cebolla', quantity: '2 unidades', checked: false },
-            { id: 2, name: 'Tomate', quantity: '4 unidades', checked: false },
-            { id: 3, name: 'Pimiento rojo', quantity: '1 unidad', checked: false },
-            { id: 4, name: 'Lechuga', quantity: '2 unidades', checked: false },
-            { id: 5, name: 'Zanahoria', quantity: '2 unidades', checked: false }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Carne',
-          collapsed: false,
-          items: [
-            { id: 6, name: 'Pollo', quantity: '800 g', checked: false },
-            { id: 7, name: 'Bacon', quantity: '200 g', checked: false }
-          ]
-        }
-      ]
+    let itemId = 1;
+    console.log(response);
+    const categories: ShoppingListCategory[] = response.map((backendCategory, index) => ({
+      id: index + 1,
+      title: this.formatCategoryName(backendCategory.category),
+      collapsed: false,
+      items: backendCategory.ingredients.map((itemName) => ({
+        id: itemId++,
+        name: itemName,
+        quantity: '',
+        checked: false
+      }))
+    }));
+
+    this.shoppingList.set({ categories });
+  }
+
+  private formatCategoryName(category: string): string {
+    const labels: Record<string, string> = {
+      LACTEO: 'Lácteos',
+      VERDURA: 'Verduras',
+      CEREAL: 'Cereales',
+      PESCADO: 'Pescado',
+      DULCE: 'Dulces'
     };
 
-    this.shoppingList.set(list);
+    return (
+      labels[category] ??
+      category
+        .toLowerCase()
+        .replace(/_/g, ' ')
+        .replace(/^\w/, (letter) => letter.toUpperCase())
+    );
   }
 
   toggleCategory(categoryId: number): void {
@@ -149,6 +157,7 @@ export class ShoppingListStore {
       }))
     });
   }
+
 
   unmarkAll(): void {
     const list = this.shoppingList();
