@@ -5,12 +5,20 @@
   ></app-search-bar>
 
   <div class="topbar__actions">
-    <ui-button routerLink="/recipes/create">Nueva receta</ui-button>
-    <app-avatar-cell
-      [name]="(user$ | async)?.username ?? 'Guest'"
-      [img]="(user$ | async)?.avatar ?? '/img/avatar.jpg'"
-    />
+    <ui-button routerLink="/recipes/create" [icon]="'add'">Nueva receta</ui-button>
 
-    <span class="material-symbols-outlined" (click)="logout()">logout</span>
+    @if (user$ | async; as user) {
+      <app-avatar-cell
+        [name]="user.username"
+        [img]="user.avatar ?? ''"
+      />
+    } @else {
+      <app-avatar-cell
+        name="Guest"
+        img=""
+      />
+    }
+
+    <span class="material-symbols-outlined topbar__logout" (click)="logout()">logout</span>
   </div>
 </header>

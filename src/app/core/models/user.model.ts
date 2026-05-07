@@ -11,3 +11,11 @@ export interface User {
   avatar: string | null;
   stats: UserStats;
 }
+
+export interface UserAuth {
+  id: number;
+  username: string;
+  email: string;
+  avatar: string | null;
+}
+

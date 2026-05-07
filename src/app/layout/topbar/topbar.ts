@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import AuthFacade from '../../features/auth/services/auth-facade';
 import {SearchBar} from '../../shared/components/search-bar/search-bar';
 import {UiButton} from '../../shared/ui/ui-button/ui-button';
 import {Router, RouterLink} from '@angular/router';
 import {Observable} from 'rxjs';
-import {User} from '../../core/models/user.model';
+import {UserAuth} from '../../core/models/user.model';
 import {AvatarCell} from '../../shared/components/avatar-cell/avatar-cell';
 import {AsyncPipe} from '@angular/common';
 
@@ -15,16 +15,19 @@ import {AsyncPipe} from '@angular/common';
     UiButton,
     RouterLink,
     AvatarCell,
-    AsyncPipe
+    AsyncPipe,
   ],
   templateUrl: './topbar.html',
   styleUrl: './topbar.scss',
 })
 export class Topbar {
-  protected user$: Observable<User | null>;
+  protected user$: Observable<UserAuth | null>;
 
-  constructor(private authFacade: AuthFacade, private router: Router) {
-   this.user$ = this.authFacade.getCurrentUser();
+  constructor(
+    private authFacade: AuthFacade,
+    private router: Router
+  ) {
+    this.user$ = this.authFacade.getCurrentUser();
   }
 
   async logout(): Promise<void> {
@@ -35,7 +38,7 @@ export class Topbar {
     if (!value) return;
 
     this.router.navigate(['/recipes'], {
-      queryParams: { search: value }
+      queryParams: {search: value}
     });
   }
 }

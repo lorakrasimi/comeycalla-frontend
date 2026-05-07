@@ -10,7 +10,7 @@
         class="sidebar__link"
         [routerLink]="item.path"
         routerLinkActive="sidebar__link--active"
-        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActiveOptions]="{ exact: item.exact }"
       >
         <span class="material-symbols-outlined">{{item.icon}}</span>
         {{ item.label }}

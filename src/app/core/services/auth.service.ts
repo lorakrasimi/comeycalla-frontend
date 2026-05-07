@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from '../models/user.model';
+import {UserAuth} from '../models/user.model';
 import {BehaviorSubject, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {AuthResponse, LoginRequest, RegisterRequest} from '../models/auth.model';
@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  private userSubject = new BehaviorSubject<User | null>(null);
+  private userSubject = new BehaviorSubject<UserAuth | null>(null);
   user$ = this.userSubject.asObservable();
 
 
@@ -36,54 +36,22 @@ export class AuthService {
     return !!localStorage.getItem(this.tokenKey);
   }
 
-  setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  }
-
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem('auth_user');
     this.userSubject.next(null);
   }
 
-  setUser(user: User): void {
-    this.userSubject.next(user);
-  }
-
-  getUser(): User | null {
-    return this.userSubject.value;
-
-  }
-
   private saveSession(response: AuthResponse): void {
-    const user: User = {
+    const user: UserAuth = {
       id: response.userId,
       username: response.username,
       email: response.email,
-      avatar: '/img/avatar-default.png',
-      stats: {
-        savedRecipes: 0,
-        createdMenus: 0,
-        cookedRecipes: 0,
-      },
+      avatar: response.avatar,
     };
 
     localStorage.setItem(this.tokenKey, response.token);
     localStorage.setItem(this.userKey, JSON.stringify(user));
     this.userSubject.next(user);
-  }
-
-  private loadUserFromStorage(): User | null {
-    const user = localStorage.getItem(this.userKey);
-
-    if (!user) {
-      return null;
-    }
-
-    return JSON.parse(user);
   }
 }
