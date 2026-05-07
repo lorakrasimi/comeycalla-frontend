@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import {CommonModule} from '@angular/common';
+import {Component, OnInit, inject, signal} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {finalize} from 'rxjs';
 
-import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
-import { UiLoader } from '../../../../shared/ui/ui-loader/ui-loader';
-import { AvatarCell } from '../../../../shared/components/avatar-cell/avatar-cell';
-import { ProfileStore } from '../../services/profile-store';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
+import {UiLoader} from '../../../../shared/ui/ui-loader/ui-loader';
+import {AvatarCell} from '../../../../shared/components/avatar-cell/avatar-cell';
+import {ProfileStore} from '../../services/profile-store';
 
 @Component({
   selector: 'app-profile-edit-page',
@@ -72,11 +72,7 @@ export class ProfileEditPage implements OnInit {
     this.avatarFile = file;
     this.removeAvatar = false;
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.avatarUrl = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+    this.avatarUrl = URL.createObjectURL(file);
   }
 
   protected onAvatarRemoved(): void {
@@ -93,10 +89,10 @@ export class ProfileEditPage implements OnInit {
 
     this.submitting.set(true);
 
-    this.profileStore.updateProfile({
-      ...this.form.getRawValue(),
-      avatarUrl: this.avatarUrl
-    })
+    this.profileStore.updateProfile(
+      this.form.getRawValue(),
+      this.avatarFile
+    )
       .pipe(finalize(() => this.submitting.set(false)))
       .subscribe(() => {
         this.router.navigate(['/profile']);

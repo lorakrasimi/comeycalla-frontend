@@ -38,10 +38,10 @@
   white-space: nowrap;
 }
 
-.shopping-item__remove-button {
+.shopping-item-row__remove-button {
   border: 0;
   background: transparent;
-  color: #d66c7a;
+  color: var(--color-error);
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;

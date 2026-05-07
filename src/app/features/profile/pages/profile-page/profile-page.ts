@@ -27,7 +27,9 @@ export class ProfilePage implements OnInit {
   ngOnInit(): void {
     this.profileStore.loadProfile()
       .pipe(finalize(() => this.loading.set(false)))
-      .subscribe();
+      .subscribe({
+        error: () => this.loading.set(false)
+      });
   }
 
   protected goBack(): void {

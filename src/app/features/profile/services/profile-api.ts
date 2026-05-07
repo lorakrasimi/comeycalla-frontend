@@ -1,38 +1,38 @@
 import {Injectable} from '@angular/core';
-import {delay, Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {User} from '../../../core/models/user.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileApi {
+  private readonly baseUrl = 'http://localhost:8080/api/users/profile';
+
+  constructor(private http: HttpClient) {}
+
   getProfile(): Observable<User> {
-    return of({
-      id: 1,
-      username: 'Usuario Demo',
-      email: 'usuario@comeycalla.com',
-      bio: 'Amante de la cocina italiana y la repostería',
-      avatar: null,
-      stats: {
-        savedRecipes: 24,
-        createdMenus: 8,
-        cookedRecipes: 156
-      }
-    }).pipe(delay(300));
+    return this.http.get<User>(this.baseUrl);
   }
 
-  updateProfile(payload: Partial<User>): Observable<User> {
-    return of({
-      id: 1,
-      username: payload.username ?? 'Usuario Demo',
-      email: payload.email ?? 'usuario@comeycalla.com',
-      avatar: payload.avatar ?? null,
-      stats: {
-        savedRecipes: 24,
-        createdMenus: 8,
-        cookedRecipes: 156
-      }
-    }).pipe(delay(300));
-  }
+  updateProfile(payload: Partial<User>, avatarFile?: File | null): Observable<User> {
+    const formData = new FormData();
 
+    formData.append(
+      'profile',
+      new Blob([JSON.stringify({
+        username: payload.username,
+        email: payload.email
+      })], { type: 'application/json' })
+    );
+
+    if (avatarFile) {
+      formData.append('avatar', avatarFile);
+    }
+
+    return this.http.put<User>(
+      this.baseUrl,
+      formData
+    );
+  }
 }

@@ -9,10 +9,14 @@ import {Observable, tap} from 'rxjs';
 export class MealPlanStore {
   readonly currentPlan = signal<MealPlan | null>(null);
 
-  constructor(private readonly mealPlanApi: MealPlanApi) {}
+  constructor(private readonly mealPlanApi: MealPlanApi) {
+  }
 
-
-  generateMealPlan(config: { days: number; meals: string[]; excludeRepeatedRecipes: boolean }):  Observable<MealPlan> {
+  generateMealPlan(config: {
+    days: number;
+    meals: string[];
+    excludeRepeatedRecipes: boolean,
+  }): Observable<MealPlan> {
     return this.mealPlanApi.generateMealPlan(config).pipe(
       tap((plan: MealPlan) => this.currentPlan.set(plan))
     );
@@ -20,9 +24,5 @@ export class MealPlanStore {
 
   setPlan(plan: MealPlan): void {
     this.currentPlan.set(plan);
-  }
-
-  clearPlan(): void {
-    this.currentPlan.set(null);
   }
 }

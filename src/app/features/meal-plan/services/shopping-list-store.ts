@@ -60,7 +60,6 @@ export class ShoppingListStore {
     }
 
     let itemId = 1;
-    console.log(response);
     const categories: ShoppingListCategory[] = response.map((backendCategory, index) => ({
       id: index + 1,
       title: this.formatCategoryName(backendCategory.category),

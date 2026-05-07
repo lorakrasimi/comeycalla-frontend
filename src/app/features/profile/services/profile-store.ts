@@ -17,9 +17,7 @@ export class ProfileStore {
     );
   }
 
-  updateProfile(payload: Partial<User>): Observable<User> {
-    return this.profileApi.updateProfile(payload).pipe(
-      tap((profile) => this.profile.set(profile))
-    );
+  updateProfile(payload: any, avatarFile?: File | null) {
+    return this.profileApi.updateProfile(payload, avatarFile);
   }
 }
