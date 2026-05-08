@@ -52,12 +52,10 @@
       ¿Olvidaste tu contraseña?
     </a>
 
-    <button class="auth-button" type="submit" [disabled]="isSubmitting">
+   <button class="auth-button" type="submit" [disabled]="isSubmitting">
       {{ isSubmitting ? 'Entrando...' : 'Iniciar sesión' }}
     </button>
 
-    <a class="signing-link" routerLink="/register">
-      Crear cuenta
-    </a>
+    <ui-button [variant]="'ghost'" routerLink="/register">Crear cuenta</ui-button>
   </form>
 </app-auth-form>

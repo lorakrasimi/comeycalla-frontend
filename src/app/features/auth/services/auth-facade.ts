@@ -1,39 +1,50 @@
-import {Injectable} from '@angular/core';
-import {AuthService} from '../../../core/services/auth.service';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthFacade {
+class AuthFacade {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {
+  ) {}
+
+  async login(email: string, password: string): Promise<string | null> {
+    try {
+      await firstValueFrom(
+        this.authService.login({ email, password })
+      );
+
+      await this.router.navigate(['/dashboard']);
+      return null;
+
+    } catch (error: any) {
+      if (error?.status === 403) {
+        return 'Credenciales incorrectas.';
+      }
+      return error?.userMessage ?? 'Ha ocurrido un error inesperado.';
+    }
   }
 
-  //TODO: arreglar cuando esté el backend
-  async login(email: string, password: string): Promise<boolean> {
-    // Simulación hasta tener backend
-    if (email === 'test@test.com' && password === '123456') {
-      this.authService.setToken('fake-token');
+  async register(username: string, email: string, password: string): Promise<boolean> {
+    try {
+      await firstValueFrom(
+        this.authService.register({
+          username,
+          email,
+          password,
+        })
+      );
+
       await this.router.navigate(['/dashboard']);
       return true;
-    }
-
-    return false;
-  }
-
-  //TODO: arreglar cuando esté el backend
-  async register(email: string, password: string): Promise<boolean> {
-    if (!email || !password) {
+    } catch {
       return false;
     }
-
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    await this.router.navigate(['/login']);
-
-    return true;
   }
 
   async logout(): Promise<void> {
@@ -52,4 +63,10 @@ export class AuthFacade {
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
+
+  getCurrentUser() {
+    return this.authService.user$;
+  }
 }
+
+export default AuthFacade;

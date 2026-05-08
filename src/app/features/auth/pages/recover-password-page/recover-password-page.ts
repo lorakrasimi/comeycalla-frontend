@@ -6,11 +6,12 @@ import {
 } from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
-import {AuthFacade} from '../../services/auth-facade';
+import AuthFacade from '../../services/auth-facade';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 
 @Component({
   selector: 'app-recover-password-page',
-  imports: [ReactiveFormsModule, RouterLink, AuthForm],
+  imports: [ReactiveFormsModule, RouterLink, AuthForm, UiButton],
   templateUrl: './recover-password-page.html',
   styleUrl: './recover-password-page.scss',
 })
