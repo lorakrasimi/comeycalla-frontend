@@ -24,7 +24,7 @@ export class RecipeCard {
   @Input() description?: string = '';
   @Input() servings: number = 0;
   @Input() tags?: string[] = [];
-  @Input()  showTags = true;
+  @Input() showTags = true;
 
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
 
