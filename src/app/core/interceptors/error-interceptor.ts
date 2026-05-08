@@ -1,9 +1,10 @@
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
+import {catchError, throwError} from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
+      console.log(error);
       let message = 'Ha ocurrido un error inesperado.';
 
       if (error.status === 0) {
@@ -11,7 +12,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       } else if (error.status === 401) {
         message = 'Sesión caducada. Inicia sesión de nuevo.';
       } else if (error.status === 403) {
-        message = 'No tienes permisos para realizar esta acción.';
+        error.error.message ? message = error.error.message : message = 'No tienes permisos para realizar esta acción.';
       } else if (error.status >= 500) {
         message = 'Error del servidor. Inténtalo más tarde.';
       } else if (error.error?.message) {

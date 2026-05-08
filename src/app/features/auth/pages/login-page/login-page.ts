@@ -27,7 +27,6 @@ export class LoginPage {
   constructor(private authFacade: AuthFacade) {
   }
 
-
   isSubmitting = false;
   serverError = '';
 
@@ -51,7 +50,6 @@ export class LoginPage {
     }
 
     this.isSubmitting = true;
-    this.serverError = '';
     // Used because Angular was not automatically updating the view after async login,
     // so I manually trigger change detection to reflect updated state (error/loading)
     this.cdr.markForCheck();

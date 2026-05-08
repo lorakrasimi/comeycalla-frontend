@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {AuthService} from '../../../core/services/auth.service';
+import {Router} from '@angular/router';
+import {firstValueFrom} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
@@ -11,26 +11,24 @@ class AuthFacade {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   async login(email: string, password: string): Promise<string | null> {
     try {
       await firstValueFrom(
-        this.authService.login({ email, password })
+        this.authService.login({email, password})
       );
 
       await this.router.navigate(['/dashboard']);
       return null;
 
     } catch (error: any) {
-      if (error?.status === 403) {
-        return 'Credenciales incorrectas.';
-      }
       return error?.userMessage ?? 'Ha ocurrido un error inesperado.';
     }
   }
 
-  async register(username: string, email: string, password: string): Promise<boolean> {
+  async register(username: string, email: string, password: string): Promise<string | null> {
     try {
       await firstValueFrom(
         this.authService.register({
@@ -41,9 +39,9 @@ class AuthFacade {
       );
 
       await this.router.navigate(['/dashboard']);
-      return true;
-    } catch {
-      return false;
+      return null;
+    } catch (error: any) {
+      return error?.userMessage ?? 'Ha ocurrido un error inesperado.';
     }
   }
 
