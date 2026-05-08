@@ -28,4 +28,9 @@ export class RecipeCard {
 
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
 
+  onImgError(event: Event): void {
+    const imgEl = event.target as HTMLImageElement;
+    imgEl.src = '/img/generic-recipe-img.jpg';
+  }
+
 }
