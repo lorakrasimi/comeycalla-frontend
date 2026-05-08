@@ -1,6 +1,5 @@
 <div class="recent-recipes-carousel">
   <h2 class="recent-recipes-carousel__title">Tus últimas recetas</h2>
-  @if (recipes().length > 0) {
     <div class="recent-recipes-carousel__content">
       <button
         class="recent-recipes-carousel__nav-button recent-recipes-carousel__nav-button--left"
@@ -8,7 +7,7 @@
         aria-label="Ver recetas anteriores"
         (click)="scrollLeft()"
       >
-        <span class="material-symbols-outlined ">arrow_back_ios</span>
+        <span class="material-symbols-outlined recent-recipes-carousel__nav-button-circle">arrow_back_ios</span>
       </button>
 
 
@@ -34,10 +33,7 @@
         aria-label="Ver siguientes recetas"
         (click)="scrollRight()"
       >
-        <span class="material-symbols-outlined ">arrow_forward_ios</span>
+        <span class="material-symbols-outlined recent-recipes-carousel__nav-button-circle">arrow_forward_ios</span>
       </button>
     </div>
-  } @else {
-    <ui-empty-state></ui-empty-state>
-  }
 </div>

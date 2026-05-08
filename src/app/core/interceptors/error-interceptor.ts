@@ -4,7 +4,6 @@ import {catchError, throwError} from 'rxjs';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      console.log(error);
       let message = 'Ha ocurrido un error inesperado.';
 
       if (error.status === 0) {

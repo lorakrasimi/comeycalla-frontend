@@ -6,7 +6,11 @@
       {{ recipe?.title }}
     </h2>
 
-    <div class="featured-recipe-card__meta">
+    <p class="featured-recipe-card__description">
+      {{ recipe?.description }}
+    </p>
+
+    <div>
       <span class="featured-recipe-card__time">
         <span class="material-symbols-outlined">timer</span>
         {{ recipe?.cookingTime }} min

@@ -39,7 +39,6 @@
   right: -22px;
 }
 
-
 .recent-recipes-carousel__nav-button:focus-visible {
   outline: 0;
   box-shadow: 0 0 0 3px rgba(217, 75, 104, 0.16);
@@ -62,6 +61,16 @@
 .recent-recipes-carousel__slide {
   flex: 0 0 240px;
   scroll-snap-align: start;
+}
+
+.recent-recipes-carousel__nav-button-circle {
+  padding: 8px;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 900px) {

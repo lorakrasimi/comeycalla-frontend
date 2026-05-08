@@ -3,12 +3,14 @@ import {FeaturedRecipeCard} from '../../components/featured-recipe-card/featured
 import {RecentRecipesCarousel} from '../../components/recent-recipes-grid/recent-recipes-carousel';
 import {Recipe} from '../../../../core/models/recipe.model';
 import {RecipesApi} from '../../../recipes/services/recipes-api';
+import {UiEmptyState} from '../../../../shared/ui/ui-empty-state/ui-empty-state';
 
 @Component({
   selector: 'app-dashboard-page',
   imports: [
     FeaturedRecipeCard,
-    RecentRecipesCarousel
+    RecentRecipesCarousel,
+    UiEmptyState
   ],
   templateUrl: './dashboard-page.html',
   styleUrl: './dashboard-page.scss',
@@ -20,8 +22,20 @@ export class DashboardPage implements OnInit {
   constructor(private recipesApi: RecipesApi) {}
 
   ngOnInit(): void {
+    this.getRandomRecipe();
     this.getLastRecipes();
-    this.getFeaturedRecipe();
+  }
+
+  private getRandomRecipe(): void {
+    this.recipesApi.getRandomRecipe().subscribe({
+      next: (recipe) => {
+        this.featuredRecipe = recipe;
+      },
+      error: (error) => {
+        console.error(error);
+        this.featuredRecipe = undefined;
+      }
+    });
   }
 
   private getLastRecipes(): void {
@@ -32,18 +46,6 @@ export class DashboardPage implements OnInit {
       error: (error) => {
         console.error(error);
         this.recipes.set([]);
-      }
-    });
-  }
-
-  private getFeaturedRecipe(): void {
-    this.recipesApi.getRandomRecipe().subscribe({
-      next: (recipe) => {
-        this.featuredRecipe = recipe;
-      },
-      error: (error) => {
-        console.error(error);
-        this.featuredRecipe = undefined;
       }
     });
   }
