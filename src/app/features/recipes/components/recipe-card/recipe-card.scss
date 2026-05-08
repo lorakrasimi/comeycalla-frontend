@@ -9,7 +9,7 @@
 
 .recipe-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .recipe-card__media {
@@ -81,7 +81,7 @@
   margin-top: auto;
 }
 
-.recipe-card__timer,
+.recipe-card__time,
 .recipe-card__servings {
   display: flex;
   align-items: center;

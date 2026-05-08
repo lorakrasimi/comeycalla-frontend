@@ -19,7 +19,7 @@ export class RecipeCard {
   @Input() title: string = '';
   @Input() img?: string;
   @Input() category: string = '';
-  @Input() time: string = '';
+  @Input() cookingTime: string = '';
 
   @Input() description?: string = '';
   @Input() servings: number = 0;
