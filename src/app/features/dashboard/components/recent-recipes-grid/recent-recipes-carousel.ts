@@ -1,12 +1,11 @@
 import {Component, ElementRef, input, viewChild} from '@angular/core';
 import {RecipeCard} from '../../../recipes/components/recipe-card/recipe-card';
 import {Recipe} from '../../../../core/models/recipe.model';
-import {UiEmptyState} from '../../../../shared/ui/ui-empty-state/ui-empty-state';
 
 @Component({
   selector: 'app-recent-recipes-carousel',
   standalone: true,
-  imports: [RecipeCard, UiEmptyState],
+  imports: [RecipeCard],
   templateUrl: './recent-recipes-carousel.html',
   styleUrl: './recent-recipes-carousel.scss',
 })

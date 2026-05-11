@@ -1,7 +1,7 @@
 <form class="recipe-filters" role="search">
   <app-search-bar
     [variant]="'secondary'"
-    [placeholder]="'Buscar por nombre o ingrediente...'"
+    [placeholder]="'Buscar por nombre...'"
     [trigger]="'input'"
     (search)="onSearchChange($event)"
   ></app-search-bar>
@@ -9,7 +9,7 @@
   <ui-select
     [variant]="'secondary'"
     [options]="categoryOptions"
-    [placeholder]="'Todos los tipos'"
+    [placeholder]="'Todas las categorías'"
     (valueChange)="onCategoryChange($event)"
   ></ui-select>
 

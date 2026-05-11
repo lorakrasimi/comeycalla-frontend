@@ -10,6 +10,7 @@ export type RecipeImportStatus =
 
 export interface RecipeImportState {
   images: RecipeImportImage[];
+  recipeUrl: string;
   status: RecipeImportStatus;
   extractedRecipe: ExtractedRecipe | null;
   error: string | null;
@@ -17,6 +18,7 @@ export interface RecipeImportState {
 
 const initialState: RecipeImportState = {
   images: [],
+  recipeUrl: '',
   status: 'idle',
   extractedRecipe: null,
   error: null,
@@ -32,6 +34,7 @@ export class RecipeImportStore {
   readonly status = () => this.state().status;
   readonly extractedRecipe = () => this.state().extractedRecipe;
   readonly error = () => this.state().error;
+  readonly recipeUrl = () => this.state().recipeUrl;
 
   setFiles(files: File[]): void {
     this.clearPreviewUrls();
@@ -44,6 +47,7 @@ export class RecipeImportStore {
 
     this.state.set({
       images,
+      recipeUrl: '',
       status: images.length > 0 ? 'ready' : 'idle',
       extractedRecipe: null,
       error: null,
@@ -125,6 +129,18 @@ export class RecipeImportStore {
   private clearPreviewUrls(): void {
     this.state().images.forEach((image) => {
       URL.revokeObjectURL(image.previewUrl);
+    });
+  }
+
+  setRecipeUrl(url: string): void {
+    this.clearPreviewUrls();
+
+    this.state.set({
+      images: [],
+      recipeUrl: url,
+      status: url ? 'ready' : 'idle',
+      extractedRecipe: null,
+      error: null,
     });
   }
 }

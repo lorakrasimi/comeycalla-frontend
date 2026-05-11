@@ -10,6 +10,7 @@ import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {UiLoader} from '../../../../shared/ui/ui-loader/ui-loader';
 import {UiChip} from '../../../../shared/ui/ui-chip/ui-chip';
 import {RecipeDetail} from '../../../../core/models/recipe-detail.model';
+import {ConfirmDialog} from '../../../../shared/ui/ui-confirm-dialog/ui-confirm-dialog';
 
 @Component({
   selector: 'app-recipe-detail-page',
@@ -19,7 +20,8 @@ import {RecipeDetail} from '../../../../core/models/recipe-detail.model';
     RouterLink,
     UiButton,
     UiLoader,
-    UiChip
+    UiChip,
+    ConfirmDialog
   ],
   templateUrl: './recipe-detail-page.html',
   styleUrl: './recipe-detail-page.scss'
@@ -29,6 +31,7 @@ export class RecipeDetailPage implements OnInit {
   protected readonly recipe = signal<RecipeDetail | null>(null);
 
   private recipeId!: number;
+  protected showConfirm = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,13 +53,12 @@ export class RecipeDetailPage implements OnInit {
     this.loadRecipe();
   }
 
-  protected onDelete(): void {
-    //TODO create toast
-    const confirmed = window.confirm('¿Seguro que quieres eliminar esta receta?');
+  onDeleteClick() {
+    this.showConfirm = true;
+  }
 
-    if (!confirmed) {
-      return;
-    }
+  protected deleteRecipe(): void {
+    this.showConfirm = false;
 
     this.recipesApi.deleteRecipe(this.recipeId).subscribe({
       next: () => {
