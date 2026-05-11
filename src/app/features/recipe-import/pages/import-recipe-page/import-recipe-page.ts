@@ -22,6 +22,7 @@ export class ImportRecipePage {
   recipeUrl = '';
   urlErrorMessage = '';
   imageErrorMessage = '';
+  previewImageUrl: string | null = null;
 
   constructor(
     private router: Router,
@@ -111,5 +112,13 @@ export class ImportRecipePage {
   onClearImages(): void {
     this.importStore.clearImages();
     this.imageErrorMessage = '';
+  }
+
+  onOpenPreview(url: string): void {
+    this.previewImageUrl = url;
+  }
+
+  onClosePreview(): void {
+    this.previewImageUrl = null;
   }
 }
