@@ -22,6 +22,16 @@
   border: 0.5px solid var(--color-primary);
 }
 
+.search-bar-primary:focus-within {
+  border: 2px solid var(--color-primary-hover);
+}
+
+
 .search-bar-secondary {
   border: 2px solid var(--color-tertiary);
 }
+
+.search-bar-secondary:focus-within {
+  border: 2px solid var(--color-tertiary-hover);;
+}
+

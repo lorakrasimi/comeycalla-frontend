@@ -68,15 +68,6 @@
   <section class="recipe-form__section">
     <div class="recipe-form__section-header">
       <h4 class="recipe-form__section-title">Ingredientes</h4>
-
-      <ui-button
-        [variant]="'outline'"
-        [icon]="'add'"
-        [size]="'sm'"
-        (click)="addIngredient()"
-      >
-        Añadir ingrediente
-      </ui-button>
     </div>
 
     <div formArrayName="ingredients" class="recipe-form__list">
@@ -97,21 +88,23 @@
           </button>
         </div>
       }
+      <div class="recipe-form__add-button">
+        <ui-button
+          [variant]="'outline'"
+          [icon]="'add'"
+          [size]="'sm'"
+          (click)="addIngredient()"
+        >
+          Añadir ingrediente
+        </ui-button>
+      </div>
+
     </div>
   </section>
 
   <section class="recipe-form__section">
     <div class="recipe-form__section-header">
       <h4 class="recipe-form__section-title">Pasos de preparación</h4>
-
-      <ui-button
-        [variant]="'outline'"
-        [icon]="'add'"
-        [size]="'sm'"
-        (click)="addStep()"
-      >
-        Añadir paso
-      </ui-button>
     </div>
 
     <div formArrayName="steps" class="recipe-form__list">
@@ -137,8 +130,17 @@
         </div>
       }
     </div>
+    <div class="recipe-form__add-button">
+      <ui-button
+        [variant]="'outline'"
+        [icon]="'add'"
+        [size]="'sm'"
+        (click)="addStep()"
+      >
+        Añadir paso
+      </ui-button>
+    </div>
   </section>
-
   <div class="recipe-form__actions">
     <ui-button
       [variant]="'ghost'"

@@ -13,6 +13,6 @@ export interface RecipeFormValue {
   servings: number | null;
   category: string;
   tags: string[];
-  ingredients: RecipeFormIngredient[];
-  steps: RecipeFormStep[];
+  ingredients: RecipeFormIngredient[] | null;
+  steps: RecipeFormStep[] | null;
 }

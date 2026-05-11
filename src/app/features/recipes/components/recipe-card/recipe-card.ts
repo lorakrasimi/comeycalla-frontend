@@ -19,13 +19,18 @@ export class RecipeCard {
   @Input() title: string = '';
   @Input() img?: string;
   @Input() category: string = '';
-  @Input() time: string = '';
+  @Input() cookingTime: string = '';
 
   @Input() description?: string = '';
   @Input() servings: number = 0;
   @Input() tags?: string[] = [];
-  @Input()  showTags = true;
+  @Input() showTags = true;
 
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
+
+  onImgError(event: Event): void {
+    const imgEl = event.target as HTMLImageElement;
+    imgEl.src = '/img/generic-recipe-img.jpg';
+  }
 
 }

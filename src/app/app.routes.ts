@@ -93,8 +93,8 @@ export const appRoutes: Routes = [
                     path: '',
                     loadComponent: () =>
                       import(
-                        './features/recipe-import/pages/import-from-image-page/import-from-image-page'
-                        ).then((m) => m.ImportFromImagePage),
+                        './features/recipe-import/pages/import-from-image-page/import-recipe-page'
+                        ).then((m) => m.ImportRecipePage),
                   },
                   {
                     path: 'processing',

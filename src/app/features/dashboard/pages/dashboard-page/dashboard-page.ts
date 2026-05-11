@@ -3,12 +3,14 @@ import {FeaturedRecipeCard} from '../../components/featured-recipe-card/featured
 import {RecentRecipesCarousel} from '../../components/recent-recipes-grid/recent-recipes-carousel';
 import {Recipe} from '../../../../core/models/recipe.model';
 import {RecipesApi} from '../../../recipes/services/recipes-api';
+import {UiEmptyState} from '../../../../shared/ui/ui-empty-state/ui-empty-state';
 
 @Component({
   selector: 'app-dashboard-page',
   imports: [
     FeaturedRecipeCard,
-    RecentRecipesCarousel
+    RecentRecipesCarousel,
+    UiEmptyState
   ],
   templateUrl: './dashboard-page.html',
   styleUrl: './dashboard-page.scss',

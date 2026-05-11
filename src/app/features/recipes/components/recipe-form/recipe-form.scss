@@ -130,6 +130,11 @@
   padding: 6px;
 }
 
+.recipe-form__add-button{
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 900px) {
   .recipe-form__top {
     grid-template-columns: 1fr;

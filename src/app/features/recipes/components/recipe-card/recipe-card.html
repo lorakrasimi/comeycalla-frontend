@@ -4,8 +4,11 @@
       class="recipe-card__image"
       [src]="img"
       [alt]="title"
+      (error)="onImgError($event)"
     />
-    <ui-chip class="recipe-card__chip">{{ category }}</ui-chip>
+    @if (category) {
+      <ui-chip class="recipe-card__chip">{{ category }}</ui-chip>
+    }
   </div>
 
   <div class="recipe-card__content">
@@ -26,14 +29,18 @@
     }
     <div class="recipe-card__meta">
       <div class="recipe-card__meta-left">
-    <span class="recipe-card__time">
+        @if (cookingTime) {
+          <span class="recipe-card__time">
       <span class="material-symbols-outlined">timer</span>
-      {{ time }}
+            {{ cookingTime }}
     </span>
-        <span class="recipe-card__servings">
-      <span class="material-symbols-outlined">person</span>
-          {{ servings }}
-    </span>
+        }
+        @if (servings) {
+          <span class="recipe-card__servings">
+           <span class="material-symbols-outlined">person</span>
+            {{ servings }}
+          </span>
+        }
       </div>
 
       <ui-button

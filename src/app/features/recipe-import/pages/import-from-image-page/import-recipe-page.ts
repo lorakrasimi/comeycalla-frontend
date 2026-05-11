@@ -8,16 +8,19 @@ import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
   selector: 'app-import-from-image-page',
   standalone: true,
   imports: [ImageDropzone, UiButton],
-  templateUrl: './import-from-image-page.html',
-  styleUrl: './import-from-image-page.scss',
+  templateUrl: './import-recipe-page.html',
+  styleUrl: './import-recipe-page.scss',
 })
-export class ImportFromImagePage {
+export class ImportRecipePage {
   readonly sectionOptions = [
     { value: 'main', label: 'Título, descripción y datos' },
     { value: 'ingredients', label: 'Ingredientes' },
     { value: 'steps', label: 'Pasos' },
     { value: 'cover', label: 'Imagen de la receta' }
   ] as const;
+
+  recipeUrl = '';
+  urlErrorMessage = '';
 
   constructor(
     private router: Router,
@@ -37,11 +40,32 @@ export class ImportFromImagePage {
     this.importStore.removeImage(index);
   }
 
-  onProcessRecipe(): void {
+  onProcessImageRecipe(): void {
     if (this.importStore.images().length === 0) {
       return;
     }
 
     this.router.navigate(['/recipes/create/image/processing']);
+  }
+
+  onRecipeUrlChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.recipeUrl = input.value;
+    this.urlErrorMessage = '';
+  }
+
+  onProcessUrlRecipe(): void {
+    const url = this.recipeUrl.trim();
+
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      this.urlErrorMessage = 'Introduce una URL válida.';
+      return;
+    }
+
+    this.importStore.setRecipeUrl(url);
+
+    this.router.navigate(['/recipes/create/image/processing'], {
+      queryParams: { source: 'url' }
+    });
   }
 }

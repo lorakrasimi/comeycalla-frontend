@@ -23,10 +23,11 @@
 
   /* Brand colors */
   --color-primary: #D12F41;
-  --color-primary-hover: #c43f5c;
-  --color-secondary: #FF6900;
-  --color-secondary-hover: #FF6900;
+  --color-primary-hover: #851438;
+  --color-secondary: #E5621C;
+  --color-secondary-hover: #BB5016;
   --color-tertiary: #BEDBFF;
+  --color-tertiary-hover: #8ABEFF;
 
   /* Backgrounds */
   --color-background: #F9E1EE;
@@ -195,7 +196,6 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 3px rgba(217, 75, 104, 0.12);
 }
 
 textarea {

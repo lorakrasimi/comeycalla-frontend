@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RecipeRequest } from '../../../core/models/recipe.model';
+import {Injectable} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RecipeRequest} from '../../../core/models/recipe.model';
 import {RecipeFormValue} from '../../../core/models/recipe-form.model';
 
 @Injectable({
@@ -50,8 +50,8 @@ export class RecipeFormMapper {
     ingredientsArray.clear();
     stepsArray.clear();
 
-    const ingredients = recipe.ingredients?.length ? recipe.ingredients : [{ name: '' }];
-    const steps = recipe.steps?.length ? recipe.steps : [{ description: '' }];
+    const ingredients = recipe.ingredients?.length ? recipe.ingredients : [{name: ''}];
+    const steps = recipe.steps?.length ? recipe.steps : [{description: ''}];
 
     for (const ingredient of ingredients) {
       ingredientsArray.push(this.createIngredientGroup(ingredient.name ?? ingredient));
@@ -63,6 +63,18 @@ export class RecipeFormMapper {
   }
 
   toCreatePayload(formValue: RecipeFormValue): RecipeRequest {
+    const ingredients = (formValue.ingredients ?? [])
+      .map((ingredient) => ({
+        name: ingredient.name.trim(),
+      }))
+      .filter((ingredient) => ingredient.name);
+
+    const steps = (formValue.steps ?? [])
+      .map((step) => ({
+        description: step.description.trim(),
+      }))
+      .filter((step) => step.description);
+
     return {
       title: formValue.title,
       description: formValue.description ?? '',
@@ -71,12 +83,8 @@ export class RecipeFormMapper {
       servings: formValue.servings,
       difficulty: 'easy',
       category: formValue.category,
-      ingredients: formValue.ingredients.map((ingredient) => ({
-        name: ingredient.name,
-      })),
-      steps: formValue.steps.map((step) => ({
-        description: step.description,
-      })),
+      ingredients: ingredients.length ? ingredients : null,
+      steps: steps.length ? steps : null,
       tags: formValue.tags ?? [],
     };
   }

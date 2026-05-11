@@ -54,8 +54,8 @@ export interface RecipeRequest {
   servings: number | null;
   difficulty: Difficulty;
   category: string;
-  ingredients: { name: string }[];
-  steps: { description: string }[];
+  ingredients: { name: string }[] | null;
+  steps: { description: string }[] | null;
   tags: string[];
 }
 

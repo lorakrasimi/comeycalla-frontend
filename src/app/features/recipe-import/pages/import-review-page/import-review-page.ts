@@ -1,5 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, OnInit, inject, signal} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {
   FormArray,
   FormBuilder,
@@ -7,13 +7,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
-import { UiButton } from '../../../../shared/ui/ui-button/ui-button';
-import { RecipeImportStore } from '../../services/recipe-import-store';
-import { RecipesApi } from '../../../recipes/services/recipes-api';
-import { RecipeFormComponent } from '../../../recipes/components/recipe-form/recipe-form';
-import { Difficulty } from '../../../../core/models/recipe.model';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
+import {RecipeImportStore} from '../../services/recipe-import-store';
+import {RecipesApi} from '../../../recipes/services/recipes-api';
+import {RecipeFormComponent} from '../../../recipes/components/recipe-form/recipe-form';
+import {Difficulty} from '../../../../core/models/recipe.model';
 import {RecipeFormMapper} from '../../../recipes/services/recipe-form-mapper';
 
 @Component({
@@ -34,7 +34,6 @@ export class ImportReviewPage implements OnInit {
     private recipesApi: RecipesApi,
     private recipeFormMapper: RecipeFormMapper
   ) {
-    this.imagePreviewUrls.set(this.importStore.previewUrls());
   }
 
   readonly form = this.fb.group({
@@ -45,8 +44,8 @@ export class ImportReviewPage implements OnInit {
     description: this.fb.control<string | null>(null),
     cookingTime: this.fb.control<number | null>(null),
     servings: this.fb.control<number | null>(null),
-    category: this.fb.control<string>('', { nonNullable: true }),
-    tags: this.fb.control<string[]>([], { nonNullable: true }),
+    category: this.fb.control<string>('', {nonNullable: true}),
+    tags: this.fb.control<string[]>([], {nonNullable: true}),
     ingredients: this.fb.array<FormGroup>([]),
     steps: this.fb.array<FormGroup>([]),
   });
@@ -57,6 +56,14 @@ export class ImportReviewPage implements OnInit {
     if (!extractedRecipe) {
       this.router.navigate(['/recipes/create/image']);
       return;
+    }
+
+    const imageUrl = extractedRecipe.img;
+
+    if (imageUrl) {
+      this.imagePreviewUrls.set([imageUrl]);
+    } else {
+      this.imagePreviewUrls.set(this.importStore.previewUrls());
     }
 
     this.form.patchValue({
@@ -159,7 +166,7 @@ export class ImportReviewPage implements OnInit {
     const urls = [...this.imagePreviewUrls()];
     const removedUrl = urls[index];
 
-    if (removedUrl) {
+    if (removedUrl?.startsWith('blob:')) {
       URL.revokeObjectURL(removedUrl);
     }
 
@@ -167,10 +174,11 @@ export class ImportReviewPage implements OnInit {
     this.imagePreviewUrls.set(urls);
   }
 
-
   private revokePreviewUrls(): void {
     this.imagePreviewUrls().forEach((url) => {
-      URL.revokeObjectURL(url);
+      if (url.startsWith('blob:')) {
+        URL.revokeObjectURL(url);
+      }
     });
   }
 }

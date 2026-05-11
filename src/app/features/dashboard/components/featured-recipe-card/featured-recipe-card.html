@@ -6,12 +6,19 @@
       {{ recipe?.title }}
     </h2>
 
-    <div class="featured-recipe-card__meta">
+    <p class="featured-recipe-card__description">
+      {{ recipe?.description }}
+    </p>
+
+    @if(recipe?.cookingTime){
+      <div>
       <span class="featured-recipe-card__time">
         <span class="material-symbols-outlined">timer</span>
         {{ recipe?.cookingTime }} min
       </span>
-    </div>
+      </div>
+
+    }
 
     <ui-button
       [routerLink]="['/recipes', recipe?.id]"

@@ -27,4 +27,11 @@ export class RecipeImportApi {
       formData
     );
   }
+
+  extractRecipeFromUrl(url: string) {
+    return this.http.post<ExtractedRecipe>(
+      `${this.apiUrl}/import-url`,
+      { url }
+    );
+  }
 }

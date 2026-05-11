@@ -21,7 +21,7 @@
 
         <ui-button
           [variant]="'danger'"
-          (click)="onDelete()"
+          (click)="onDeleteClick()"
         >
           Eliminar
         </ui-button>
@@ -118,3 +118,11 @@
     </article>
   }
 </section>
+
+<ui-confirm-dialog
+  [open]="showConfirm"
+  title="¿Eliminar receta?"
+  message="Esta acción no se puede deshacer."
+  (confirm)="deleteRecipe()"
+  (cancel)="showConfirm = false"
+/>

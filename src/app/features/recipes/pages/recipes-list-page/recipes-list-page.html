@@ -13,7 +13,7 @@
         [title]="recipe.title"
         [img]="recipe.img"
         [category]="recipe.category"
-        [time]="recipe.cookingTime"
+        [cookingTime]="recipe.cookingTime"
         [description]="recipe.description"
         [servings]="recipe.servings"
         [tags]="recipe.tags"
@@ -21,24 +21,27 @@
     }
   </section>
   <div class="recipes-list-page__pagination">
-    <ui-button
-      [variant]="'ghost'"
-      [icon]="'arrow_back'"
-      (click)="prevPage()"
-    >
-      Anterior
-    </ui-button>
-
+    @if (page() !== 0) {
+      <ui-button
+        [variant]="'ghost'"
+        [icon]="'arrow_back'"
+        (click)="prevPage()"
+      >
+        Anterior
+      </ui-button>
+    }
     <span class="recipes-list-page__pagination-info">
     Página {{ page() + 1 }} / {{ totalPages() }}
   </span>
 
-    <ui-button
-      [variant]="'ghost'"
-      [icon]="'arrow_forward'"
-      (click)="nextPage()"
-    >
-      Siguiente
-    </ui-button>
+    @if (page() + 1 !== totalPages() ) {
+      <ui-button
+        [variant]="'ghost'"
+        [icon]="'arrow_forward'"
+        (click)="nextPage()"
+      >
+        Siguiente
+      </ui-button>
+    }
   </div>
 </section>
