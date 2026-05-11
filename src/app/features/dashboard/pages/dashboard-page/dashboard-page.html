@@ -1,1 +1,8 @@
-<p>dashboard-page works!</p>
+@if(recipes().length){
+  <app-featured-recipe-card [recipe]="featuredRecipe" />
+  <app-recent-recipes-carousel [recipes]="recipes()" />
+} @else {
+  <ui-empty-state></ui-empty-state>
+}
+
+

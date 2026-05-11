@@ -1,1 +1,13 @@
-<p>ui-confirm-dialog works!</p>
+@if (open) {
+  <div class="overlay" (click)="onCancel()"></div>
+
+  <div class="dialog">
+    <h3 class="dialog__title">{{ title }}</h3>
+    <p class="dialog__message">{{ message }}</p>
+
+    <div class="dialog__actions">
+      <ui-button (click)="onCancel()" [variant]="'ghost'">Cancelar</ui-button>
+      <ui-button (click)="onConfirm()" [variant]="'danger'" [icon]="'delete'">Eliminar</ui-button>
+    </div>
+  </div>
+}

@@ -1,0 +1,68 @@
+<div class="recipe-image-field">
+  <label class="recipe-image-field__label">{{ label }}</label>
+
+  @if (imageUrl) {
+    <div class="recipe-image-field__preview-wrapper">
+      <div
+        class="recipe-image-field__preview"
+        (click)="openPreview()"
+      >
+        <img
+          class="recipe-image-field__image"
+          [src]="imageUrl"
+          alt="Imagen de la receta"
+        />
+      </div>
+
+      <div class="recipe-image-field__actions">
+        <ui-button (click)="triggerFilePicker()" [variant]="'outline'" [size]="'sm'" >Cambiar</ui-button>
+        <ui-button (click)="removeImage()" [variant]="'danger'" [size]="'sm'" >Eliminar</ui-button>
+
+      </div>
+
+      <input
+        #fileInput
+        class="recipe-image-field__input"
+        type="file"
+        accept="image/png,image/jpeg,image/gif,image/webp"
+        (change)="onFileChange($event)"
+      />
+    </div>
+  } @else {
+    <label class="recipe-image-field__upload-card">
+      <div class="recipe-image-field__upload-icon">
+        <span class="material-symbols-outlined">add_photo_alternate</span>
+      </div>
+
+      <span class="recipe-image-field__upload-title">Añadir foto</span>
+      <span class="recipe-image-field__upload-hint">JPG, PNG, o GIF</span>
+
+      <input
+        class="recipe-image-field__input"
+        type="file"
+        accept="image/png,image/jpeg,image/gif,image/webp"
+        (change)="onFileChange($event)"
+      />
+    </label>
+  }
+
+  @if (isPreviewOpen && imageUrl) {
+    <div class="recipe-image-field__modal" (click)="closePreview()">
+      <div class="recipe-image-field__modal-content" (click)="$event.stopPropagation()">
+        <button
+          type="button"
+          class="recipe-image-field__modal-close"
+          (click)="closePreview()"
+        >
+          ×
+        </button>
+
+        <img
+          class="recipe-image-field__modal-image"
+          [src]="imageUrl"
+          alt="Vista previa ampliada"
+        />
+      </div>
+    </div>
+  }
+</div>

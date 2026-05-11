@@ -1,1 +1,8 @@
-<p>create-meal-plan-page works!</p>
+<section class="create-meal-plan-page">
+ <app-ui-page-header [title]="'Crear menú semenal'"></app-ui-page-header>
+
+  <app-meal-plan-config-form
+    [submitting]="submitting()"
+    (formSubmit)="onGenerateMenu($event)"
+  />
+</section>

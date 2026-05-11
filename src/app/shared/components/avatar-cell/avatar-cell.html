@@ -1,0 +1,27 @@
+<div
+  class="avatar-cell"
+  [class.avatar-cell--topbar]="variant === 'topbar'"
+  [class.avatar-cell--profile]="variant === 'profile'"
+>
+  @if (clickable) {
+    <a routerLink="/profile" class="avatar-cell__link">
+      <ng-container [ngTemplateOutlet]="avatarContent" />
+    </a>
+  } @else {
+    <ng-container [ngTemplateOutlet]="avatarContent" />
+  }
+</div>
+
+<ng-template #avatarContent>
+  @if (img) {
+    <img
+      class="avatar-cell__image"
+      [src]="img"
+      [alt]="name"
+    />
+  } @else {
+    <div class="avatar-cell__placeholder">
+      {{ initial }}
+    </div>
+  }
+</ng-template>

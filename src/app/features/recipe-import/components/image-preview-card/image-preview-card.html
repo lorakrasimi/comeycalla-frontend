@@ -1,1 +1,22 @@
-<p>image-preview-card works!</p>
+<div class="image-preview-card">
+  <div class="image-preview-card__frame">
+    <div class="image-preview-card__image-wrapper">
+      <img
+        class="image-preview-card__image"
+        [src]="previewUrl"
+        alt="Vista previa de la receta"
+      />
+    </div>
+
+    <div class="image-preview-card__action">
+      <ui-button
+        class="image-preview-card__change-button"
+        [variant]="'outline'"
+        [size]="'sm'"
+        (click)="changeImage.emit()"
+      >
+        Cambiar imagen
+      </ui-button>
+    </div>
+  </div>
+</div>

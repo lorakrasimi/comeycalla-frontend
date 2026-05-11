@@ -1,0 +1,11 @@
+<div class="search-bar">
+  <span class="material-symbols-outlined">search</span>
+  <input
+    type="text"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (input)="onInput()"
+    (keydown.enter)="onEnter(); $event.preventDefault()"
+    class="search-bar-{{variant}}"
+  />
+</div>

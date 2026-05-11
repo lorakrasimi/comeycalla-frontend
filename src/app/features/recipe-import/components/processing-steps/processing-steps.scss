@@ -1,0 +1,29 @@
+.processing-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 320px;
+}
+
+.processing-steps__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.processing-steps__indicator {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: white;
+  transition: background-color 0.3s ease;
+}
+
+.processing-steps__indicator--active {
+  background: var(--color-primary);
+}
+
+.processing-steps__label {
+  font-size: var(--font-size-md);
+  color: var(--color-text-strong);
+}

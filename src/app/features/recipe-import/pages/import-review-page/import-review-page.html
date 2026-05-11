@@ -1,1 +1,28 @@
-<p>import-review-page works!</p>
+<section class="import-review-page">
+  <div class="import-review-page__card">
+    <header class="import-review-page__header">
+      <div class="import-review-page__review-header">
+        <h3 class="import-review-page__review-title">Revisa tu receta</h3>
+      </div>
+
+      <ui-button
+        [variant]="'outline'"
+        [icon]="'restart_alt'"
+        [size]="'sm'"
+        (click)="onProcessAgain()"
+      >
+        Procesar otra vez
+      </ui-button>
+    </header>
+
+    <form class="import-review-page__form" [formGroup]="form">
+      <app-recipe-form
+        [form]="form"
+        [imageUrl]="imagePreviewUrls()[0]"
+        (imageSelected)="onImageSelected($event)"
+        (imageRemoved)="onImageRemoved(0)"
+        (submit)="onSubmit()"
+      />
+    </form>
+  </div>
+</section>

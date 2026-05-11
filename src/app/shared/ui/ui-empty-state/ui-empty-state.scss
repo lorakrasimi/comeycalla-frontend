@@ -1,0 +1,28 @@
+.empty-state {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.empty-state__card {
+  width: 100%;
+  height: auto;
+  padding: 40px;
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-2xl);
+  background: rgba(255, 255, 255, 0.55);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem
+}
+
+.img {
+  width: auto;
+}
+
+.empty-state__text {
+  font-size: var(--font-size-sm);
+  font-width: var(--font-weight-extrabold);
+}

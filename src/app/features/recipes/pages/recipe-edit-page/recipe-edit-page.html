@@ -1,1 +1,16 @@
-<p>recipe-edit-page works!</p>
+<section class="recipe-edit-page">
+  @if (loading()) {
+    <ui-loader></ui-loader>
+  } @else {
+    <app-recipe-form
+      [form]="form"
+      [imageUrl]="imageUrl()"
+      [submitLabel]="'Guardar cambios'"
+      [submitting]="submitting()"
+      (submit)="onSubmit()"
+      (cancel)="onCancel()"
+      (imageSelected)="onImageSelected($event)"
+      (imageRemoved)="onImageRemoved()"
+    />
+  }
+</section>

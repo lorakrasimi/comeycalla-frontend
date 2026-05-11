@@ -1,1 +1,48 @@
-<p>meal-plan-result-page works!</p>
+@if (mealPlan(); as mealPlan) {
+  <section class="meal-plan-result-page">
+    <app-ui-page-header [title]="'Tu menú semanal'"></app-ui-page-header>
+
+    <div class="meal-plan-result-page__actions">
+      <ui-button
+        [variant]="'outline'"
+        [icon]="'autorenew'"
+        (click)="regenerate()"
+      >
+        Regenerar menú completo
+      </ui-button>
+
+      <ui-button
+        [variant]="'outline'"
+        [icon]="'print'"
+        (click)="printMenu()"
+      >
+        Imprimir menú
+      </ui-button>
+
+      <ui-button
+        [variant]="'primary'"
+        [icon]="'shopping_cart'"
+        (click)="goToShoppingList()"
+      >
+        Generar lista de la compra
+      </ui-button>
+    </div>
+
+    <div id="print-section"
+         class="meal-plan-result-page__grid">
+      @for (day of mealPlan.days; track day.dayNumber) {
+        <app-meal-day-column
+          [day]="day"
+          (replaceSlot)="onReplaceSlot($event)"
+        />
+      }
+    </div>
+  </section>
+} @else {
+  <section class="meal-plan-result-page meal-plan-result-page--empty">
+    <ui-empty-state
+      title="No hay menú generado"
+      description="Primero crea un menú semanal para ver el resultado."
+    ></ui-empty-state>
+  </section>
+}

@@ -1,0 +1,53 @@
+.recipe-create-manual-page {
+  width: 100%;
+}
+
+.recipe-create-manual-page__card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 30px 24px;
+  background: #fcfcfc;
+  border: 1px solid #d9b6be;
+  border-radius: 16px;
+}
+
+.recipe-create-manual-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.recipe-create-manual-page__review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recipe-create-manual-page__review-title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-strong);
+}
+
+.recipe-create-manual-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.recipe-create-manual-page__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .recipe-create-manual-page__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

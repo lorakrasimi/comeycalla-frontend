@@ -1,0 +1,103 @@
+.ui-button {
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+.ui-button--primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.ui-button--primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.ui-button--secondary {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: white;
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  background: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+}
+
+.ui-button--outline {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-primary);
+}
+
+.ui-button--outline:hover:not(:disabled) {
+  background: rgba(209, 47, 65, 0.06);
+}
+
+.ui-button--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-primary);
+}
+
+.ui-button--ghost:hover:not(:disabled) {
+  color: var(--color-primary-hover);
+}
+
+.ui-button--danger {
+  background: var(--color-error);
+  color: white;
+}
+
+.ui-button--danger:hover:not(:disabled) {
+  background: rgba(106, 23, 34, 0.9);
+  border-color: var(--color-primary);
+}
+
+.ui-button--soft {
+  background: #fff4f1;
+  border-color: #f2c9c1;
+  color: #d86445;
+}
+
+.ui-button--soft:hover:not(:disabled) {
+  background: #ffe8e1;
+  border-color: #eab4a8;
+}
+
+.ui-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ui-button__icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.ui-button--sm {
+  height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+  border-radius: var(--radius-md);
+}
+
+.ui-button--sm .ui-button__icon {
+  font-size: 14px;
+}

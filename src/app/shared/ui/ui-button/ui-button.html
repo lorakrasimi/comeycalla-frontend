@@ -1,1 +1,19 @@
-<p>ui-button works!</p>
+<button
+  [type]="type"
+  [disabled]="disabled"
+  [class]="buttonClass"
+>
+  @if (icon && iconPosition === 'left') {
+    <span class="material-symbols-outlined ui-button__icon">
+      {{ icon }}
+    </span>
+  }
+
+  <ng-content />
+
+  @if (icon && iconPosition === 'right') {
+    <span class="material-symbols-outlined ui-button__icon">
+      {{ icon }}
+    </span>
+  }
+</button>

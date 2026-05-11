@@ -1,1 +1,22 @@
-<p>recipe-filters works!</p>
+<form class="recipe-filters" role="search">
+  <app-search-bar
+    [variant]="'secondary'"
+    [placeholder]="'Buscar por nombre...'"
+    [trigger]="'input'"
+    (search)="onSearchChange($event)"
+  ></app-search-bar>
+
+  <ui-select
+    [variant]="'secondary'"
+    [options]="categoryOptions"
+    [placeholder]="'Todas las categorías'"
+    (valueChange)="onCategoryChange($event)"
+  ></ui-select>
+
+  <ui-select
+    [variant]="'secondary'"
+    [options]="timeOptions"
+    [placeholder]="'Cualquier tiempo'"
+    (valueChange)="onMaxTimeChange($event)"
+  ></ui-select>
+</form>

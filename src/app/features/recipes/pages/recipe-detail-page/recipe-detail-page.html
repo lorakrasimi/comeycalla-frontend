@@ -1,1 +1,128 @@
-<p>recipe-detail-page works!</p>
+<section class="recipe-detail-page">
+  @if (loading()) {
+    <ui-loader></ui-loader>
+  } @else if (recipe(); as recipeData) {
+    <div class="recipe-detail-page__top-actions">
+      <ui-button
+        [variant]="'ghost'"
+        (click)="goBack()"
+        [icon]="'arrow_back'"
+      >
+        Volver
+      </ui-button>
+
+      <div class="recipe-detail-page__top-actions-right">
+        <ui-button
+          [variant]="'outline'"
+          [routerLink]="['/recipes', recipeData.id, 'edit']"
+        >
+          Editar
+        </ui-button>
+
+        <ui-button
+          [variant]="'danger'"
+          (click)="onDeleteClick()"
+        >
+          Eliminar
+        </ui-button>
+      </div>
+    </div>
+
+    <article class="recipe-detail-page__card">
+      <header class="recipe-detail-page__hero">
+        <img
+          class="recipe-detail-page__hero-image"
+          [src]="recipeData.img || 'img/generic-recipe-img.jpg'"
+          [alt]="recipeData.title"
+        />
+
+        <div class="recipe-detail-page__hero-overlay"></div>
+
+        <div class="recipe-detail-page__hero-content">
+          @if (recipeData.tags.length) {
+            <div class="recipe-detail-page__tags">
+              @for (tag of recipeData.tags; track tag) {
+                <span class="recipe-detail-page__tag">{{ tag }}</span>
+              }
+            </div>
+          }
+
+          <h1 class="recipe-detail-page__title">{{ recipeData.title }}</h1>
+
+          <div class="recipe-detail-page__meta">
+            @if (recipeData.cookingTime !== null) {
+              <span>{{ recipeData.cookingTime }} min</span>
+            }
+
+            @if (recipeData.servings !== null) {
+              <span>{{ recipeData.servings }} raciones</span>
+            }
+
+            @if (recipeData.category) {
+              <ui-chip>{{ recipeData.category }}</ui-chip>
+            }
+
+            @if (recipeData.difficulty) {
+              <span>{{ recipeData.difficulty }}</span>
+            }
+          </div>
+        </div>
+      </header>
+
+      <div class="recipe-detail-page__content">
+        <section class="recipe-detail-page__section">
+          <h2 class="recipe-detail-page__section-title">Descripción</h2>
+          <p class="recipe-detail-page__description">
+            {{ recipeData.description || 'Sin descripción añadida.' }}
+          </p>
+        </section>
+
+        <section class="recipe-detail-page__panel">
+          <h2 class="recipe-detail-page__section-title">Ingredientes</h2>
+
+          @if (recipeData.ingredients.length) {
+            <ul class="recipe-detail-page__ingredients-list">
+              @for (ingredient of recipeData.ingredients; track ingredient) {
+                <li class="recipe-detail-page__ingredient-item">
+                  {{ ingredient }}
+                </li>
+              }
+            </ul>
+          } @else {
+            <p class="recipe-detail-page__empty-text">No hay ingredientes añadidos.</p>
+          }
+        </section>
+
+        <section class="recipe-detail-page__panel">
+          <h2 class="recipe-detail-page__section-title">Preparación</h2>
+
+          @if (recipeData.steps.length) {
+            <ol class="recipe-detail-page__steps-list">
+              @for (step of recipeData.steps; track $index) {
+                <li class="recipe-detail-page__step-item">
+                  <div class="recipe-detail-page__step-badge">
+                    {{ $index + 1 }}
+                  </div>
+
+                  <div class="recipe-detail-page__step-content">
+                    {{ step }}
+                  </div>
+                </li>
+              }
+            </ol>
+          } @else {
+            <p class="recipe-detail-page__empty-text">No hay pasos añadidos.</p>
+          }
+        </section>
+      </div>
+    </article>
+  }
+</section>
+
+<ui-confirm-dialog
+  [open]="showConfirm"
+  title="¿Eliminar receta?"
+  message="Esta acción no se puede deshacer."
+  (confirm)="deleteRecipe()"
+  (cancel)="showConfirm = false"
+/>

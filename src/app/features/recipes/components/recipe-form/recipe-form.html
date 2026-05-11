@@ -1,1 +1,159 @@
-<p>recipe-form works!</p>
+<div class="recipe-form" [formGroup]="form">
+  <div class="recipe-form__header-grid">
+    <div class="recipe-form__header-fields">
+      <div class="recipe-form__field">
+        <label class="recipe-form__label">Nombre de la receta</label>
+        <input class="recipe-form__input" type="text" formControlName="title"/>
+      </div>
+
+      <div class="recipe-form__field">
+        <label class="recipe-form__label">Descripción</label>
+        <textarea
+          class="recipe-form__textarea"
+          rows="3"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="recipe-form__image-column">
+      <app-recipe-image-field
+        [imageUrl]="imageUrl"
+        (imageSelected)="onImageSelected($event)"
+        (imageRemoved)="onImageRemoved()"
+      />
+    </div>
+  </div>
+
+  <div class="recipe-form__main-fields">
+    <div class="recipe-form__field">
+      <label class="recipe-form__label">Categoría</label>
+      <input
+        class="recipe-form__input"
+        type="text"
+        formControlName="category"
+        placeholder="Ej: Italiana"
+      />
+    </div>
+
+    <div class="recipe-form__field">
+      <h4 class="recipe-form__section-title">Tags</h4>
+      <ui-tags-input
+        [tags]="form.controls['tags'].value"
+        (tagsChange)="form.controls['tags'].setValue($event)"
+      ></ui-tags-input>
+    </div>
+
+    <div class="recipe-form__meta-grid">
+      <div class="recipe-form__field">
+        <label class="recipe-form__label">Tiempo (minutos)</label>
+        <input
+          class="recipe-form__input"
+          type="number"
+          formControlName="cookingTime"
+        />
+      </div>
+
+      <div class="recipe-form__field">
+        <label class="recipe-form__label">Raciones</label>
+        <input
+          class="recipe-form__input"
+          type="number"
+          formControlName="servings"
+        />
+      </div>
+    </div>
+  </div>
+
+  <section class="recipe-form__section">
+    <div class="recipe-form__section-header">
+      <h4 class="recipe-form__section-title">Ingredientes</h4>
+    </div>
+
+    <div formArrayName="ingredients" class="recipe-form__list">
+      @for (ingredient of ingredients.controls; track ingredient) {
+        <div class="recipe-form__list-row" [formGroupName]="$index">
+          <input
+            class="recipe-form__input"
+            type="text"
+            formControlName="name"
+            placeholder="Ej: 200g de pasta"
+          />
+
+          <button
+            class="recipe-form__remove-button"
+            (click)="removeIngredient($index)"
+          >
+            ×
+          </button>
+        </div>
+      }
+      <div class="recipe-form__add-button">
+        <ui-button
+          [variant]="'outline'"
+          [icon]="'add'"
+          [size]="'sm'"
+          (click)="addIngredient()"
+        >
+          Añadir ingrediente
+        </ui-button>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="recipe-form__section">
+    <div class="recipe-form__section-header">
+      <h4 class="recipe-form__section-title">Pasos de preparación</h4>
+    </div>
+
+    <div formArrayName="steps" class="recipe-form__list">
+      @for (step of steps.controls; track step) {
+        <div class="recipe-form__step-row" [formGroupName]="$index">
+          <div class="recipe-form__step-badge">
+            {{ $index + 1 }}
+          </div>
+
+          <textarea
+            class="recipe-form__textarea recipe-form__textarea--step"
+            rows="2"
+            formControlName="description"
+            placeholder="Describe el paso..."
+          ></textarea>
+
+          <button
+            class="recipe-form__remove-button"
+            (click)="removeStep($index)"
+          >
+            ×
+          </button>
+        </div>
+      }
+    </div>
+    <div class="recipe-form__add-button">
+      <ui-button
+        [variant]="'outline'"
+        [icon]="'add'"
+        [size]="'sm'"
+        (click)="addStep()"
+      >
+        Añadir paso
+      </ui-button>
+    </div>
+  </section>
+  <div class="recipe-form__actions">
+    <ui-button
+      [variant]="'ghost'"
+      (click)="onBack()"
+    >
+      Cancelar
+    </ui-button>
+
+    <ui-button
+      [disabled]="form.invalid || submitting"
+      (click)="submit.emit()"
+    >
+      {{ submitLabel }}
+    </ui-button>
+  </div>
+</div>

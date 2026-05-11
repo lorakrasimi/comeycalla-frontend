@@ -1,0 +1,45 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+}
+
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 320px;
+  z-index: 1001;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.dialog__title {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.dialog__message {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn--danger {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn--ghost {
+  background: transparent;
+}

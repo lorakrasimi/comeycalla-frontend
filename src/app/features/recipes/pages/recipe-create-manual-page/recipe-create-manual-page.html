@@ -1,1 +1,23 @@
-<p>recipe-create-manual-page works!</p>
+<section class="recipe-create-manual-page">
+  <div class="recipe-create-manual-page__card">
+    <header class="recipe-create-manual-page__header">
+      <div class="recipe-create-manual-page__review-header">
+        <h3 class="recipe-create-manual-page__review-title">Crear receta</h3>
+      </div>
+    </header>
+
+    <form
+      class="recipe-create-manual-page__form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
+      <app-recipe-form
+        [form]="form"
+        [imageUrl]="imagePreviewUrl()"
+        (imageSelected)="onImageSelected($event)"
+        (imageRemoved)="onImageRemoved()"
+        (submit)="onSubmit()"
+      />
+    </form>
+  </div>
+</section>

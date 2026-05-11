@@ -23,8 +23,11 @@
 
   /* Brand colors */
   --color-primary: #D12F41;
-  --color-primary-hover: #c43f5c;
-  --color-secondary: #FF6900;
+  --color-primary-hover: #851438;
+  --color-secondary: #E5621C;
+  --color-secondary-hover: #BB5016;
+  --color-tertiary: #BEDBFF;
+  --color-tertiary-hover: #8ABEFF;
 
   /* Backgrounds */
   --color-background: #F9E1EE;
@@ -38,7 +41,7 @@
 
   /* Borders */
   --color-border: #D12F41;
-  --color-border-soft: #f1dbe0;
+  --color-border-soft: #d9b6be;
   --color-border-focus: #d94b68;
 
   /* States */
@@ -59,7 +62,8 @@
   --radius-xl: 20px;
   --radius-2xl: 24px;
   --radius-3xl: 32px;
-  --radius-pill: 999px;
+  --radius-pull: 999px;
+  --radius-full: 50%;
 
   /* Shadows */
   --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -74,7 +78,18 @@
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-base: 0.3s ease;
+
+  /* Avatar-cell */
+  --size-avatar-sm: 32px;
+
+  --color-avatar-surface-muted: #e5e7eb;
+  --color-avatar-text-placeholder: #374151;
+
+  /* Tabs */
+  --color-tab-background: #e7dce3;
 }
+
+
 
 /* Reset */
 *,
@@ -181,7 +196,6 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 3px rgba(217, 75, 104, 0.12);
 }
 
 textarea {
@@ -204,9 +218,14 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Logo */
 .logo {
   width: 259px;
   height: 91px;
+}
+
+.logo-sidebar {
+  width: 140px;
 }
 
 /* Scrollbar */
@@ -217,12 +236,32 @@ button:disabled {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(217, 75, 104, 0.35);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-3xl);
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(243, 200, 209, 0.35);
 }
+
+.recent-recipes-carousel__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.recent-recipes-carousel__viewport::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none;
+}
+
+.recent-recipes-carousel__viewport::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+
+.recent-recipes-carousel__viewport::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
 
 /* Selection */
 ::selection {
@@ -234,5 +273,39 @@ button:disabled {
   :root {
     --font-size-xl: 22px;
     --font-size-2xl: 28px;
+  }
+}
+
+/* Print */
+@page {
+  size: A4 landscape;
+  margin: 8mm;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #print-section,
+  #print-section * {
+    visibility: visible;
+  }
+
+  #print-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    transform: scale(0.55);
+    transform-origin: top left;
+  }
+
+  ui-button,
+  button,
+  .meal-plan-result-page__actions,
+  app-ui-page-header {
+    display: none !important;
   }
 }

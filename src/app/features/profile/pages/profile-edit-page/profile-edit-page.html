@@ -1,0 +1,98 @@
+<section class="profile-edit-page">
+  @if (loading()) {
+    <ui-loader></ui-loader>
+  } @else {
+    <button
+      type="button"
+      class="profile-edit-page__back-link"
+      (click)="goBack()"
+    >
+      <span class="material-symbols-outlined">arrow_back</span>
+      Volver
+    </button>
+
+    <article class="profile-edit-page__card">
+      <div class="profile-edit-page__hero">
+        <div class="profile-edit-page__avatar-wrapper">
+          <app-avatar-cell
+            [name]="form.controls['username'].value || 'Usuario'"
+            [img]="avatarUrl || ''"
+            [variant]="'profile'"
+            [clickable]="false"
+          />
+
+          <label class="profile-edit-page__avatar-upload">
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              (change)="onAvatarSelected($event)"
+            />
+            <span class="material-symbols-outlined profile-edit-page__avatar-upload-icon">
+              photo_camera
+            </span>
+          </label>
+        </div>
+
+        <div class="profile-edit-page__hero-content">
+          <h1 class="profile-edit-page__name">
+            {{ form.controls['username'].value || 'Usuario Demo' }}
+          </h1>
+
+          <p class="profile-edit-page__email">
+            {{ form.controls['email'].value || 'usuario@comeycalla.com' }}
+          </p>
+
+          @if (avatarUrl) {
+            <button
+              type="button"
+              class="profile-edit-page__remove-photo"
+              (click)="onAvatarRemoved()"
+            >
+              Eliminar foto
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="profile-edit-page__divider"></div>
+
+      <form class="profile-edit-page__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="profile-edit-page__field">
+          <label for="username">Nombre de usuario</label>
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+          />
+        </div>
+
+        <div class="profile-edit-page__field">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+          />
+        </div>
+
+        <div class="profile-edit-page__actions">
+          <ui-button
+            type="button"
+            (click)="onCancel()"
+          >
+            Cancelar
+          </ui-button>
+
+          <ui-button
+            type="submit"
+            [variant]="'primary'"
+            [disabled]="submitting()"
+          >
+            Guardar cambios
+          </ui-button>
+        </div>
+      </form>
+    </article>
+  }
+</section>

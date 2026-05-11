@@ -1,10 +1,24 @@
 <header class="topbar">
-  <input class="topbar__search" type="text" placeholder="Search" />
+  <app-search-bar
+    [trigger]="'submit'"
+    (search)="onTopbarSearch($event)"
+  ></app-search-bar>
 
   <div class="topbar__actions">
-    <button class="topbar__button" type="button">Nueva receta</button>
-    <button class="topbar__logout" type="button" (click)="logout()">
-      Salir
-    </button>
+    <ui-button routerLink="/recipes/create" [icon]="'add'">Nueva receta</ui-button>
+
+    @if (user$ | async; as user) {
+      <app-avatar-cell
+        [name]="user.username"
+        [img]="user.avatar ?? ''"
+      />
+    } @else {
+      <app-avatar-cell
+        name="Guest"
+        img=""
+      />
+    }
+
+    <span class="material-symbols-outlined topbar__logout" (click)="logout()">logout</span>
   </div>
 </header>

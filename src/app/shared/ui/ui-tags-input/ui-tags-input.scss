@@ -1,0 +1,39 @@
+.ui-tags-input {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ui-tags-input__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ui-tags-input__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ui-tags-input__remove {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.ui-tags-input__controls {
+  display: flex;
+  gap: 8px;
+}
+
+.ui-tags-input__input {
+  flex: 1;
+  border: 0.5px solid var(--color-border-soft);
+}
+
+.ui-tags-input__input:focus{
+  border-color: var(--color-border);
+}
+

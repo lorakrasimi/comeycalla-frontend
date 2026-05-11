@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +9,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
-  readonly navItems = [
-    { label: 'Dashboard', path: '/dashboard' },
-    { label: 'Mis recetas', path: '/recipes' },
-    { label: 'Añadir receta', path: '/recipes/new' },
-    { label: 'Menú semanal', path: '/meal-plan' },
+  readonly navItems: {
+    label: string;
+    path: string;
+    icon: string;
+    exact: boolean;
+  }[] = [
+    {label: 'Dashboard', path: '/dashboard', icon: 'dashboard', exact: true},
+    {label: 'Mis recetas', path: '/recipes', icon: 'menu_book', exact: true},
+    {label: 'Añadir receta', path: '/recipes/create', icon: 'add_circle', exact: false },
+    {label: 'Menú semanal', path: '/meal-plan', icon: 'calendar_month', exact: true},
   ];
 }

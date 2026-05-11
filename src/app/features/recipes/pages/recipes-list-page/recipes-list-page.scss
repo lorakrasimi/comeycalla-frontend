@@ -1,0 +1,106 @@
+.recipes-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-height: 100%;
+  padding: 32px 40px 40px;
+  background-color: var(--color-background);
+}
+
+.recipes-list-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.recipes-list-page__title {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-strong);
+}
+
+.recipes-list-page__filters {
+  width: 100%;
+}
+
+.recipes-list-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 50px;
+  align-items: start;
+}
+
+.recipes-list-page__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding: var(--space-md) 0;
+}
+
+.recipes-list-page__pagination-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 8px 14px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .recipes-list-page__pagination {
+    gap: var(--space-sm);
+  }
+
+  .recipes-list-page__pagination-info {
+    min-width: auto;
+    padding: 8px 10px;
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 1100px) {
+  .recipes-list-page {
+    padding: 28px 24px 32px;
+  }
+
+  .recipes-list-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .recipes-list-page {
+    gap: 24px;
+    padding: 20px 16px 24px;
+  }
+
+  .recipes-list-page__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .recipes-list-page__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .recipes-list-page__pagination {
+    gap: var(--space-sm);
+  }
+
+  .recipes-list-page__pagination-info {
+    min-width: auto;
+    padding: 8px 10px;
+    font-size: var(--font-size-xs);
+  }
+}
+

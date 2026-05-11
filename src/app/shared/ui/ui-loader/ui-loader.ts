@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-ui-loader',
+  selector: 'ui-loader',
+  standalone: true,
   imports: [],
   templateUrl: './ui-loader.html',
   styleUrl: './ui-loader.scss',
 })
-export class UiLoader {}
+export class UiLoader {
+  @Input() label: string = 'Cargando...';
+  @Input() fullPage: boolean = false;
+}

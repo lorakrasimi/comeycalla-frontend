@@ -1,1 +1,55 @@
-<p>recipe-card works!</p>
+<div class="recipe-card recipe-card-{{size}}">
+  <div class="recipe-card__media">
+    <img
+      class="recipe-card__image"
+      [src]="img"
+      [alt]="title"
+      (error)="onImgError($event)"
+    />
+    @if (category) {
+      <ui-chip class="recipe-card__chip">{{ category }}</ui-chip>
+    }
+  </div>
+
+  <div class="recipe-card__content">
+    <h3 class="recipe-card__title">
+      {{ title }}
+    </h3>
+    @if (description) {
+      <h5 class="recipe-card__description">
+        {{ description }}
+      </h5>
+    }
+    @if (showTags) {
+      <div class="recipe-card__tags">
+        @for (tag of tags; track tag) {
+          <ui-chip [size]="'sm'" variant="secondary">{{ tag }}</ui-chip>
+        }
+      </div>
+    }
+    <div class="recipe-card__meta">
+      <div class="recipe-card__meta-left">
+        @if (cookingTime) {
+          <span class="recipe-card__time">
+      <span class="material-symbols-outlined">timer</span>
+            {{ cookingTime }}
+    </span>
+        }
+        @if (servings) {
+          <span class="recipe-card__servings">
+           <span class="material-symbols-outlined">person</span>
+            {{ servings }}
+          </span>
+        }
+      </div>
+
+      <ui-button
+        size="sm"
+        [icon]="'visibility'"
+        [routerLink]="['/recipes', id]"
+      >
+        Ver
+      </ui-button>
+    </div>
+  </div>
+</div>

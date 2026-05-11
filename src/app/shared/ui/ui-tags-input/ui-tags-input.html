@@ -1,0 +1,32 @@
+<div class="ui-tags-input">
+  <div class="ui-tags-input__chips">
+    @for (tag of tags; track tag) {
+      <div class="ui-tags-input__chip">
+        <ui-chip>{{ tag }}
+          <button
+            type="button"
+            class="ui-tags-input__remove"
+            (click)="removeTag(tag)"
+          >
+            ×
+          </button>
+        </ui-chip>
+
+      </div>
+    }
+  </div>
+
+  <div class="ui-tags-input__controls">
+    <input
+      class="ui-tags-input__input"
+      type="text"
+      [placeholder]="placeholder"
+      [(ngModel)]="newTag"
+      (keydown.enter)="onKeydownEnter($event)"
+    />
+    <ui-button (click)="addTag()"
+               [variant]="'outline'"
+               [icon]="'add'">Añadir
+    </ui-button>
+  </div>
+</div>

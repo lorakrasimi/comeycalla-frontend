@@ -1,0 +1,40 @@
+.add-recipe-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px 40px 40px;
+}
+
+.add-recipe-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.add-recipe-page__title {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-strong);
+}
+
+.add-recipe-page__tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: var(--radius-pull);
+  background: var(--color-tab-background);
+  width: fit-content;
+}
+
+.add-recipe-page__tab {
+  padding: 10px 18px;
+  border-radius: var(--radius-pull);
+  text-decoration: none;
+  color: var(--color-text-strong);
+  font-weight: var(--font-weight-semibold);
+}
+
+.add-recipe-page__tab--active {
+  background: white;
+}

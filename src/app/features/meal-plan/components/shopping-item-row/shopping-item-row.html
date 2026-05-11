@@ -1,1 +1,28 @@
-<p>shopping-item-row works!</p>
+<label class="shopping-item-row">
+  <div class="shopping-item-row__left">
+    <input
+      type="checkbox"
+      [checked]="item.checked"
+      (change)="onToggle()"
+    />
+
+    <span
+      class="shopping-item-row__name"
+      [class.shopping-item-row__name--checked]="item.checked"
+    >
+      {{ item.name }}
+    </span>
+  </div>
+  <div>
+ <span class="shopping-item-row__quantity">
+    {{ item.quantity }}
+  </span>
+    <button
+      class="shopping-item-row__remove-button"
+      (click)="deleteItem()"
+    >
+      ×
+    </button>
+  </div>
+
+</label>

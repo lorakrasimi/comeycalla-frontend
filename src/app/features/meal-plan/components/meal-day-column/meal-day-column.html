@@ -1,1 +1,14 @@
-<p>meal-day-column works!</p>
+<article class="meal-day-column">
+  <header class="meal-day-column__header">
+    <h3 class="meal-day-column__title">Día {{ day.dayNumber }}</h3>
+  </header>
+
+  <div class="meal-day-column__body">
+    @for (slot of day.slots; track $index) {
+      <app-meal-slot-card
+        [slot]="slot"
+        (replace)="onReplace($event)"
+      />
+    }
+  </div>
+</article>
