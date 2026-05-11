@@ -13,6 +13,7 @@ export interface SelectOption {
   templateUrl: './ui-select.html',
   styleUrl: './ui-select.scss'
 })
+//TODO hacer secondary primary y eliminar el que sobra
 export class UiSelect {
   @Input() options: SelectOption[] = [];
   @Input() placeholder: string = 'Selecciona una opción';
