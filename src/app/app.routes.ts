@@ -77,7 +77,7 @@ export const appRoutes: Routes = [
               {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'image',
+                redirectTo: 'import',
               },
               {
                 path: 'manual',
@@ -87,13 +87,13 @@ export const appRoutes: Routes = [
                     ).then((m) => m.RecipeCreateManualPage),
               },
               {
-                path: 'image',
+                path: 'import',
                 children: [
                   {
                     path: '',
                     loadComponent: () =>
                       import(
-                        './features/recipe-import/pages/import-from-image-page/import-recipe-page'
+                        './features/recipe-import/pages/import-recipe-page/import-recipe-page'
                         ).then((m) => m.ImportRecipePage),
                   },
                   {

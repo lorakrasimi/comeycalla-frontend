@@ -7,7 +7,8 @@ import {RecipeFormValue} from '../../../core/models/recipe-form.model';
   providedIn: 'root'
 })
 export class RecipeFormMapper {
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(private readonly fb: FormBuilder) {
+  }
 
   createEmptyForm(): FormGroup {
     return this.fb.group({
