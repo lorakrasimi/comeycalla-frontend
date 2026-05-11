@@ -27,7 +27,7 @@ export class ImportProcessingPage implements OnInit {
     const images = this.importStore.images();
 
     if (!recipeUrl && images.length === 0) {
-      this.router.navigate(['/recipes/create/image']);
+      this.router.navigate(['/recipes/create/import']);
       return;
     }
 
@@ -45,7 +45,7 @@ export class ImportProcessingPage implements OnInit {
     this.recipeImportApi.extractRecipeFromUrl(url).subscribe({
       next: (recipe) => {
         this.importStore.setExtractedRecipe(recipe);
-        this.router.navigate(['/recipes/create/image/review']);
+        this.router.navigate(['/recipes/create/import/review']);
       },
       error: () => {
         this.importStore.setError('No se pudo importar la receta desde esta URL.');
@@ -57,7 +57,7 @@ export class ImportProcessingPage implements OnInit {
     this.recipeImportApi.extractRecipeFromImages(images).subscribe({
       next: (recipe) => {
         this.importStore.setExtractedRecipe(recipe);
-        this.router.navigate(['/recipes/create/image/review']);
+        this.router.navigate(['/recipes/create/import/review']);
       },
       error: () => {
         this.importStore.setError('No se pudo procesar la receta.');
@@ -66,11 +66,11 @@ export class ImportProcessingPage implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/recipes/create/image']);
+    this.router.navigate(['/recipes/create/import']);
   }
 
   onRetry(): void {
-    this.router.navigate(['/recipes/create/image']);
+    this.router.navigate(['/recipes/create/import']);
   }
 
 

@@ -2,16 +2,17 @@
   <app-ui-page-header [title]="'Añadir receta'"></app-ui-page-header>
   <nav class="add-recipe-page__tabs">
     <a
-      routerLink="/recipes/create/image"
+      routerLink="/recipes/create/import"
       routerLinkActive="add-recipe-page__tab--active"
+      [routerLinkActiveOptions]="{ exact: false }"
       class="add-recipe-page__tab"
     >
-      Desde imagen
-    </a>
+      Importar </a>
 
     <a
       routerLink="/recipes/create/manual"
       routerLinkActive="add-recipe-page__tab--active"
+      [routerLinkActiveOptions]="{ exact: false }"
       class="add-recipe-page__tab"
     >
       Manual
