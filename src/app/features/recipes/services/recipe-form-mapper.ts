@@ -108,7 +108,7 @@ export class RecipeFormMapper {
   }
 
   toUpdateFormData(
-    payload: unknown,
+    payload: RecipeRequest,
     image?: File | null,
     removeImage = false
   ): FormData {
