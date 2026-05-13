@@ -10,19 +10,28 @@ export class MealPlanStore {
   readonly currentPlan = signal<MealPlan | null>(null);
 
   constructor(private readonly mealPlanApi: MealPlanApi) {
+    const savedPlan = localStorage.getItem('currentPlan');
+
+    if (savedPlan) {
+      this.currentPlan.set(JSON.parse(savedPlan));
+    }
   }
 
   generateMealPlan(config: {
     days: number;
     meals: string[];
-    excludeRepeatedRecipes: boolean,
+    excludeRepeatedRecipes: boolean;
   }): Observable<MealPlan> {
     return this.mealPlanApi.generateMealPlan(config).pipe(
-      tap((plan: MealPlan) => this.currentPlan.set(plan))
+      tap((plan: MealPlan) => {
+        this.currentPlan.set(plan);
+        localStorage.setItem('currentPlan', JSON.stringify(plan));
+      })
     );
   }
 
   setPlan(plan: MealPlan): void {
     this.currentPlan.set(plan);
+    localStorage.setItem('currentPlan', JSON.stringify(plan));
   }
 }

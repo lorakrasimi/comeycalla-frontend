@@ -1,5 +1,7 @@
-@if (list(); as shoppingList) {
-  <section class="shopping-list-page">
+<section class="shopping-list-page">
+  @if (loading()) {
+    <ui-loader></ui-loader>
+  } @else if (list(); as shoppingList) {
     <ui-button
       [variant]="'ghost'"
       [icon]="'arrow_back'"
@@ -8,7 +10,6 @@
       Volver al menú
     </ui-button>
     <app-ui-page-header [title]="'Lista de la compra'"></app-ui-page-header>
-
 
     <section class="shopping-list-page__progress-card">
       <div class="shopping-list-page__progress-header">
@@ -65,20 +66,6 @@
         />
       }
     </div>
-  </section>
-} @else {
-  <section class="shopping-list-page shopping-list-page--empty">
-    <ui-empty-state
-      title="No hay lista de la compra"
-      description="Genera primero un menú semanal para construir la lista."
-    ></ui-empty-state>
+  }
+</section>
 
-    <ui-button
-      type="button"
-      [variant]="'primary'"
-      [routerLink]="['/meal-plan']"
-    >
-      Crear menú
-    </ui-button>
-  </section>
-}

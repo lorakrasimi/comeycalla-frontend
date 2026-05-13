@@ -18,6 +18,6 @@ export class Sidebar {
     {label: 'Dashboard', path: '/dashboard', icon: 'dashboard', exact: true},
     {label: 'Mis recetas', path: '/recipes', icon: 'menu_book', exact: true},
     {label: 'Añadir receta', path: '/recipes/create', icon: 'add_circle', exact: false },
-    {label: 'Menú semanal', path: '/meal-plan', icon: 'calendar_month', exact: true},
+    {label: 'Menú semanal', path: '/meal-plan', icon: 'calendar_month', exact: false},
   ];
 }

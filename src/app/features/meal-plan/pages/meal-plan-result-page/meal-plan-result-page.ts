@@ -20,7 +20,6 @@ import {MealPlanApi} from '../../services/meal-plan-api';
   styleUrl: './meal-plan-result-page.scss',
 })
 export class MealPlanResultPage {
-
   protected mealPlan = computed(() => this.mealPlanStore.currentPlan());
 
   constructor(
