@@ -50,14 +50,11 @@
             (change)="onAddImages($event)"
           />
         </label>
-
-        <button
-          type="button"
-          class="import-recipe-page__remove"
+        <ui-button
           (click)="onClearImages()"
-        >
+          [variant]="'ghost'">
           Eliminar todas
-        </button>
+        </ui-button>
       </div>
 
       <div class="import-recipe-page__images">
@@ -67,8 +64,8 @@
               class="import-recipe-page__preview"
               [src]="image.previewUrl"
               [alt]="image.file.name"
+              (click)="onOpenPreview(image.previewUrl)"
             />
-
             <div class="import-recipe-page__image-info">
               <p class="import-recipe-page__image-name">
                 {{ image.file.name }}
@@ -130,3 +127,22 @@
 
   </div>
 </section>
+
+@if (previewImageUrl) {
+  <div class="import-recipe-page__preview-modal" (click)="onClosePreview()">
+    <img
+      class="import-recipe-page__preview-modal-img"
+      [src]="previewImageUrl"
+      (click)="$event.stopPropagation()"
+      alt="Imagen seleccionada"
+    />
+
+    <button
+      type="button"
+      class="import-recipe-page__preview-close"
+      (click)="onClosePreview()"
+    >
+      ✕
+    </button>
+  </div>
+}

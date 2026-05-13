@@ -12,8 +12,6 @@ export class Recipe {
   difficulty: Difficulty;
   category: string;
   tags?: string[];
-  createdAt: Date;
-  updatedAt?: Date;
 
   constructor(
     id: number,
@@ -24,11 +22,9 @@ export class Recipe {
     servings: number,
     difficulty: Difficulty,
     category: string,
-    createdAt: Date,
     description?: string,
     img?: string,
     tags?: string[],
-    updatedAt?: Date
   ) {
     this.id = id;
     this.title = title;
@@ -38,11 +34,9 @@ export class Recipe {
     this.servings = servings;
     this.difficulty = difficulty;
     this.category = category;
-    this.createdAt = createdAt;
     this.description = description;
     this.img = img;
     this.tags = tags;
-    this.updatedAt = updatedAt;
   }
 }
 
@@ -79,6 +73,4 @@ export interface RecipeResponse {
     description: string;
   }[];
   tags: string[];
-  createdAt: string;
-  updatedAt?: string;
 }

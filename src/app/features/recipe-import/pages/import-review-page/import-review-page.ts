@@ -106,7 +106,6 @@ export class ImportReviewPage implements OnInit {
       })),
     };
 
-    console.log(this.selectedImage);
     const formData = this.recipeFormMapper.toFormData(
       payload,
       this.selectedImage() ?? undefined
