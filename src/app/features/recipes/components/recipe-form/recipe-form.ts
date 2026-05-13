@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {RecipeImageField} from '../recipe-image-field/recipe-image-field';
@@ -18,7 +18,7 @@ import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
   templateUrl: './recipe-form.html',
   styleUrl: './recipe-form.scss'
 })
-export class RecipeFormComponent {
+export class RecipeFormComponent implements OnInit {
   @Input({ required: true }) form!: FormGroup;
   @Input() imageUrl: string | null = null;
   @Input() submitLabel = 'Guardar receta';
@@ -28,6 +28,23 @@ export class RecipeFormComponent {
   @Output() cancel = new EventEmitter<void>();
   @Output() imageSelected = new EventEmitter<File>();
   @Output() imageRemoved = new EventEmitter<void>();
+
+  ngOnInit(): void {
+    this.ensureOneIngredient();
+    this.ensureOneStep();
+  }
+
+  private ensureOneIngredient(): void {
+    if (this.ingredients.length === 0) {
+      this.addIngredient();
+    }
+  }
+
+  private ensureOneStep(): void {
+    if (this.steps.length === 0) {
+      this.addStep();
+    }
+  }
 
   get ingredients(): FormArray {
     return this.form.get('ingredients') as FormArray;

@@ -2,7 +2,7 @@
   <article class="meal-slot-card">
     <img
       class="meal-slot-card__image"
-      [src]="recipe.img"
+      [src]="recipe.img ?? 'img/generic-recipe-img.jpg'"
       [alt]="recipe.title"
     />
 
