@@ -11,7 +11,7 @@ import {MealSlotCard} from '../meal-slot-card/meal-slot-card';
   styleUrl: './meal-day-column.scss',
 })
 export class MealDayColumn {
-  @Input({ required: true }) day!: MealPlanDay;
+  @Input({required: true}) day!: MealPlanDay;
   @Output() replaceSlot = new EventEmitter<{ dayNumber: number; slot: MealSlot }>();
 
   protected onReplace(slot: MealSlot): void {

@@ -2,12 +2,12 @@
   <article class="meal-slot-card">
     <img
       class="meal-slot-card__image"
-      [src]="recipe.img ?? 'img/generic-recipe-img.jpg'"
+      [src]="recipe.img || 'img/generic-recipe-img.jpg'"
       [alt]="recipe.title"
     />
 
     <div class="meal-slot-card__content">
-      <p class="meal-slot-card__type">{{slot.type.toLocaleUpperCase()}}</p>
+      <p class="meal-slot-card__type">{{getMealTypeTranslation(slot.type)}}</p>
       <h4 class="meal-slot-card__title">{{ recipe.title }}</h4>
 
       <div class="meal-slot-card__actions">
@@ -23,7 +23,6 @@
 
         <ui-button
           size="md"
-          [variant]="'outline'"
           [icon]="'visibility'"
           [routerLink]="['/recipes', recipe.id]"
         >

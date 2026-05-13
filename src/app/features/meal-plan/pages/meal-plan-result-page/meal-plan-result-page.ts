@@ -21,14 +21,14 @@ import {MealPlanApi} from '../../services/meal-plan-api';
 })
 export class MealPlanResultPage {
 
+  protected mealPlan = computed(() => this.mealPlanStore.currentPlan());
+
   constructor(
     private mealPlanStore: MealPlanStore,
     private mealPlanApi: MealPlanApi,
     private router: Router
   ) {
   }
-
-  protected mealPlan = computed(() => this.mealPlanStore.currentPlan());
 
   protected regenerate(): void {
     this.router.navigate(['/meal-plan']);

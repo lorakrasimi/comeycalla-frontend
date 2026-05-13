@@ -58,6 +58,13 @@
             Selecciona al menos una comida.
           </p>
         }
+
+        @if (serverMessage) {
+          <div class="error-message">
+            {{ serverMessage }}
+          </div>
+        }
+
       </section>
 
       <ui-button
