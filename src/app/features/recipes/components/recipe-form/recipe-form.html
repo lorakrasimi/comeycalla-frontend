@@ -4,6 +4,10 @@
       <div class="recipe-form__field">
         <label class="recipe-form__label">Nombre de la receta</label>
         <input class="recipe-form__input" type="text" formControlName="title"/>
+
+        @if (form.get('title')?.invalid && form.get('title')?.touched) {
+          <small class="error-message">El nombre de la receta es obligatorio.</small>
+        }
       </div>
 
       <div class="recipe-form__field">
@@ -81,6 +85,7 @@
           />
 
           <button
+            type="button"
             class="recipe-form__remove-button"
             (click)="removeIngredient($index)"
           >
@@ -98,7 +103,6 @@
           Añadir ingrediente
         </ui-button>
       </div>
-
     </div>
   </section>
 
@@ -122,6 +126,7 @@
           ></textarea>
 
           <button
+            type="button"
             class="recipe-form__remove-button"
             (click)="removeStep($index)"
           >
@@ -150,10 +155,10 @@
     </ui-button>
 
     <ui-button
-      [disabled]="form.invalid || submitting"
-      (click)="submit.emit()"
+      [disabled]="submitting"
+      (click)="onSubmit()"
     >
-      {{ submitLabel }}
+      Guardar receta
     </ui-button>
   </div>
 </div>
