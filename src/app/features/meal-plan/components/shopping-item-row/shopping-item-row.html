@@ -2,27 +2,23 @@
   <div class="shopping-item-row__left">
     <input
       type="checkbox"
+      class="custom-checkbox"
       [checked]="item.checked"
       (change)="onToggle()"
     />
 
     <span
-      class="shopping-item-row__name"
+      class="custom-checkbox-label shopping-item-row__name"
       [class.shopping-item-row__name--checked]="item.checked"
     >
       {{ item.name }}
     </span>
   </div>
-  <div>
- <span class="shopping-item-row__quantity">
-    {{ item.quantity }}
-  </span>
-    <button
-      class="shopping-item-row__remove-button"
-      (click)="deleteItem()"
-    >
-      ×
-    </button>
-  </div>
 
+  <button
+    class="shopping-item-row__remove-button"
+    (click)="deleteItem()"
+  >
+    ×
+  </button>
 </label>

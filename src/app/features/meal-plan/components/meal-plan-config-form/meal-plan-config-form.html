@@ -29,23 +29,23 @@
 
         <div class="meal-plan-config-form__checkbox-group">
           <label>
-            <input type="checkbox"  class = "meal-plan-config-form__checkbox" formControlName="breakfast" />
-            <span>Desayuno</span>
+            <input type="checkbox"  class="custom-checkbox"  formControlName="breakfast" />
+            <span class="custom-checkbox-label">Desayuno</span>
           </label>
 
           <label>
-            <input type="checkbox" class = "meal-plan-config-form__checkbox" formControlName="lunch" />
-            <span>Comida</span>
+            <input type="checkbox" class="custom-checkbox"  formControlName="lunch" />
+            <span class="custom-checkbox-label">Comida</span>
           </label>
 
           <label>
-            <input type="checkbox" class = "meal-plan-config-form__checkbox" formControlName="dinner" />
-            <span>Cena</span>
+            <input type="checkbox" class="custom-checkbox"  formControlName="dinner" />
+            <span class="custom-checkbox-label">Cena</span>
           </label>
 
           <label>
-            <input type="checkbox" class = "meal-plan-config-form__checkbox " formControlName="excludeRepeatedRecipes" />
-            <span>Excluir recetas repetidas</span>
+            <input type="checkbox" class = "custom-checkbox " formControlName="excludeRepeatedRecipes" />
+            <span class="custom-checkbox-label">Excluir recetas repetidas</span>
           </label>
         </div>
 
@@ -58,6 +58,13 @@
             Selecciona al menos una comida.
           </p>
         }
+
+        @if (serverMessage) {
+          <div class="error-message">
+            {{ serverMessage }}
+          </div>
+        }
+
       </section>
 
       <ui-button

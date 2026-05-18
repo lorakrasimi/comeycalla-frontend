@@ -16,11 +16,14 @@ import {UiPageHeader} from '../../../../shared/ui/ui-page-header/ui-page-header'
   styleUrl: './create-meal-plan-page.scss',
 })
 export class CreateMealPlanPage {
-
-  constructor(private mealPlanStore: MealPlanStore, private router: Router) {
-  }
-
+  serverError: string = '';
   protected readonly submitting = signal(false);
+
+  constructor(
+    private mealPlanStore: MealPlanStore,
+    private router: Router
+  ) {
+  }
 
   protected onGenerateMenu(config: MealPlanConfig): void {
     this.submitting.set(true);
@@ -32,7 +35,8 @@ export class CreateMealPlanPage {
           this.router.navigate(['/meal-plan/result']);
         },
         error: (error: any) => {
-          console.error('Error generating meal plan', error);
+          console.log("error", error);
+          this.serverError = error.error.message;
         }
       });
   }
