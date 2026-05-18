@@ -1,10 +1,9 @@
 import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
 import AuthFacade from '../../services/auth-facade';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
-
 
 function passwordsMatchValidator(
   control: AbstractControl

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from '../../../core/services/auth.service';
 import {Router} from '@angular/router';
 import {firstValueFrom} from 'rxjs';
-import {HttpErrorResponse} from '@angular/common/http';
+
+import {AuthService} from '../../../core/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +16,12 @@ class AuthFacade {
 
   async login(email: string, password: string): Promise<string | null> {
     try {
-      await firstValueFrom(
-        this.authService.login({email, password})
-      );
 
+      await firstValueFrom(this.authService.login({email, password}));
       await this.router.navigate(['/dashboard']);
       return null;
-
     } catch (error: any) {
-      return error?.userMessage ?? 'Ha ocurrido un error inesperado.';
+      return error?.userMessage;
     }
   }
 
@@ -51,19 +48,20 @@ class AuthFacade {
   }
 
   async recoverPassword(email: string): Promise<boolean> {
-    if (!email) {
-      return false;
-    }
+    return !!email;
+  }
 
-    return true;
+  getCurrentUser() {
+    return this.authService.user$;
   }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
 
-  getCurrentUser() {
-    return this.authService.user$;
+
+  loadCurrentUser() {
+    return this.authService.loadCurrentUser();
   }
 }
 

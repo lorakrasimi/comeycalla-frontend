@@ -10,7 +10,7 @@
         formControlName="email"
         placeholder="Introduce tu email"
       />
-      @if (email.touched && email.invalid) {
+      @if (isSubmitting && email.invalid) {
         <small class="error-message">
           @if (email.errors?.['required']) {
             El email es obligatorio.
@@ -30,7 +30,7 @@
         formControlName="password"
         placeholder="Introduce tu contraseña"
       />
-      @if (password.touched && password.invalid) {
+      @if (isSubmitting && password.invalid) {
         <small class="error-message">
           @if (password.errors?.['required']) {
             La contraseña es obligatoria.

@@ -23,7 +23,7 @@ import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
   private readonly cdr = inject(ChangeDetectorRef);
-
+  private isSubmitted: boolean = false;
   constructor(private authFacade: AuthFacade) {
   }
 
@@ -44,8 +44,9 @@ export class LoginPage {
   }
 
   async submit(): Promise<void> {
+    this.isSubmitted = true;
+
     if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
       return;
     }
 

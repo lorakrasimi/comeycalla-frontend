@@ -1,13 +1,9 @@
 import {Component, inject} from '@angular/core';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
-import AuthFacade from '../../services/auth-facade';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
+import AuthFacade from '../../services/auth-facade';
 
 @Component({
   selector: 'app-recover-password-page',
