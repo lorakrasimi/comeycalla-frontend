@@ -1,6 +1,8 @@
-import {Injectable} from '@angular/core';
-import {AuthService} from '../../../core/services/auth.service';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+
+import { AuthService } from '../../../core/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,31 +11,29 @@ export class AuthFacade {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {
-  }
+  ) {}
 
-  //TODO: arreglar cuando esté el backend
-  async login(email: string, password: string): Promise<boolean> {
-    // Simulación hasta tener backend
-    if (email === 'test@test.com' && password === '123456') {
-      this.authService.setToken('fake-token');
+  async login(email: string, password: string): Promise<string | null> {
+    try {
+      await firstValueFrom(this.authService.login({ email, password }));
       await this.router.navigate(['/dashboard']);
-      return true;
+      return null;
+    } catch (error: any) {
+      return error?.userMessage;
     }
-
-    return false;
   }
 
-  //TODO: arreglar cuando esté el backend
-  async register(email: string, password: string): Promise<boolean> {
-    if (!email || !password) {
-      return false;
+  async register(username: string, email: string, password: string): Promise<string | null> {
+    try {
+      await firstValueFrom(
+        this.authService.register({ username, email, password })
+      );
+
+      await this.router.navigate(['/dashboard']);
+      return null;
+    } catch (error: any) {
+      return error?.userMessage;
     }
-
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    await this.router.navigate(['/login']);
-
-    return true;
   }
 
   async logout(): Promise<void> {
@@ -42,14 +42,18 @@ export class AuthFacade {
   }
 
   async recoverPassword(email: string): Promise<boolean> {
-    if (!email) {
-      return false;
-    }
+    return !!email;
+  }
 
-    return true;
+  getCurrentUser() {
+    return this.authService.user$;
   }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  loadCurrentUser() {
+    return this.authService.loadCurrentUser();
   }
 }

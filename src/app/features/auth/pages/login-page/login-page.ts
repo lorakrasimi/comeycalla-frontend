@@ -1,12 +1,12 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {AuthService} from '../../../../core/services/auth.service';
-import {Router, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {AuthFacade} from '../../services/auth-facade';
 
 @Component({
@@ -14,18 +14,23 @@ import {AuthFacade} from '../../services/auth-facade';
   imports: [
     ReactiveFormsModule,
     RouterLink,
-    AuthForm
+    AuthForm,
+    UiButton
   ],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private isSubmitted: boolean = false;
+
+  constructor(private authFacade: AuthFacade) {
+  }
 
   isSubmitting = false;
   serverError = '';
 
-  // Reactive form group for email and password creation
   readonly loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -39,27 +44,30 @@ export class LoginPage {
     return this.loginForm.controls.password;
   }
 
-  constructor(private authFacade: AuthFacade) {
-  }
-
   async submit(): Promise<void> {
+    this.isSubmitted = true;
+
     if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
       return;
     }
 
     this.isSubmitting = true;
-    this.serverError = '';
+    // Used because Angular was not automatically updating the view after async login,
+    // so I manually trigger change detection to reflect updated state (error/loading)
+    this.cdr.markForCheck();
 
-    const { email, password } = this.loginForm.getRawValue();
+    try {
+      const {email, password} = this.loginForm.getRawValue();
 
-    // Temporary login until backend is connected
-    if (email === 'test@test.com' && password === '123456') {
-      await this.authFacade.login(email, password);
-      return;
+      const errorMessage = await this.authFacade.login(email, password);
+
+      if (errorMessage) {
+        this.serverError = errorMessage;
+      }
+    } finally {
+      this.isSubmitting = false;
+      this.cdr.markForCheck();
     }
-
-    this.serverError = 'Credenciales incorrectas.';
-    this.isSubmitting = false;
   }
+
 }

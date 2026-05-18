@@ -28,20 +28,6 @@ form {
   color: var(--color-error);
 }
 
-
-.recover-link {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  text-align: right;
-}
-
-.signing-link {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-  text-align: center;
-}
-
 .auth-button {
   height: 48px;
   border-radius: var(--radius-lg);
