@@ -89,8 +89,6 @@
   --color-tab-background: #e7dce3;
 }
 
-
-
 /* Reset */
 *,
 *::before,
@@ -181,10 +179,9 @@ select {
   border-radius: var(--radius-lg);
   padding: 12px 14px;
   outline: none;
-  transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast),
-    background-color var(--transition-fast);
+  transition: border-color var(--transition-fast),
+  box-shadow var(--transition-fast),
+  background-color var(--transition-fast);
 }
 
 input::placeholder,
@@ -267,6 +264,47 @@ button:disabled {
 ::selection {
   background-color: rgba(217, 75, 104, 0.2);
   color: var(--color-text-strong);
+}
+
+/* Checkbox */
+
+.custom-checkbox {
+  display: none;
+}
+
+.custom-checkbox + .custom-checkbox-label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+}
+
+/* caja */
+.custom-checkbox + .custom-checkbox-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #999;
+  border-radius: 4px;
+  background: white;
+}
+
+/* checked */
+.custom-checkbox:checked + .custom-checkbox-label::before {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+/* check icon */
+.custom-checkbox:checked + .custom-checkbox-label::after {
+  content: "✔";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  font-size: var(--font-size-sm);
+  color: white;
 }
 
 @media (max-width: 768px) {

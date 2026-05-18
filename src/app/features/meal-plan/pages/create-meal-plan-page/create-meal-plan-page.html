@@ -4,5 +4,6 @@
   <app-meal-plan-config-form
     [submitting]="submitting()"
     (formSubmit)="onGenerateMenu($event)"
+    [serverMessage] = "serverError"
   />
 </section>

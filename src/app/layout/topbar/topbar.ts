@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import AuthFacade from '../../features/auth/services/auth-facade';
 import {SearchBar} from '../../shared/components/search-bar/search-bar';
 import {UiButton} from '../../shared/ui/ui-button/ui-button';
 import {Router, RouterLink} from '@angular/router';
@@ -7,6 +6,7 @@ import {Observable} from 'rxjs';
 import {UserAuth} from '../../core/models/user.model';
 import {AvatarCell} from '../../shared/components/avatar-cell/avatar-cell';
 import {AsyncPipe} from '@angular/common';
+import {AuthFacade} from '../../features/auth/services/auth-facade';
 
 @Component({
   selector: 'app-topbar',

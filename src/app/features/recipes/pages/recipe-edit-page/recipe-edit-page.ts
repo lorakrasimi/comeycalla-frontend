@@ -83,10 +83,9 @@ export class RecipeEditPage implements OnInit {
     }
     this.submitting.set(true);
 
-    const payload = {
-      ...this.form.getRawValue(),
-      removeImage: this.removeCurrentImage,
-    };
+    const formValue = this.form.getRawValue();
+
+    const payload = this.recipeFormMapper.toCreatePayload(formValue);
 
     const formData = this.recipeFormMapper.toUpdateFormData(
       payload,

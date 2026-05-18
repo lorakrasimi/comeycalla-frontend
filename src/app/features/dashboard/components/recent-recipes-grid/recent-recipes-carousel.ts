@@ -5,7 +5,7 @@ import {Recipe} from '../../../../core/models/recipe.model';
 @Component({
   selector: 'app-recent-recipes-carousel',
   standalone: true,
-  imports: [RecipeCard],
+  imports: [RecipeCard, RecipeCard],
   templateUrl: './recent-recipes-carousel.html',
   styleUrl: './recent-recipes-carousel.scss',
 })

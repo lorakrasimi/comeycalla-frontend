@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {RecipeImageField} from '../recipe-image-field/recipe-image-field';
@@ -18,16 +18,34 @@ import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
   templateUrl: './recipe-form.html',
   styleUrl: './recipe-form.scss'
 })
-export class RecipeFormComponent {
-  @Input({ required: true }) form!: FormGroup;
+export class RecipeFormComponent implements OnInit {
+  @Input({required: true}) form!: FormGroup;
   @Input() imageUrl: string | null = null;
-  @Input() submitLabel = 'Guardar receta';
   @Input() submitting = false;
 
   @Output() submit = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
   @Output() imageSelected = new EventEmitter<File>();
   @Output() imageRemoved = new EventEmitter<void>();
+
+  ngOnInit(): void {
+    this.ensureOneIngredient();
+    this.ensureOneStep();
+  }
+
+  // Asegura que exista al menos un ingrediente al iniciar el formulario.
+  private ensureOneIngredient(): void {
+    if (this.ingredients.length === 0) {
+      this.addIngredient();
+    }
+  }
+
+  // Asegura que exista al menos un paso al iniciar el formulario.
+  private ensureOneStep(): void {
+    if (this.steps.length === 0) {
+      this.addStep();
+    }
+  }
 
   get ingredients(): FormArray {
     return this.form.get('ingredients') as FormArray;
@@ -67,6 +85,7 @@ export class RecipeFormComponent {
     this.steps.removeAt(index);
   }
 
+  // Emite el archivo de imagen seleccionado al componente padre.
   onImageSelected(file: File): void {
     this.imageSelected.emit(file);
   }
@@ -77,5 +96,17 @@ export class RecipeFormComponent {
 
   onBack(): void {
     this.cancel.emit();
+  }
+
+  // Valida el formulario al pulsar submit.
+  // Si el formulario es inválido, marca todos los campos como tocados
+  // para mostrar los mensajes de error.
+  // Si es válido, emite el evento submit.
+  onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.submit.emit();
   }
 }

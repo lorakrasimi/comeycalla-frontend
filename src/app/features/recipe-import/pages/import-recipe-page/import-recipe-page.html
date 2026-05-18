@@ -1,0 +1,148 @@
+<section class="import-recipe-page">
+  <div class="import-recipe-page__card">
+
+    <div class="import-recipe-page__url">
+      <label for="recipeUrl" class="import-recipe-page__url-label">
+        Importa una receta desde URL
+      </label>
+
+      <div class="import-recipe-page__url-form">
+        <input
+          id="recipeUrl"
+          type="url"
+          placeholder="https://..."
+          [value]="recipeUrl"
+          (input)="onRecipeUrlChange($event)"
+        />
+
+        <ui-button
+          type="button"
+          (click)="onProcessUrlRecipe()"
+        >
+          Procesar URL
+        </ui-button>
+      </div>
+
+      @if (urlErrorMessage) {
+        <p class="import-recipe-page__error">
+          {{ urlErrorMessage }}
+        </p>
+      }
+    </div>
+
+    <div class="import-recipe-page__separator">
+      O sube imágenes de la receta
+    </div>
+
+    @if (importStore.images().length === 0) {
+      <app-image-dropzone
+        (filesSelected)="onImagesSelected($event)"
+      />
+    } @else {
+      <div class="import-recipe-page__image-actions">
+        <label class="import-recipe-page__change-button">
+          Añadir más imágenes
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            hidden
+            (change)="onAddImages($event)"
+          />
+        </label>
+        <ui-button
+          (click)="onClearImages()"
+          [variant]="'ghost'">
+          Eliminar todas
+        </ui-button>
+      </div>
+
+      <div class="import-recipe-page__images">
+        @for (image of importStore.images(); track image.previewUrl; let i = $index) {
+          <article class="import-recipe-page__image-card">
+            <img
+              class="import-recipe-page__preview"
+              [src]="image.previewUrl"
+              [alt]="image.file.name"
+              (click)="onOpenPreview(image.previewUrl)"
+            />
+            <div class="import-recipe-page__image-info">
+              <p class="import-recipe-page__image-name">
+                {{ image.file.name }}
+              </p>
+
+              <label class="import-recipe-page__change-button">
+                Cambiar esta imagen
+                <input
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  (change)="onReplaceImage(i, $event)"
+                />
+              </label>
+
+              @if (importStore.images().length > 1) {
+                <label class="import-recipe-page__field">
+                  <span>¿Qué contiene esta imagen?</span>
+
+                  <select
+                    [value]="image.section"
+                    (change)="onSectionChange(i, $event)"
+                  >
+                    <option value="" disabled>
+                      Selecciona una sección
+                    </option>
+
+                    @for (option of sectionOptions; track option.value) {
+                      <option [value]="option.value">
+                        {{ option.label }}
+                      </option>
+                    }
+                  </select>
+                </label>
+              }
+
+              <button
+                type="button"
+                class="import-recipe-page__remove"
+                (click)="onRemoveImage(i)"
+              >
+                Eliminar imagen
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+
+      @if (imageErrorMessage) {
+        <p class="import-recipe-page__error">
+          {{ imageErrorMessage }}
+        </p>
+      }
+
+      <ui-button (click)="onProcessImageRecipe()">
+        Procesar receta
+      </ui-button>
+    }
+
+  </div>
+</section>
+
+@if (previewImageUrl) {
+  <div class="import-recipe-page__preview-modal" (click)="onClosePreview()">
+    <img
+      class="import-recipe-page__preview-modal-img"
+      [src]="previewImageUrl"
+      (click)="$event.stopPropagation()"
+      alt="Imagen seleccionada"
+    />
+
+    <button
+      type="button"
+      class="import-recipe-page__preview-close"
+      (click)="onClosePreview()"
+    >
+      ✕
+    </button>
+  </div>
+}

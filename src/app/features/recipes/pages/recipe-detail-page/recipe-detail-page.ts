@@ -21,7 +21,7 @@ import {ConfirmDialog} from '../../../../shared/ui/ui-confirm-dialog/ui-confirm-
     UiButton,
     UiLoader,
     UiChip,
-    ConfirmDialog
+    ConfirmDialog,
   ],
   templateUrl: './recipe-detail-page.html',
   styleUrl: './recipe-detail-page.scss'

@@ -9,7 +9,7 @@ export type RecipeImageSection =
 export interface RecipeImportImage {
   file: File;
   previewUrl: string;
-  section: RecipeImageSection;
+  section: RecipeImageSection | '';
 }
 
 export interface ExtractedRecipe {

@@ -16,6 +16,8 @@ export class MealPlanConfigForm {
   private readonly fb = inject(FormBuilder);
 
   @Input() submitting = false;
+  @Input() serverMessage: string = '';
+
   @Output() formSubmit = new EventEmitter<MealPlanConfig>();
 
   protected readonly dayOptions = [1, 2, 3, 4, 5, 6, 7];
@@ -25,7 +27,7 @@ export class MealPlanConfigForm {
     breakfast: this.fb.nonNullable.control(false),
     lunch: this.fb.nonNullable.control(true),
     dinner: this.fb.nonNullable.control(true),
-    excludeRepeatedRecipes: this.fb.nonNullable.control(true)
+    excludeRepeatedRecipes: this.fb.nonNullable.control(true),
   });
 
   protected selectDays(days: number): void {

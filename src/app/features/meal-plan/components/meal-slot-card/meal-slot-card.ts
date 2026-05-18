@@ -19,4 +19,17 @@ export class MealSlotCard {
   protected onReplace(): void {
     this.replace.emit(this.slot);
   }
+
+  protected getMealTypeTranslation(i: string): string {
+    switch (i) {
+      case 'breakfast':
+        return "DESAYUNO"
+      case 'lunch':
+        return "COMIDA"
+      case 'dinner':
+        return "CENA"
+      default:
+        return "tipo de comida"
+    }
+  }
 }

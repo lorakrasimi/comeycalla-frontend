@@ -20,6 +20,7 @@ import {MealPlanApi} from '../../services/meal-plan-api';
   styleUrl: './meal-plan-result-page.scss',
 })
 export class MealPlanResultPage {
+  protected mealPlan = computed(() => this.mealPlanStore.currentPlan());
 
   constructor(
     private mealPlanStore: MealPlanStore,
@@ -27,8 +28,6 @@ export class MealPlanResultPage {
     private router: Router
   ) {
   }
-
-  protected mealPlan = computed(() => this.mealPlanStore.currentPlan());
 
   protected regenerate(): void {
     this.router.navigate(['/meal-plan']);

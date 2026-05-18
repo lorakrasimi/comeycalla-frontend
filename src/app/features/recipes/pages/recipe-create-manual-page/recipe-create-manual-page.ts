@@ -43,8 +43,8 @@ export class RecipeCreateManualPage {
     );
 
     this.recipesApi.createRecipe(formData).subscribe({
-      next: (recipe) => {
-        this.router.navigate(['/recipe', recipe.id]);
+      next: () => {
+        this.router.navigate(['/recipes']);
       },
       error: (error) => {
         console.error('Error al guardar la receta', error);

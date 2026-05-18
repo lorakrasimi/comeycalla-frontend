@@ -20,26 +20,20 @@
   padding: 32px;
 }
 
-.featured-recipe-card__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  padding: 8px 14px;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
-  color: white;
-  background-color: var(--color-primary);
-  border-radius: var(--radius-xl);
-}
-
 .featured-recipe-card__title {
   max-width: 320px;
   font-size: clamp(2rem, 2.4vw, 3rem);
   font-weight: var(--font-weight-extrabold);
   line-height: 1;
   color: var(--color-text-strong);
+}
+
+.featured-recipe-card__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
 }
 
 .featured-recipe-card__time {
