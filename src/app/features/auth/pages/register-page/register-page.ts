@@ -1,7 +1,8 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
+import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {AuthFacade} from '../../services/auth-facade';
 
 
@@ -23,20 +24,22 @@ function passwordsMatchValidator(
   imports: [
     ReactiveFormsModule,
     AuthForm,
-    RouterLink
+    RouterLink,
+    UiButton
   ],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })
 export class RegisterPage {
   private readonly fb = inject(FormBuilder);
-  private readonly router = inject(Router);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   isSubmitting = false;
   serverError = '';
 
   readonly registerForm = this.fb.nonNullable.group(
     {
+      loginName: this.fb.nonNullable.control('', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9_]+$/)]),
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
@@ -56,6 +59,10 @@ export class RegisterPage {
     return this.registerForm.controls.confirmPassword;
   }
 
+  get loginName() {
+    return this.registerForm.controls['loginName'];
+  }
+
   constructor(private authFacade: AuthFacade) {
   }
 
@@ -67,16 +74,20 @@ export class RegisterPage {
 
     this.isSubmitting = true;
     this.serverError = '';
+    this.cdr.markForCheck();
 
-    const { email, password } = this.registerForm.getRawValue();
+    try {
+      const {loginName, email, password} = this.registerForm.getRawValue();
 
-    const success = await this.authFacade.register(email, password);
+      const errorMessage = await this.authFacade.register(loginName, email, password);
 
-    if (!success) {
-      this.serverError = 'No se pudo crear la cuenta.';
+      if (errorMessage) {
+        this.serverError = errorMessage;
+      }
+    } finally {
+      this.isSubmitting = false;
+      this.cdr.markForCheck();
+
     }
-
-    this.isSubmitting = false;
   }
 }
-

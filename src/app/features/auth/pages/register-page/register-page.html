@@ -3,6 +3,26 @@
 >
   <form [formGroup]="registerForm" (ngSubmit)="submit()" novalidate>
     <div class="form-field">
+      <label for="loginName">Nombre de usuario</label>
+      <input id="loginName" type="text" formControlName="loginName" />
+
+      @if (loginName.touched && loginName.invalid) {
+        <small class="error-message">
+          @if (loginName.errors?.['required']) {
+            El nombre de usuario es obligatorio.
+          }
+          @if (loginName.errors?.['minlength']) {
+            Debe tener al menos 3 caracteres.
+          }
+          @if (loginName.errors?.['pattern']) {
+            Solo letras, números y guiones bajos.
+          }
+        </small>
+      }
+    </div>
+
+
+    <div class="form-field">
       <label for="email">Email</label>
       <input id="email" type="email" formControlName="email" />
       @if (email.touched && email.invalid) {
@@ -66,8 +86,6 @@
       {{ isSubmitting ? 'Creando cuenta...' : 'Crear cuenta' }}
     </button>
 
-    <a class="signing-link" routerLink="/login">
-      Iniciar sesión
-    </a>
+    <ui-button [variant]="'ghost'" routerLink="/login">Iniciar sesión</ui-button>
   </form>
 </app-auth-form>
