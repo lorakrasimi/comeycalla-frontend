@@ -17,10 +17,6 @@ export class AvatarCell {
   @Input() variant: 'topbar' | 'profile' = 'topbar';
   @Input() clickable: boolean = true;
 
-  ngOnInit() {
-    console.log(this.img)
-  }
-
   protected get initial(): string {
     return this.name?.trim()?.charAt(0)?.toUpperCase() || 'U';
   }

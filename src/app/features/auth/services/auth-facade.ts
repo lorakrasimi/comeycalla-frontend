@@ -1,38 +1,47 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
-
-import { AuthService } from '../../../core/services/auth.service';
+import {Injectable} from '@angular/core';
+import {AuthService} from '../../../core/services/auth.service';
+import {Router} from '@angular/router';
+import {firstValueFrom} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthFacade {
+class AuthFacade {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   async login(email: string, password: string): Promise<string | null> {
     try {
-      await firstValueFrom(this.authService.login({ email, password }));
+      await firstValueFrom(
+        this.authService.login({email, password})
+      );
+
       await this.router.navigate(['/dashboard']);
       return null;
+
     } catch (error: any) {
-      return error?.userMessage;
+      return error?.userMessage ?? 'Ha ocurrido un error inesperado.';
     }
   }
 
   async register(username: string, email: string, password: string): Promise<string | null> {
     try {
       await firstValueFrom(
-        this.authService.register({ username, email, password })
+        this.authService.register({
+          username,
+          email,
+          password,
+        })
       );
 
       await this.router.navigate(['/dashboard']);
       return null;
     } catch (error: any) {
-      return error?.userMessage;
+      return error?.userMessage ?? 'Ha ocurrido un error inesperado.';
     }
   }
 
@@ -42,18 +51,20 @@ export class AuthFacade {
   }
 
   async recoverPassword(email: string): Promise<boolean> {
-    return !!email;
-  }
+    if (!email) {
+      return false;
+    }
 
-  getCurrentUser() {
-    return this.authService.user$;
+    return true;
   }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
 
-  loadCurrentUser() {
-    return this.authService.loadCurrentUser();
+  getCurrentUser() {
+    return this.authService.user$;
   }
 }
+
+export default AuthFacade;

@@ -35,7 +35,6 @@ export class CreateMealPlanPage {
           this.router.navigate(['/meal-plan/result']);
         },
         error: (error: any) => {
-          console.log("error", error);
           this.serverError = error.error.message;
         }
       });

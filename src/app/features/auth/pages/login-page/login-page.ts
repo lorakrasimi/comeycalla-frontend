@@ -6,8 +6,8 @@ import {
 } from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {AuthForm} from '../../components/auth-form/auth-form';
+import AuthFacade from '../../services/auth-facade';
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
-import {AuthFacade} from '../../services/auth-facade';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +23,6 @@ import {AuthFacade} from '../../services/auth-facade';
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
   private readonly cdr = inject(ChangeDetectorRef);
-  private isSubmitted: boolean = false;
 
   constructor(private authFacade: AuthFacade) {
   }
@@ -45,9 +44,8 @@ export class LoginPage {
   }
 
   async submit(): Promise<void> {
-    this.isSubmitted = true;
-
     if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 
