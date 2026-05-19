@@ -5,7 +5,7 @@
   ></app-search-bar>
 
   <div class="topbar__actions">
-    <ui-button routerLink="/recipes/create" [icon]="'add'">Nueva receta</ui-button>
+    <ui-button routerLink="/create-recipe" [icon]="'add'">Nueva receta</ui-button>
 
     @if (user$ | async; as user) {
       <app-avatar-cell

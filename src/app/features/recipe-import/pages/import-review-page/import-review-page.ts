@@ -58,7 +58,7 @@ export class ImportReviewPage implements OnInit {
 
     this.extractedRecipe = this.importStore.extractedRecipe();
     if (!this.extractedRecipe) {
-      this.router.navigate(['/recipes/create/import']);
+      this.router.navigate(['/create-recipe/import']);
       return;
     }
 
@@ -75,11 +75,11 @@ export class ImportReviewPage implements OnInit {
   }
 
   onProcessAgain(): void {
-    this.router.navigate(['/recipes/create/import']);
+    this.router.navigate(['/create-recipe/import']);
   }
 
   protected onCancel(): void {
-    this.router.navigate(['/recipes/create/import']);
+    this.router.navigate(['/create-recipe/import']);
   }
 
   onSubmit(): void {

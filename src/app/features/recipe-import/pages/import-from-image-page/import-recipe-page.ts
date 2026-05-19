@@ -45,7 +45,7 @@ export class ImportRecipePage {
       return;
     }
 
-    this.router.navigate(['/recipes/create/image/processing']);
+    this.router.navigate(['/create-recipe/image/processing']);
   }
 
   onRecipeUrlChange(event: Event): void {
@@ -64,7 +64,7 @@ export class ImportRecipePage {
 
     this.importStore.setRecipeUrl(url);
 
-    this.router.navigate(['/recipes/create/image/processing'], {
+    this.router.navigate(['/create-recipe/image/processing'], {
       queryParams: { source: 'url' }
     });
   }
