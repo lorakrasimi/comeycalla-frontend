@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ExtractedRecipe, RecipeImportImage} from '../../../core/models/recipe-import.model';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class RecipeImportApi {
-  private readonly apiUrl = 'http://localhost:8080/api/recipes';
+  private readonly apiUrl = `${environment.apiUrl}/recipes`;
 
   constructor(private http: HttpClient) {
   }

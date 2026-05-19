@@ -3,12 +3,13 @@ import {UserAuth} from '../models/user.model';
 import {BehaviorSubject, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {AuthResponse, LoginRequest, RegisterRequest} from '../models/auth.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:8080/api/auth';
+  private readonly apiUrl =  `${environment.apiUrl}/auth`;
 
   private readonly tokenKey = 'auth_token';
   private readonly userKey = 'auth_user';
