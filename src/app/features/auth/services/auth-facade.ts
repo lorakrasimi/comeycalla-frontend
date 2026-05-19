@@ -3,6 +3,7 @@ import {AuthService} from '../../../core/services/auth.service';
 import {Router} from '@angular/router';
 import {firstValueFrom} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ProfileStore} from '../../profile/services/profile-store';
 
 @Injectable({
   providedIn: 'root',
