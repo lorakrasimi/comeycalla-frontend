@@ -22,8 +22,20 @@ export class DashboardPage implements OnInit {
   constructor(private recipesApi: RecipesApi) {}
 
   ngOnInit(): void {
+    this.getRandomRecipe();
     this.getLastRecipes();
-    this.getFeaturedRecipe();
+  }
+
+  private getRandomRecipe(): void {
+    this.recipesApi.getRandomRecipe().subscribe({
+      next: (recipe) => {
+        this.featuredRecipe = recipe;
+      },
+      error: (error) => {
+        console.error(error);
+        this.featuredRecipe = undefined;
+      }
+    });
   }
 
   private getLastRecipes(): void {
@@ -34,18 +46,6 @@ export class DashboardPage implements OnInit {
       error: (error) => {
         console.error(error);
         this.recipes.set([]);
-      }
-    });
-  }
-
-  private getFeaturedRecipe(): void {
-    this.recipesApi.getRandomRecipe().subscribe({
-      next: (recipe) => {
-        this.featuredRecipe = recipe;
-      },
-      error: (error) => {
-        console.error(error);
-        this.featuredRecipe = undefined;
       }
     });
   }

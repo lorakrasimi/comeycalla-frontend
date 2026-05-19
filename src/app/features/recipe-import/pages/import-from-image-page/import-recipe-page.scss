@@ -1,0 +1,23 @@
+.import-recipe-page__card{
+  width: 100%;
+  padding: 40px;
+  border: 2px solid var(--color-tertiary);
+  border-radius: var(--radius-2xl);
+  background: white;
+}
+
+.import-recipe-page__url-form{
+  display: flex;
+  gap: 8px;
+}
+
+.import-recipe-page__url-label{
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.import-recipe-page__separator{
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  margin-top: 30px;
+}

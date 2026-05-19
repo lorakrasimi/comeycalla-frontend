@@ -72,6 +72,4 @@ export class ImportProcessingPage implements OnInit {
   onRetry(): void {
     this.router.navigate(['/recipes/create/import']);
   }
-
-
 }

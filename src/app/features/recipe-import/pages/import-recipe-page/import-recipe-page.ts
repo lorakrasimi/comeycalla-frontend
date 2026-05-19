@@ -30,7 +30,7 @@ export class ImportRecipePage {
   ) {}
 
   onImagesSelected(files: File[]): void {
-    this.importStore.setImages(files);
+    this.importStore.setFiles(files);
     this.imageErrorMessage = '';
   }
 

@@ -1,6 +1,6 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {AuthFacade} from './features/auth/services/auth-facade';
+import AuthFacade from './features/auth/services/auth-facade';
 
 @Component({
   selector: 'app-root',

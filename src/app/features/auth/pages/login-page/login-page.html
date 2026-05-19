@@ -10,7 +10,7 @@
         formControlName="email"
         placeholder="Introduce tu email"
       />
-      @if (isSubmitting && email.invalid) {
+      @if (email.touched && email.invalid) {
         <small class="error-message">
           @if (email.errors?.['required']) {
             El email es obligatorio.
@@ -30,7 +30,7 @@
         formControlName="password"
         placeholder="Introduce tu contraseña"
       />
-      @if (isSubmitting && password.invalid) {
+      @if (password.touched && password.invalid) {
         <small class="error-message">
           @if (password.errors?.['required']) {
             La contraseña es obligatoria.
@@ -52,7 +52,7 @@
       ¿Olvidaste tu contraseña?
     </a>
 
-    <button class="auth-button" type="submit" [disabled]="isSubmitting">
+   <button class="auth-button" type="submit" [disabled]="isSubmitting">
       {{ isSubmitting ? 'Entrando...' : 'Iniciar sesión' }}
     </button>
 

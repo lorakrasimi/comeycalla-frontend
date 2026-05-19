@@ -36,7 +36,7 @@ export class RecipeImportStore {
   readonly error = () => this.state().error;
   readonly recipeUrl = () => this.state().recipeUrl;
 
-  setImages(images: File[]): void {
+  setFiles(images: File[]): void {
     this.releaseImagePreviewUrls();
 
     const recipeImages: RecipeImportImage[] = images.map((image) => ({
