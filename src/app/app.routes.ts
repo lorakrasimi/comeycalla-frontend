@@ -5,6 +5,12 @@ import { guestGuard } from './core/guards/guest-guard';
 export const appRoutes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
+
+  {
+    path: '',
     canActivate: [guestGuard],
     loadComponent: () =>
       import('./layout/auth-layout/auth-layout').then(
@@ -51,7 +57,9 @@ export const appRoutes: Routes = [
       {
         path: 'profile',
         loadChildren: () =>
-          import('./features/profile/profile.routes').then((m) => m.PROFILE_ROUTES),
+          import('./features/profile/profile.routes').then(
+            (m) => m.PROFILE_ROUTES
+          ),
       },
       {
         path: 'dashboard',
@@ -65,20 +73,23 @@ export const appRoutes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import('./features/recipes/pages/recipes-list-page/recipes-list-page')
-                .then((m) => m.RecipesListPage),
+              import(
+                './features/recipes/pages/recipes-list-page/recipes-list-page'
+                ).then((m) => m.RecipesListPage),
           },
           {
             path: ':id',
             loadComponent: () =>
-              import('./features/recipes/pages/recipe-detail-page/recipe-detail-page')
-                .then((m) => m.RecipeDetailPage),
+              import(
+                './features/recipes/pages/recipe-detail-page/recipe-detail-page'
+                ).then((m) => m.RecipeDetailPage),
           },
           {
             path: ':id/edit',
             loadComponent: () =>
-              import('./features/recipes/pages/recipe-edit-page/recipe-edit-page')
-                .then((m) => m.RecipeEditPage),
+              import(
+                './features/recipes/pages/recipe-edit-page/recipe-edit-page'
+                ).then((m) => m.RecipeEditPage),
           },
         ],
       },
@@ -96,8 +107,9 @@ export const appRoutes: Routes = [
           {
             path: 'manual',
             loadComponent: () =>
-              import('./features/recipes/pages/recipe-create-manual-page/recipe-create-manual-page')
-                .then((m) => m.RecipeCreateManualPage),
+              import(
+                './features/recipes/pages/recipe-create-manual-page/recipe-create-manual-page'
+                ).then((m) => m.RecipeCreateManualPage),
           },
           {
             path: 'import',
@@ -105,20 +117,23 @@ export const appRoutes: Routes = [
               {
                 path: '',
                 loadComponent: () =>
-                  import('./features/recipe-import/pages/import-recipe-page/import-recipe-page')
-                    .then((m) => m.ImportRecipePage),
+                  import(
+                    './features/recipe-import/pages/import-recipe-page/import-recipe-page'
+                    ).then((m) => m.ImportRecipePage),
               },
               {
                 path: 'processing',
                 loadComponent: () =>
-                  import('./features/recipe-import/pages/import-processing-page/import-processing-page')
-                    .then((m) => m.ImportProcessingPage),
+                  import(
+                    './features/recipe-import/pages/import-processing-page/import-processing-page'
+                    ).then((m) => m.ImportProcessingPage),
               },
               {
                 path: 'review',
                 loadComponent: () =>
-                  import('./features/recipe-import/pages/import-review-page/import-review-page')
-                    .then((m) => m.ImportReviewPage),
+                  import(
+                    './features/recipe-import/pages/import-review-page/import-review-page'
+                    ).then((m) => m.ImportReviewPage),
               },
             ],
           },
@@ -130,25 +145,29 @@ export const appRoutes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import('./features/meal-plan/pages/create-meal-plan-page/create-meal-plan-page')
-                .then((m) => m.CreateMealPlanPage),
+              import(
+                './features/meal-plan/pages/create-meal-plan-page/create-meal-plan-page'
+                ).then((m) => m.CreateMealPlanPage),
           },
           {
             path: 'result',
             loadComponent: () =>
-              import('./features/meal-plan/pages/meal-plan-result-page/meal-plan-result-page')
-                .then((m) => m.MealPlanResultPage),
+              import(
+                './features/meal-plan/pages/meal-plan-result-page/meal-plan-result-page'
+                ).then((m) => m.MealPlanResultPage),
           },
           {
             path: 'shopping-list',
             loadComponent: () =>
-              import('./features/meal-plan/pages/shopping-list-page/shopping-list-page')
-                .then((m) => m.ShoppingListPage),
+              import(
+                './features/meal-plan/pages/shopping-list-page/shopping-list-page'
+                ).then((m) => m.ShoppingListPage),
           },
         ],
       },
     ],
   },
+
   {
     path: '**',
     redirectTo: 'login',
