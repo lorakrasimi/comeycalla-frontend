@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth.service';
+import {ProfileStore} from '../../profile/services/profile-store';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,8 @@ import { AuthService } from '../../../core/services/auth.service';
 export class AuthFacade {
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private profileStore: ProfileStore
   ) {}
 
   async login(email: string, password: string): Promise<string | null> {
@@ -54,6 +56,6 @@ export class AuthFacade {
   }
 
   loadCurrentUser() {
-    return this.authService.loadCurrentUser();
+    return this.profileStore.loadProfile();
   }
 }
