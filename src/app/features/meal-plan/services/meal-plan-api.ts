@@ -4,12 +4,13 @@ import {Observable} from 'rxjs';
 import {MealPlan, MealPlanRecipe, MealType} from '../../../core/models/meal-plan.model';
 import {HttpClient} from '@angular/common/http';
 import {ShoppingListBackendCategory} from '../../../core/models/shopping-list.model';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MealPlanApi {
-  private readonly baseUrl = 'http://localhost:8080/api/meal-plans';
+  private readonly baseUrl = `${environment.apiUrl}/meal-plans`;
 
   constructor(private http: HttpClient) {
   }

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 
 import {Recipe, RecipeResponse} from '../../../core/models/recipe.model';
 import {RecipeFiltersModel} from '../../../core/models/recipe-filters.model';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,9 @@ import {RecipeFiltersModel} from '../../../core/models/recipe-filters.model';
 export class RecipesApi {
   constructor(private http: HttpClient) {
   }
-  private readonly baseUrl = 'http://localhost:8080/api/recipes';
+  private readonly baseUrl = `${environment.apiUrl}/recipes`;
 
-  getRecipes(page = 0, size = 12, filters?: RecipeFiltersModel) {
+getRecipes(page = 0, size = 12, filters?: RecipeFiltersModel) {
     const params: Record<string, string | number> = {
       page,
       size,
