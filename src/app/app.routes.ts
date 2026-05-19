@@ -44,6 +44,11 @@ export const appRoutes: Routes = [
       ),
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard',
+      },
+      {
         path: 'profile',
         loadChildren: () =>
           import('./features/profile/profile.routes').then((m) => m.PROFILE_ROUTES),
