@@ -16,8 +16,8 @@ export class Sidebar {
     exact: boolean;
   }[] = [
     {label: 'Dashboard', path: '/dashboard', icon: 'dashboard', exact: true},
-    {label: 'Mis recetas', path: '/recipes', icon: 'menu_book', exact: true},
-    {label: 'Añadir receta', path: '/recipes/create', icon: 'add_circle', exact: false },
+    {label: 'Mis recetas', path: '/recipes', icon: 'menu_book', exact: false},
+    {label: 'Añadir receta', path: '/create-recipe', icon: 'add_circle', exact: false },
     {label: 'Menú semanal', path: '/meal-plan', icon: 'calendar_month', exact: false},
   ];
 }

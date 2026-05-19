@@ -72,7 +72,7 @@ export class ImportRecipePage {
       return;
     }
 
-    this.router.navigate(['/recipes/create/import/processing']);
+    this.router.navigate(['/create-recipe/import/processing']);
   }
 
   onRecipeUrlChange(event: Event): void {
@@ -91,7 +91,7 @@ export class ImportRecipePage {
 
     this.importStore.setRecipeUrl(url);
 
-    this.router.navigate(['/recipes/create/import/processing'], {
+    this.router.navigate(['/create-recipe/import/processing'], {
       queryParams: { source: 'url' },
     });
   }

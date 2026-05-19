@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {UserAuth} from '../../core/models/user.model';
 import {AvatarCell} from '../../shared/components/avatar-cell/avatar-cell';
 import {AsyncPipe} from '@angular/common';
-import {AuthFacade} from '../../features/auth/services/auth-facade';
+import AuthFacade from '../../features/auth/services/auth-facade';
 
 @Component({
   selector: 'app-topbar',
@@ -27,7 +27,7 @@ export class Topbar {
     private authFacade: AuthFacade,
     private router: Router
   ) {
-    this.user$ = this.authFacade.getCurrentUser();
+    this.user$ = this.authFacade.loadCurrentUser();
   }
 
   async logout(): Promise<void> {
