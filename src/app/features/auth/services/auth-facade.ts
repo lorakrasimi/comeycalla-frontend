@@ -10,9 +10,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 class AuthFacade {
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) {
-  }
+    private router: Router,
+    private profileStore: ProfileStore
+  ) {}
 
   async login(email: string, password: string): Promise<string | null> {
     try {
@@ -62,8 +62,8 @@ class AuthFacade {
     return this.authService.isAuthenticated();
   }
 
-  getCurrentUser() {
-    return this.authService.user$;
+  loadCurrentUser() {
+    return this.profileStore.loadProfile();
   }
 }
 

@@ -125,11 +125,6 @@
   background-position: center;
 }
 
-.error-message {
-  font-size: var(--font-size-sm);
-  color: var(--color-error);
-}
-
 @media (max-width: 920px) {
   .meal-plan-config-form__content {
     grid-template-columns: 1fr;

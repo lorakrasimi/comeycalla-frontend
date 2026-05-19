@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, OnInit, inject, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {finalize} from 'rxjs';
@@ -16,12 +16,9 @@ import {UiLoader} from '../../../../shared/ui/ui-loader/ui-loader';
   styleUrl: './recipe-edit-page.scss'
 })
 export class RecipeEditPage implements OnInit {
-  private readonly route = inject(ActivatedRoute);
-  private readonly router = inject(Router);
-  private readonly recipesApi = inject(RecipesApi);
-  private readonly recipeFormMapper = inject(RecipeFormMapper);
 
-  protected form: FormGroup = this.recipeFormMapper.createEmptyForm();
+  public form: FormGroup;
+
   protected loading = signal(true);
   protected submitting = signal(false);
   protected imageUrl = signal<string | null>(null);
@@ -29,6 +26,15 @@ export class RecipeEditPage implements OnInit {
   private recipeId!: number;
   private selectedImageFile: File | null = null;
   private removeCurrentImage = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private recipesApi: RecipesApi,
+    private recipeFormMapper: RecipeFormMapper
+  ) {
+    this.form = this.recipeFormMapper.createEmptyForm();
+  }
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');

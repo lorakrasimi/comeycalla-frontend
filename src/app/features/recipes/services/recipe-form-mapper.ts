@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RecipeRequest} from '../../../core/models/recipe.model';
+import {Difficulty, RecipeRequest} from '../../../core/models/recipe.model';
 import {RecipeFormValue} from '../../../core/models/recipe-form.model';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class RecipeFormMapper {
       title: this.fb.nonNullable.control('', Validators.required),
       description: this.fb.control<string | null>(null),
       category: this.fb.control(''),
+      difficulty: this.fb.control<Difficulty | null>(null),
       tags: this.fb.control<string[]>([]),
       cookingTime: this.fb.control<string | null>(null),
       servings: this.fb.control<number | null>(null),
@@ -40,6 +41,7 @@ export class RecipeFormMapper {
       title: recipe.title ?? recipe.name ?? '',
       description: recipe.description ?? '',
       category: recipe.category ?? recipe.nationality ?? '',
+      difficulty: recipe.difficulty ?? null,
       tags: recipe.tags ?? [],
       cookingTime: recipe.cookingTime?.toString() ?? recipe.time?.toString() ?? null,
       servings: recipe.servings ?? null
@@ -82,7 +84,7 @@ export class RecipeFormMapper {
       img: null,
       cookingTime: formValue.cookingTime ? Number(formValue.cookingTime) : null,
       servings: formValue.servings,
-      difficulty: 'easy',
+      difficulty: formValue.difficulty,
       category: formValue.category,
       ingredients: ingredients.length ? ingredients : null,
       steps: steps.length ? steps : null,

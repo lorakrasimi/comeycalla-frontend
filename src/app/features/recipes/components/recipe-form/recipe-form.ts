@@ -4,6 +4,8 @@ import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from
 import {UiButton} from '../../../../shared/ui/ui-button/ui-button';
 import {RecipeImageField} from '../recipe-image-field/recipe-image-field';
 import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
+import {SelectOption, UiSelect} from '../../../../shared/ui/ui-select/ui-select';
+import {DIFFICULTIES} from '../../../../core/models/recipe.model';
 
 @Component({
   selector: 'app-recipe-form',
@@ -14,14 +16,16 @@ import {UiTagsInput} from '../../../../shared/ui/ui-tags-input/ui-tags-input';
     UiButton,
     RecipeImageField,
     UiTagsInput,
+    UiSelect,
   ],
   templateUrl: './recipe-form.html',
   styleUrl: './recipe-form.scss'
 })
-export class RecipeFormComponent implements OnInit {
+export class RecipeFormComponent implements OnInit  {
   @Input({required: true}) form!: FormGroup;
   @Input() imageUrl: string | null = null;
   @Input() submitting = false;
+  difficultyOptions: SelectOption[] = [];
 
   @Output() submit = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
@@ -31,6 +35,13 @@ export class RecipeFormComponent implements OnInit {
   ngOnInit(): void {
     this.ensureOneIngredient();
     this.ensureOneStep();
+
+    this.difficultyOptions = DIFFICULTIES.map(
+      (difficulty) => ({
+        value: difficulty,
+        label: difficulty.charAt(0).toUpperCase() + difficulty.slice(1),
+      })
+    )
   }
 
   // Asegura que exista al menos un ingrediente al iniciar el formulario.
@@ -108,5 +119,9 @@ export class RecipeFormComponent implements OnInit {
       return;
     }
     this.submit.emit();
+  }
+
+  onDifficultyChange(value: string): void {
+    this.form.controls["difficulty"].setValue(value);
   }
 }

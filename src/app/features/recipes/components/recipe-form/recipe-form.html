@@ -29,15 +29,29 @@
     </div>
   </div>
 
+
   <div class="recipe-form__main-fields">
-    <div class="recipe-form__field">
-      <label class="recipe-form__label">Categoría</label>
-      <input
-        class="recipe-form__input"
-        type="text"
-        formControlName="category"
-        placeholder="Ej: Italiana"
-      />
+    <div class="recipe-form__meta-grid">
+      <div class="recipe-form__field">
+        <label class="recipe-form__label">Categoría</label>
+        <input
+          class="recipe-form__input"
+          type="text"
+          formControlName="category"
+          placeholder="Ej: Italiana"
+        />
+      </div>
+      <div class="recipe-form__main-field">
+        <label class="recipe-form__label-difficulty">Dificultad</label>
+
+        <ui-select
+          [variant]="'primary'"
+          [options]="difficultyOptions"
+          [placeholder]="'Selecciona la dificultad'"
+          [value]="form.controls['difficulty'].value || ''"
+          (valueChange)="onDifficultyChange($event)"
+        ></ui-select>
+      </div>
     </div>
 
     <div class="recipe-form__field">
