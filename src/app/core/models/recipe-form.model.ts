@@ -1,3 +1,5 @@
+import {Difficulty} from './recipe.model';
+
 export interface RecipeFormIngredient {
   name: string;
 }
@@ -12,6 +14,7 @@ export interface RecipeFormValue {
   cookingTime: string | null;
   servings: number | null;
   category: string;
+  difficulty: Difficulty;
   tags: string[];
   ingredients: RecipeFormIngredient[] | null;
   steps: RecipeFormStep[] | null;

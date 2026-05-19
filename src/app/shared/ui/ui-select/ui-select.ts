@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 export interface SelectOption {
@@ -13,18 +13,16 @@ export interface SelectOption {
   templateUrl: './ui-select.html',
   styleUrl: './ui-select.scss'
 })
-//TODO hacer secondary primary y eliminar el que sobra
 export class UiSelect {
   @Input() options: SelectOption[] = [];
-  @Input() placeholder: string = 'Selecciona una opción';
+  @Input() placeholder = 'Selecciona una opción';
   @Input() variant: 'primary' | 'secondary' = 'primary';
-  @Input() value: string = '';
+  @Input() value = '';
 
   @Output() valueChange = new EventEmitter<string>();
 
-  onChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    this.value = target.value;
-    this.valueChange.emit(this.value);
+  onValueChange(value: string): void {
+    this.value = value;
+    this.valueChange.emit(value);
   }
 }

@@ -1,4 +1,6 @@
-export type Difficulty = 'easy' | 'medium' | 'hard';
+export const DIFFICULTIES = ['facil', 'media', 'dificil'] as const;
+
+export type Difficulty = typeof DIFFICULTIES[number];
 
 export class Recipe {
   id: number;

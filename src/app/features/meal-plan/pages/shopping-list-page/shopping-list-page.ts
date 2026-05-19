@@ -143,7 +143,6 @@ export class ShoppingListPage implements OnInit {
         <script>
           window.onload = () => {
             window.print();
-            window.close();
           };
         </script>
       </body>

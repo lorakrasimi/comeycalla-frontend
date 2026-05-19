@@ -2,14 +2,13 @@
   @if (loading()) {
     <ui-loader></ui-loader>
   } @else {
-    <button
-      type="button"
-      class="profile-edit-page__back-link"
+    <ui-button
+      [variant]="'ghost'"
       (click)="goBack()"
+      [icon]="'arrow_back'"
     >
-      <span class="material-symbols-outlined">arrow_back</span>
       Volver
-    </button>
+    </ui-button>
 
     <article class="profile-edit-page__card">
       <div class="profile-edit-page__hero">
@@ -36,11 +35,11 @@
 
         <div class="profile-edit-page__hero-content">
           <h1 class="profile-edit-page__name">
-            {{ form.controls['username'].value || 'Usuario Demo' }}
+            {{ form.controls['username'].value || '' }}
           </h1>
 
           <p class="profile-edit-page__email">
-            {{ form.controls['email'].value || 'usuario@comeycalla.com' }}
+            {{ form.controls['email'].value }}
           </p>
 
           @if (avatarUrl) {
@@ -65,7 +64,11 @@
             type="text"
             formControlName="username"
           />
+          @if (form.get('username')?.invalid && form.get('username')?.touched) {
+            <small class="error-message">El nombre de usuario es obligatorio.</small>
+          }
         </div>
+
 
         <div class="profile-edit-page__field">
           <label for="email">Email</label>
@@ -74,6 +77,9 @@
             type="email"
             formControlName="email"
           />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <small class="error-message">El email es obligatorio.</small>
+          }
         </div>
 
         <div class="profile-edit-page__actions">

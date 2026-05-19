@@ -25,7 +25,10 @@ import {ProfileStore} from '../../services/profile-store';
 export class ProfileEditPage implements OnInit {
   private readonly fb = inject(FormBuilder);
 
-  constructor(private profileStore: ProfileStore, private router: Router) {
+  constructor(
+    private profileStore: ProfileStore,
+    private router: Router
+  ) {
   }
 
   protected readonly loading = signal(true);

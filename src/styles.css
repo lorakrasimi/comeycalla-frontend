@@ -267,7 +267,6 @@ button:disabled {
 }
 
 /* Checkbox */
-
 .custom-checkbox {
   display: none;
 }
@@ -278,7 +277,6 @@ button:disabled {
   cursor: pointer;
 }
 
-/* caja */
 .custom-checkbox + .custom-checkbox-label::before {
   content: "";
   position: absolute;
@@ -306,6 +304,13 @@ button:disabled {
   font-size: var(--font-size-sm);
   color: white;
 }
+
+/* Error message */
+.error-message {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+}
+
 
 @media (max-width: 768px) {
   :root {

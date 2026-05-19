@@ -10,11 +10,17 @@ import {AuthService} from '../../../core/services/auth.service';
 export class ProfileStore {
   readonly profile = signal<User | null>(null);
 
-  constructor(private readonly profileApi: ProfileApi, private authService: AuthService) {}
+  constructor(
+    private readonly profileApi: ProfileApi,
+    private readonly authService: AuthService
+  ) {}
 
   loadProfile(): Observable<User> {
     return this.profileApi.getProfile().pipe(
-      tap((profile) => this.profile.set(profile))
+      tap((profile) => {
+        this.profile.set(profile);
+        this.syncAuthUser(profile);
+      })
     );
   }
 
@@ -22,14 +28,17 @@ export class ProfileStore {
     return this.profileApi.updateProfile(payload, avatarFile).pipe(
       tap((updatedProfile) => {
         this.profile.set(updatedProfile);
-
-        this.authService.updateCurrentUser({
-          id: updatedProfile.id,
-          username: updatedProfile.username,
-          email: updatedProfile.email,
-          avatar: updatedProfile.avatar,
-        });
+        this.syncAuthUser(updatedProfile);
       })
     );
+  }
+
+  private syncAuthUser(profile: User): void {
+    this.authService.updateCurrentUser({
+      id: profile.id,
+      username: profile.username,
+      email: profile.email,
+      avatar: profile.avatar,
+    });
   }
 }
