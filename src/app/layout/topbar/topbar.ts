@@ -27,7 +27,8 @@ export class Topbar {
     private authFacade: AuthFacade,
     private router: Router
   ) {
-    this.user$ = this.authFacade.loadCurrentUser();
+    this.user$ = this.authFacade.user$;
+    this.authFacade.loadCurrentUser().subscribe();
   }
 
   async logout(): Promise<void> {
@@ -38,7 +39,7 @@ export class Topbar {
     if (!value) return;
 
     this.router.navigate(['/recipes'], {
-      queryParams: {search: value}
+      queryParams: { search: value }
     });
   }
 }

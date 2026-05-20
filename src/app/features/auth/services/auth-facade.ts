@@ -9,11 +9,15 @@ import {ProfileStore} from '../../profile/services/profile-store';
   providedIn: 'root',
 })
 class AuthFacade {
+  readonly user$;
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private profileStore: ProfileStore
-  ) {}
+  ) {
+    this.user$ = this.authService.user$;
+  }
 
   async login(email: string, password: string): Promise<string | null> {
     try {
