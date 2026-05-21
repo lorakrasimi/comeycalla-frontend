@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ProcessingSteps} from '../../components/processing-steps/processing-steps';
 import {RecipeImportApi} from '../../services/recipe-import-api';
 import {RecipeImportStore} from '../../services/recipe-import-store';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-import-processing-page',
@@ -59,8 +60,14 @@ export class ImportProcessingPage implements OnInit {
         this.importStore.setExtractedRecipe(recipe);
         this.router.navigate(['/create-recipe/import/review']);
       },
-      error: () => {
-        this.importStore.setError('No se pudo procesar la receta.');
+      error: (error: HttpErrorResponse) => {
+        const message =
+          error.error?.message ||
+          error.error?.error ||
+          error.message ||
+          'No se pudo procesar la receta.';
+
+        this.importStore.setError(message);
       },
     });
   }

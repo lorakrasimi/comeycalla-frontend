@@ -11,7 +11,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       } else if (error.status === 401) {
         message = 'Sesión caducada. Inicia sesión de nuevo.';
       } else if (error.status === 403) {
-        error.error.message ? message = error.error.message : message = 'No tienes permisos para realizar esta acción.';
+        error.error?.message ? message = error.error.message : message = 'No tienes permisos para realizar esta acción.';
       } else if (error.status >= 500) {
         message = 'Error del servidor. Inténtalo más tarde.';
       } else if (error.error?.message) {
