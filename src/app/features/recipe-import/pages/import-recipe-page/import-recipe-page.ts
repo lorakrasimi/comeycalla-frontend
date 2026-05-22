@@ -67,6 +67,13 @@ export class ImportRecipePage {
       return;
     }
 
+    const coverImages = images.filter((image) => image.section === 'cover');
+
+    if (images.length > 1 && coverImages.length !== 1) {
+      this.imageErrorMessage = 'Selecciona exactamente una imagen como portada.';
+      return;
+    }
+
     if (images.length > 1 && images.some((image) => !image.section)) {
       this.imageErrorMessage = 'Asigna una sección a cada imagen antes de continuar.';
       return;

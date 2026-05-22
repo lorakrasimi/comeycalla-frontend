@@ -146,20 +146,23 @@ export class ImportReviewPage implements OnInit {
   }
 
   private setInitialImagePreview(imageUrl: string | null | undefined): void {
-    const importedImage = this.importStore.images()[0];
-
-    if (importedImage) {
-      this.selectedImage.set(importedImage.file);
-    }
+    const importedImages = this.importStore.images();
 
     if (this.isValidImageUrl(imageUrl)) {
       this.imagePreviewUrls.set([imageUrl]);
       return;
     }
 
-    if (importedImage) {
-      this.imagePreviewUrls.set([importedImage.previewUrl]);
+    const coverImage =
+      importedImages.find((image) => image.section === 'cover') ??
+      importedImages[0];
+
+    if (!coverImage) {
+      return;
     }
+
+    this.selectedImage.set(coverImage.file);
+    this.imagePreviewUrls.set([coverImage.previewUrl]);
   }
 
   private isValidImageUrl(value: string | null | undefined): value is string {
@@ -216,3 +219,5 @@ export class ImportReviewPage implements OnInit {
     });
   }
 }
+
+export default ImportReviewPage
