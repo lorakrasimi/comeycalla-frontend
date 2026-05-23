@@ -34,6 +34,7 @@
           class="recipe-detail-page__hero-image"
           [src]="recipeData.img || 'img/generic-recipe-img.jpg'"
           [alt]="recipeData.title"
+          (error)="onImageError($event)"
         />
 
         <div class="recipe-detail-page__hero-overlay"></div>

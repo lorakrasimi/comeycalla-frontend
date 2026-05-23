@@ -109,4 +109,9 @@ export class RecipeDetailPage implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'img/generic-recipe-img.jpg';
+  }
 }

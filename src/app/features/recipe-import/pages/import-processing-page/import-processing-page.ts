@@ -49,7 +49,9 @@ export class ImportProcessingPage implements OnInit {
         this.router.navigate(['/create-recipe/import/review']);
       },
       error: () => {
-        this.importStore.setError('No se pudo importar la receta desde esta URL.');
+        this.importStore.setError(
+          'No hemos podido importar la receta desde esta página. Algunas webs bloquean automáticamente la lectura de contenido. Prueba subiendo capturas de pantalla de la receta.'
+        );
       },
     });
   }
